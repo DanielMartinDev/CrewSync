@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftManager-Web\\Shift Planner - API\\Shift Planner - API.csproj": {}
+    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Shift Planner - API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftManager-Web\\Shift Planner - API\\Shift Planner - API.csproj": {
+    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Shift Planner - API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftManager-Web\\Shift Planner - API\\Shift Planner - API.csproj",
+        "projectUniqueName": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Shift Planner - API.csproj",
         "projectName": "Shift Planner - API",
-        "projectPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftManager-Web\\Shift Planner - API\\Shift Planner - API.csproj",
+        "projectPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Shift Planner - API.csproj",
         "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftManager-Web\\Shift Planner - API\\obj\\",
+        "outputPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,37 @@
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\appsettings.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.staticwebassets.endpoints.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.exe
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.deps.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.runtimeconfig.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Shift Planner - API.pdb
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.csproj.AssemblyReference.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.AssemblyInfoInputs.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.AssemblyInfo.cs
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.csproj.CoreCompileInputs.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.sourcelink.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\scopedcss\bundle\Shift Planner - API.styles.css
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Pl.3DFC6306.Up2Date
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\refint\Shift Planner - API.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.pdb
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.genruntimeconfig.cache
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\ref\Shift Planner - API.dll
