@@ -1,0 +1,6 @@
+@Shift_Planner___API_HostAddress = http://localhost:5108
+
+GET {{Shift_Planner___API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
