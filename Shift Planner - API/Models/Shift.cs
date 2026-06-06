@@ -2,11 +2,11 @@
 {
     public class Shift
     {
-        public int shiftID { get; set; }
-        public int employeeID { get; set; }
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
-        public TimeSpan breakDuration { get; set; }
-        public ShiftDay day { get; set; }
+        public int ShiftID { get; set; }
+        public int EmployeeID { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public TimeSpan BreakDuration { get; set; }
+        public ShiftDay.DayOfWeek Day { get; set; }
     }
 }
