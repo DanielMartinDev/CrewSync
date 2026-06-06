@@ -44,6 +44,15 @@ namespace Shift_Planner___API.Controllers
                 createdEmployee);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateEmployee(int id, Employee updatedEmployee)
+        {
+            if (!_employeeService.UpdateEmployee(id, updatedEmployee))
+                return NotFound();
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteEmployee(int id)
         {

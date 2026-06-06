@@ -29,6 +29,21 @@ namespace Shift_Planner___API.Services
             return employee;
         }
 
+        public bool UpdateEmployee(int id, Employee updatedEmployee)
+        {
+            var employee = employees.FirstOrDefault(e => e.EmployeeID == id);
+
+            if (employee == null)
+                return false;
+
+            employee.Name = updatedEmployee.Name;
+            employee.WeeklyHours = updatedEmployee.WeeklyHours;
+            employee.StartDate = updatedEmployee.StartDate;
+            employee.Role = updatedEmployee.Role;
+
+            return true;
+        }
+
         public bool DeleteEmployee(int id)
         {
             var employee = employees.FirstOrDefault(e => e.EmployeeID == id);

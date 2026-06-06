@@ -6,7 +6,7 @@
         public int EmployeeID { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public TimeSpan BreakDuration { get; set; }
+        public int BreakDuration { get; set; }
         public ShiftDay.DayOfWeek Day { get; set; }
     }
 }
