@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Models;
+using Shift_Planner___API.Services;
 
 namespace Shift_Planner___API.Controllers
 {
@@ -7,29 +8,23 @@ namespace Shift_Planner___API.Controllers
     [Route("api/[controller]")]
     public class ShiftController : ControllerBase
     {
-        private List<Shift> shifts = new List<Shift>()
-        {
-            new Shift
-            {
-                ShiftID = 1,
-                EmployeeID = 1,
-                Day = ShiftDay.DayOfWeek.Monday,
-                BreakDuration = TimeSpan.FromMinutes(30),
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now
-            }
-        };
+        private readonly ShiftService _shiftService;
+
+        public ShiftController(ShiftService shiftService) 
+        { 
+            _shiftService = shiftService;
+        }
 
         [HttpGet]
         public ActionResult<List<Shift>> GetShifts()
         {
-            return Ok(shifts);
+            return Ok(_shiftService.GetShifts());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Shift> GetShift(int id)
         {
-            var shift = shifts.FirstOrDefault(shift => shift.ShiftID == id);
+            var shift = _shiftService.GetShift(id);
 
             if (shift == null)
                 return NotFound();
@@ -40,23 +35,19 @@ namespace Shift_Planner___API.Controllers
         [HttpPost]
         public ActionResult<Shift> CreateShift(Shift shift)
         {
-            shifts.Add(shift);
+            var createdShift = _shiftService.CreateShift(shift);
 
             return CreatedAtAction(
                 nameof(GetShift),
-                new { id = shift.ShiftID },
-                shift);
+                new { id = createdShift.ShiftID },
+                createdShift);
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteShift(int id)
         {
-            var shift = shifts.FirstOrDefault(s => s.ShiftID == id);
-            
-            if (shift == null)
+            if (!_shiftService.DeleteShift(id))
                 return NotFound();
-
-            shifts.Remove(shift);
 
             return NoContent();
         }

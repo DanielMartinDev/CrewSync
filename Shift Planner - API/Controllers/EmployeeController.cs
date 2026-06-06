@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Models;
+using Shift_Planner___API.Services;
 
 namespace Shift_Planner___API.Controllers
 {
@@ -8,52 +9,48 @@ namespace Shift_Planner___API.Controllers
 
     public class EmployeeController : ControllerBase
     {
-        private List<Employee> employees = new List<Employee>()
-            {
-                new Employee
-                {
-                    EmployeeID = 1,
-                    Role = EmployeeRole.Role.Store_Manager,
-                    Name = "Daniel",
-                    WeeklyHours = 40,
-                    StartDate = DateTime.Now
-                },
-                new Employee
-                {
-                    EmployeeID = 2,
-                    Role = EmployeeRole.Role.Customer_Assistant,
-                    Name = "Bob",
-                    WeeklyHours = 35,
-                    StartDate = DateTime.Now
-                }
-            };
+        private readonly EmployeeService _employeeService;
+
+        public EmployeeController(EmployeeService employeeService)
+        {
+            _employeeService = employeeService;
+        }
 
         [HttpGet]
         public ActionResult<List<Employee>> GetEmployees()
         {
-            return Ok(employees);
+            return Ok(_employeeService.GetEmployees());
         }
 
         [HttpGet("{id}")]
         public ActionResult<Employee> GetEmployee(int id)
         {
-            var employee = employees.FirstOrDefault(employee => employee.EmployeeID == id);
+            var employee = _employeeService.GetEmployee(id);
 
             if (employee == null)
                 return NotFound();
 
             return Ok(employee);
-        }       
+        }
 
         [HttpPost]
         public ActionResult<Employee> CreateEmployee(Employee employee)
         {
-            employees.Add(employee);
+            var createdEmployee = _employeeService.CreateEmployee(employee);
 
             return CreatedAtAction(
                 nameof(GetEmployee),
-                new { id = employee.EmployeeID },
-                employee);
+                new { id = createdEmployee.EmployeeID },
+                createdEmployee);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteEmployee(int id)
+        {
+            if (!_employeeService.DeleteEmployee(id))
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
