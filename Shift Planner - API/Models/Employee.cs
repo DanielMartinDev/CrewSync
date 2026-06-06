@@ -7,5 +7,6 @@
         public DateTime StartDate {  get; set; }
         public int WeeklyHours { get; set; }
         public EmployeeRole.Role Role { get; set; }
+        public ICollection<Shift> Shifts { get; set; } = new List<Shift>();
     }
 }

@@ -33,6 +33,17 @@ namespace Shift_Planner___API.Controllers
             return Ok(employee);
         }
 
+        [HttpGet("{id}/schedule")]
+        public ActionResult<Employee> GetEmployeeSchedule(int id)
+        {
+            var employee = _employeeService.GetEmployeeWithShifts(id);
+
+            if (employee == null)
+                return NotFound();
+
+            return Ok(employee);
+        }
+
         [HttpPost]
         public ActionResult<Employee> CreateEmployee(Employee employee)
         {

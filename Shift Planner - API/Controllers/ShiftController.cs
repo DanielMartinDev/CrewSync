@@ -32,6 +32,17 @@ namespace Shift_Planner___API.Controllers
             return Ok(shift);
         }
 
+        [HttpGet("{id}/employee")]
+        public ActionResult<Shift> GetEmployeeFromShift(int id)
+        {
+            var shift = _shiftService.GetShiftWithEmployee(id);
+
+            if (shift == null)
+                return NotFound();
+
+            return Ok(shift);
+        }
+
         [HttpPost]
         public ActionResult<Shift> CreateShift(Shift shift)
         {

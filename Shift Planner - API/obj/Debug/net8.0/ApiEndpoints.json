@@ -109,6 +109,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Shift_Planner___API.Controllers.EmployeeController",
+    "Method": "GetEmployeeSchedule",
+    "RelativePath": "api/Employee/{id}/schedule",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner___API.Models.Employee",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Shift_Planner___API.Controllers.ShiftController",
     "Method": "GetShifts",
     "RelativePath": "api/Shift",
@@ -216,5 +242,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.ShiftController",
+    "Method": "GetEmployeeFromShift",
+    "RelativePath": "api/Shift/{id}/employee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner___API.Models.Shift",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

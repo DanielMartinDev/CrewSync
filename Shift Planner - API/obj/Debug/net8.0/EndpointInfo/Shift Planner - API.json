@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "Shift Planner - API",
     "version": "1.0"
@@ -190,6 +190,46 @@
         }
       }
     },
+    "/api/Employee/{id}/schedule": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Shift": {
       "get": {
         "tags": [
@@ -374,6 +414,46 @@
           }
         }
       }
+    },
+    "/api/Shift/{id}/employee": {
+      "get": {
+        "tags": [
+          "Shift"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shift"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shift"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shift"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -412,6 +492,13 @@
           },
           "role": {
             "$ref": "#/components/schemas/Role"
+          },
+          "shifts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Shift"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -437,6 +524,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          },
           "startTime": {
             "type": "string",
             "format": "date-time"
@@ -456,5 +546,13 @@
         "additionalProperties": false
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Employee"
+    },
+    {
+      "name": "Shift"
+    }
+  ]
 }

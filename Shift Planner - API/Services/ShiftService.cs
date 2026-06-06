@@ -1,30 +1,39 @@
-﻿using Shift_Planner___API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Shift_Planner___API.Data;
+using Shift_Planner___API.Models;
 
 namespace Shift_Planner___API.Services
 {
     public class ShiftService
     {
-        private readonly List<Shift> shifts;
+        private readonly ShiftPlannerContext shiftPlannerContext;
 
-        public ShiftService()
+        public ShiftService(ShiftPlannerContext context)
         {
-            shifts = new List<Shift>();
+            shiftPlannerContext = context;
         }
 
         public List<Shift> GetShifts()
         {
-            return shifts;
+            return shiftPlannerContext.Shifts.Include(s => s.Employee).ToList();
         }
 
         public Shift? GetShift(int id)
         {
-            return shifts.FirstOrDefault(
-                s => s.ShiftID == id);
+            return shiftPlannerContext.Shifts
+                .Include(s => s.Employee)
+                .FirstOrDefault(s => s.ShiftID == id);
+        }
+
+        public Shift? GetShiftWithEmployee(int id)
+        {
+            return shiftPlannerContext.Shifts.Include(s => s.Employee).FirstOrDefault(s => s.ShiftID == id);
         }
 
         public Shift CreateShift(Shift shift)
         {
-            shifts.Add(shift);
+            shiftPlannerContext.Shifts.Add(shift);
+            shiftPlannerContext.SaveChanges();
             return shift;
         }
 
@@ -33,7 +42,7 @@ namespace Shift_Planner___API.Services
             Shift updatedShift)
         {
             var shift =
-                shifts.FirstOrDefault(
+                shiftPlannerContext.Shifts.FirstOrDefault(
                    s => s.ShiftID == id);
 
             if (shift == null)
@@ -45,17 +54,19 @@ namespace Shift_Planner___API.Services
             shift.BreakDuration = updatedShift.BreakDuration;
             shift.Day = updatedShift.Day;
 
+            shiftPlannerContext.SaveChanges();
             return true;
         }
 
         public bool DeleteShift(int id)
         {
-            var shift = shifts.FirstOrDefault(s => s.ShiftID == id);
+            var shift = shiftPlannerContext.Shifts.FirstOrDefault(s => s.ShiftID == id);
 
             if (shift == null)
                 return false;
 
-            shifts.Remove(shift);
+            shiftPlannerContext.Shifts.Remove(shift);
+            shiftPlannerContext.SaveChanges();
             return true;
         }
     }
