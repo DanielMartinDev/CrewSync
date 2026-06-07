@@ -1,0 +1,55 @@
+﻿@model ShiftPlanner_Web.Models.Employee
+
+<h1> Employee Details </h1>
+
+<p>
+    <strong>Name:</strong>
+    @Model.Name
+</p>
+
+<p>
+    <strong>Weekly Hours:</strong>
+    @Model.WeeklyHours
+</p>
+
+<p>
+    <strong>Start Date:</strong>
+    @Model.StartDate.ToShortDateString()
+</p>
+
+<p>
+    <strong>Job Title:</strong>
+    @Model.EmployeeRole
+</p>
+
+<h2> Assigned Shifts </h2>
+
+@if (Model.Shifts.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Break</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var shift in Model.Shifts)
+            {
+                <tr>
+                    <td>@shift.Day</td>
+                    <td>@shift.StartTime.ToString("HH:mm")</td>
+                    <td>@shift.EndTime.ToString("HH:mm")</td>
+                    <td>@shift.BreakDuration mins</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No shifts assigned.</p>
+}

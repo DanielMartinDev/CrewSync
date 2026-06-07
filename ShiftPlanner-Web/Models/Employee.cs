@@ -1,4 +1,6 @@
-﻿namespace ShiftPlanner_Web.Models
+﻿using Shift_Planner___API.Models;
+
+namespace ShiftPlanner_Web.Models
 {
     public class Employee
     {
@@ -10,6 +12,8 @@
 
         public int WeeklyHours { get; set; }
 
-        public int Role { get; set; }
+        public EmployeeRole.Role EmployeeRole { get; set; }
+
+        public List<Shift> Shifts { get; set; } = new();
     }
 }

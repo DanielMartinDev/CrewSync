@@ -22,5 +22,17 @@ namespace ShiftPlanner_Web.Controllers
 
             return View(employees);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var employee = await _httpClient.GetFromJsonAsync<Employee>(
+                            $"https://localhost:7255/api/Employee/{id}/schedule"
+                );
+
+            if (employee == null)
+                return NotFound();
+
+            return View(employee);
+        }
     }
 }
