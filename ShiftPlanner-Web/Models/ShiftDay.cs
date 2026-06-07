@@ -1,4 +1,4 @@
-﻿namespace Shift_Planner___API.Models
+﻿namespace Shift_Planner_Web.Models
 {
     public class ShiftDay
     {

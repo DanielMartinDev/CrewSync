@@ -1,0 +1,38 @@
+﻿@using Shift_Planner_Web.Models
+@model Shift_Planner_Web.Models.Employee
+
+<h1>Create Employee</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="WeeklyHours"></label>
+        <input asp-for="WeeklyHours"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate"
+               class="form-control" />
+    </div>
+
+   <div class="mb-3">
+       <label asp-for="Role"></label>
+
+       <select asp-for="Role" class="form-select" asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
+       </select>
+   </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Save Employee
+    </button>
+
+</form>

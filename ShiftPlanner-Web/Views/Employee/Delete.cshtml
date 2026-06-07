@@ -1,0 +1,24 @@
+﻿@model Shift_Planner_Web.Models.Employee
+
+<h1>Delete Employee</h1>
+
+<p>
+    Are you sure you want to delete
+    <strong>@Model.Name</strong>?
+</p>
+
+<form asp-action="Delete" method="post">
+
+    <input asp-for="EmployeeID" type="hidden" />
+
+    <button type="submit"
+            class="btn btn-danger">
+        Delete
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

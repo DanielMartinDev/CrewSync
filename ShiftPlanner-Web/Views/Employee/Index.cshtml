@@ -19,7 +19,23 @@
                         View Details
                     </a>
                 </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@employee.EmployeeID">
+                        Edit Employee
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@employee.EmployeeID"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
             </tr>
         }
+
+        <a asp-action="Create" class="btn btn-primary mb-3">
+            Add Employee
+        </a>
     </tbody>
 </table>

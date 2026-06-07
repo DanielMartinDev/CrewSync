@@ -13,6 +13,7 @@ namespace Shift_Planner___API.Models
         public string Name { get; set; } = string.Empty;
         public DateTime StartDate {  get; set; }
 
+        [Display(Name = "Contracted Hours")]
         [Range(1, 60)]
         public int WeeklyHours { get; set; }
 

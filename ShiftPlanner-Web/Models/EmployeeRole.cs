@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shift_Planner___API.Models
+namespace Shift_Planner_Web.Models
 {
     public class EmployeeRole
     {
@@ -19,6 +19,6 @@ namespace Shift_Planner___API.Models
             Store_Manager
         }
 
-        public Role employeeRole;
+        public Role role;
     }
 }
