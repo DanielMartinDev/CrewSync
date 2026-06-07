@@ -472,6 +472,11 @@
         "format": "int32"
       },
       "Employee": {
+        "required": [
+          "employeeID",
+          "name",
+          "role"
+        ],
         "type": "object",
         "properties": {
           "employeeID": {
@@ -479,14 +484,17 @@
             "format": "int32"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
           },
           "startDate": {
             "type": "string",
             "format": "date-time"
           },
           "weeklyHours": {
+            "maximum": 60,
+            "minimum": 1,
             "type": "integer",
             "format": "int32"
           },
@@ -514,6 +522,10 @@
         "format": "int32"
       },
       "Shift": {
+        "required": [
+          "breakDuration",
+          "employeeID"
+        ],
         "type": "object",
         "properties": {
           "shiftID": {
@@ -536,6 +548,8 @@
             "format": "date-time"
           },
           "breakDuration": {
+            "maximum": 180,
+            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },

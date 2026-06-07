@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Shift Planner - API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f38a1ecf14aba6adba4a8e1046272c0ea537451c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13a800c04fa8cc6593e77818fb4982a6b842e991")]
 [assembly: System.Reflection.AssemblyProductAttribute("Shift Planner - API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Shift Planner - API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
