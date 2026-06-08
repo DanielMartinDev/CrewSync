@@ -8,11 +8,6 @@
 </p>
 
 <p>
-    <strong>Weekly Hours:</strong>
-    @Model.WeeklyHours
-</p>
-
-<p>
     <strong>Start Date:</strong>
     @Model.StartDate.ToShortDateString()
 </p>
@@ -21,6 +16,39 @@
     <strong>Job Title:</strong>
     @Model.Role
 </p>
+
+<p>
+    <strong>Weekly Hours:</strong>
+    @Model.WeeklyHours
+</p>
+
+<p>
+    <strong>Scheduled Hours:</strong>
+    @Model.ScheduledHours
+</p>
+
+@if (Model.RemainingHours < 0)
+{
+    <p class="text-danger">
+        Overtime:
+        @Math.Abs(Model.RemainingHours) Hours
+    </p>
+} 
+else 
+{
+    <p class="text-success">
+        Remaining:
+        @Model.RemainingHours Hours
+    </p>    
+}
+
+<p>
+    <strong>Utilisation:</strong>
+    @Model.Utilisation.ToString("0.0")%
+</p>
+
+
+
 
 <h2> Assigned Shifts </h2>
 
@@ -33,6 +61,7 @@
                 <th>Start</th>
                 <th>End</th>
                 <th>Break</th>
+                <th>Working Hours</th>
             </tr>
         </thead>
 
@@ -44,6 +73,7 @@
                     <td>@shift.StartTime.ToString("HH:mm")</td>
                     <td>@shift.EndTime.ToString("HH:mm")</td>
                     <td>@shift.BreakDuration mins</td>
+                    <td>@shift.ShiftHours</td>
                 </tr>
             }
         </tbody>

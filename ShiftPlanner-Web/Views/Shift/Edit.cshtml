@@ -7,6 +7,10 @@
 
     <input asp-for="ShiftID" type="hidden" />
 
+    <div asp-validation-summary="All"
+         class="text-danger">
+    </div>
+
     <div class="mb-3">
         <label asp-for="EmployeeID"></label>
 
@@ -21,18 +25,28 @@
         <input asp-for="StartTime"
                type="datetime-local"
                class="form-control" />
+
+        <span asp-validation-for="StartTime"
+              class="text-danger"></span>
     </div>
+
     <div class="mb-3">
         <label asp-for="EndTime"></label>
         <input asp-for="EndTime"
                type="datetime-local"
                class="form-control" />
+
+        <span asp-validation-for="EndTime"
+              class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="BreakDuration"></label>
         <input asp-for="BreakDuration"
                class="form-control" />
+
+        <span asp-validation-for="BreakDuration"
+              class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -42,6 +56,9 @@
                 class="form-select"
                 asp-items="Html.GetEnumSelectList<ShiftDay.DayOfWeek>()">
         </select>
+
+        <span asp-validation-for="Day"
+              class="text-danger"></span>
     </div>
 
     <button type="submit"

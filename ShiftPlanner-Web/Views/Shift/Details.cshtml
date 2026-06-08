@@ -8,6 +8,11 @@
 </p>
 
 <p>
+    <strong>Role:</strong>
+    @Model.Employee?.Role
+</p>
+
+<p>
     <strong>Start Time:</strong>
     @Model.StartTime.ToShortTimeString()
 </p>
@@ -25,4 +30,14 @@
 <p>
     <strong> Working Day:</strong>
     @Model.Day
+</p>
+
+<p>
+    <strong>Shift Length:</strong>
+    @Model.ShiftLength Hours
+</p>
+
+<p>
+    <strong>Paid Hours:</strong>
+    @Model.ShiftHours Hours
 </p>

@@ -1,4 +1,44 @@
-﻿<div class="row">
+﻿@model ShiftPlanner_Web.ViewModels.DashboardViewModel
+
+@if (Model.OverHoursEmployees.Any())
+{
+    <div class="alert alert-danger">
+
+        <h5>Warnings</h5>
+
+        <ul>
+            @foreach (var employee in Model.OverHoursEmployees)
+            {
+                <li>
+                    @employee.Name exceeds
+                    contracted hours
+                </li>
+            }
+        </ul>
+
+    </div>
+}
+
+@if (Model.NoShiftEmployees.Any())
+{
+    <div class="alert alert-warning">
+
+        <h5>Warnings</h5>
+
+        <ul>
+            @foreach (var employee in Model.NoShiftEmployees)
+            {
+                <li>
+                    @employee.Name Has
+                    no shifts assigned
+                </li>
+            }
+        </ul>
+
+    </div>
+}
+
+<div class="row">
 
     <div class="col-md-6">
         <div class="card">
@@ -24,6 +64,28 @@
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Total Hours Used</h5>
+
+                <h2>@Model.TotalHours</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Average Contract</h5>
+                <h2> 0 Hours </h2>
+            </div>
+        </div>
+    </div>
+
     <h2>Upcoming Shifts</h2>
 
     <table class="table">
@@ -35,6 +97,7 @@
                 <th>Start</th>
                 <th>End</th>
                 <th>Break</th>
+                <th> Shift Length </th>
             </tr>
         </thead>
 
@@ -53,6 +116,8 @@
                     <td>@shift.EndTime.ToString("HH:mm")</td>
 
                     <td>@shift.BreakDuration mins</td>
+
+                    <td>@shift.ShiftHours</td>
 
                 </tr>
             }

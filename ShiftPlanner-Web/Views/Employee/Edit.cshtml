@@ -6,17 +6,27 @@
 <form asp-action="Edit" method="post">
 
     <input asp-for="EmployeeID" type="hidden" />
+    
+    <div asp-validation-summary="All"
+         class="text-danger">
+    </div>
 
     <div class="mb-3">
         <label asp-for="Name"></label>
         <input asp-for="Name"
                class="form-control" />
+
+        <span asp-validation-for="Name"
+              class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label asp-for="WeeklyHours"></label>
         <input asp-for="WeeklyHours"
                class="form-control" />
+
+        <span asp-validation-for="WeeklyHours"
+              class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -26,6 +36,9 @@
                 class="form-select"
                 asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
         </select>
+
+        <span asp-validation-for="Role"
+              class="text-danger"></span>
     </div>
 
     <button type="submit"

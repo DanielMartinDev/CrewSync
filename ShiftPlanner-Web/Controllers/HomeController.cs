@@ -10,6 +10,7 @@ namespace ShiftPlanner_Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HttpClient _httpClient;
+
         public HomeController(ILogger<HomeController> logger, IHttpClientFactory factory)
         {
             _logger = logger;
@@ -40,16 +41,40 @@ namespace ShiftPlanner_Web.Controllers
                 "https://localhost:7255/api/Shift"
             );
 
+            double totalHours = 0;
+
+            foreach (var shift in shifts)
+            {
+                totalHours += shift.ShiftHours;
+            }
+
+            totalHours = Math.Round(totalHours, 1);
+
+            var overHoursEmployees = employees.Where(employee =>
+            shifts.Where(s => s.EmployeeID == employee.EmployeeID)
+            .Sum(s => s.ShiftHours) > employee.WeeklyHours)
+            .ToList();
+
+            var noShiftEmployees = employees
+                .Where(employee =>
+                !shifts.Any(
+                shift => shift.EmployeeID == employee.EmployeeID))
+                .ToList();
+
             var model = new DashboardViewModel
             {
                 EmployeeCount = employees.Count,
                 ShiftCount = shifts.Count,
+                TotalHours = totalHours,
 
                 UpcomingShifts = shifts
                 .OrderBy(s => s.Day)
                 .ThenBy(s => s.StartTime)
                 .Take(10)
-                .ToList()
+                .ToList(),
+
+                OverHoursEmployees = overHoursEmployees,
+                NoShiftEmployees = noShiftEmployees
             };
 
             return View(model);

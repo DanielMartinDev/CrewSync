@@ -13,5 +13,16 @@
         public EmployeeRole.Role Role { get; set; }
 
         public List<Shift> Shifts { get; set; } = new();
+
+        public double ScheduledHours =>
+        Shifts.Sum(s => s.ShiftHours);
+
+        public double RemainingHours =>
+            WeeklyHours - ScheduledHours;
+
+        public double Utilisation =>
+            WeeklyHours == 0
+                ? 0
+                : (ScheduledHours / WeeklyHours) * 100;
     }
 }
