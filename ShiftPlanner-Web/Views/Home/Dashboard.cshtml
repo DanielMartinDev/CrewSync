@@ -1,0 +1,64 @@
+﻿<div class="row">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Total Employees</h5>
+
+                <h2>@Model.EmployeeCount</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Total Shifts</h5>
+
+                <h2>@Model.ShiftCount</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <h2>Upcoming Shifts</h2>
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Day</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Break</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var shift in Model.UpcomingShifts)
+            {
+                <tr>
+
+                    <td>@shift.Employee?.Name</td>
+
+                    <td>@shift.Day</td>
+
+                    <td>@shift.StartTime.ToString("HH:mm")</td>
+
+                    <td>@shift.EndTime.ToString("HH:mm")</td>
+
+                    <td>@shift.BreakDuration mins</td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
