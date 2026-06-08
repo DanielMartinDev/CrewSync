@@ -1,0 +1,50 @@
+﻿@using Shift_Planner_Web.Models
+@model Shift_Planner_Web.Models.Shift
+
+<h1>Create Shift</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="EmployeeID"></label>
+
+        <select asp-for="EmployeeID"
+                class="form-select"
+                asp-items="ViewBag.Employees">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTime"></label>
+        <input asp-for="StartTime"
+               type="datetime-local"
+               class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="EndTime"></label>
+        <input asp-for="EndTime"
+               type="datetime-local"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BreakDuration"></label>
+        <input asp-for="BreakDuration"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Day"></label>
+
+        <select asp-for="Day"
+                class="form-select"
+                asp-items="Html.GetEnumSelectList<ShiftDay.DayOfWeek>()">
+        </select>
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Add Shift
+    </button>
+
+</form>

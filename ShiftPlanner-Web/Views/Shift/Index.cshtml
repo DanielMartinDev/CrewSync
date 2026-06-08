@@ -1,0 +1,49 @@
+﻿@model List<Shift_Planner_Web.Models.Shift>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Empoloyee</th>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Break</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var shift in Model)
+        {
+            <tr>
+                <td>@shift.ShiftID</td>
+                <td>@shift.Employee?.Name</td>
+                <td>@shift.Day</td>
+                <td>@shift.StartTime.ToShortTimeString()</td>
+                <td>@shift.EndTime.ToShortTimeString()</td>
+                <td>@shift.BreakDuration</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@shift.ShiftID"> 
+                        View Details
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@shift.ShiftID">
+                        Edit Employee
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@shift.ShiftID"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+
+        <a asp-action="Create" class="btn btn-primary mb-3">
+            Add Shift
+        </a>
+    </tbody>
+</table>

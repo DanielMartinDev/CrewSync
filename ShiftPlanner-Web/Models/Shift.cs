@@ -13,6 +13,6 @@
 
         public int BreakDuration { get; set; }
 
-        public int Day { get; set; }
+        public ShiftDay.DayOfWeek Day { get; set; }
     }
 }

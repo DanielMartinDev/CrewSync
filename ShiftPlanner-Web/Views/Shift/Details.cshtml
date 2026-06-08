@@ -1,0 +1,28 @@
+﻿@model Shift_Planner_Web.Models.Shift
+
+<h1> Shift Details </h1>
+
+<p>
+    <strong>Name:</strong>
+    @Model.Employee?.Name
+</p>
+
+<p>
+    <strong>Start Time:</strong>
+    @Model.StartTime.ToShortTimeString()
+</p>
+
+<p>
+    <strong>End Time:</strong>
+    @Model.EndTime.ToShortTimeString()
+</p>
+
+<p>
+    <strong>Break Duration:</strong>
+    @Model.BreakDuration
+</p>
+
+<p>
+    <strong> Working Day:</strong>
+    @Model.Day
+</p>
