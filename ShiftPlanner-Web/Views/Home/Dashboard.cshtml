@@ -81,43 +81,92 @@
             <div class="card-body">
 
                 <h5>Average Contract</h5>
-                <h2> 0 Hours </h2>
+                <h2>@Model.AverageContractHours Hours</h2>
             </div>
         </div>
     </div>
 
-    <h2>Upcoming Shifts</h2>
+    <h2>Weekly Schedule</h2>
 
-    <table class="table">
+    <div class="d-flex justify-content-between mb-3">
+
+        <a asp-action="Dashboard"
+           asp-route-weekStart="@Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd")"
+           class="btn btn-secondary">
+            Previous Week
+        </a>
+
+        <h4>
+            Week Beginning
+            @Model.WeekStart.ToString("dd/MM/yyyy")
+        </h4>
+
+        <a asp-action="Dashboard"
+           asp-route-weekStart="@Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd")"
+           class="btn btn-secondary">
+            Next Week
+        </a>
+
+    </div>
+
+<div>
+    <table class="table table-bordered">
 
         <thead>
             <tr>
                 <th>Employee</th>
-                <th>Day</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Break</th>
-                <th> Shift Length </th>
+
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
             </tr>
         </thead>
 
         <tbody>
 
-            @foreach (var shift in Model.UpcomingShifts)
+            @foreach (var employee in Model.Employees)
             {
                 <tr>
 
-                    <td>@shift.Employee?.Name</td>
+                    <td>
+                        @employee.Name
+                    </td>
 
-                    <td>@shift.Day</td>
+                    @for (int i = 0; i < 7; i++)
+                    {
+                        var day = Model.WeekStart.AddDays(i);
 
-                    <td>@shift.StartTime.ToString("HH:mm")</td>
+                            var shift = Model.UpcomingShifts
+                                .FirstOrDefault(
+                                    s =>
+                                    s.EmployeeID == employee.EmployeeID &&
+                                    s.StartTime.Date == day.Date);
+                            <td class="text-center align-middle">
 
-                    <td>@shift.EndTime.ToString("HH:mm")</td>
+                                @if (shift != null)
+                                {
+                                    <strong>
+                                        @shift.StartTime.ToString("HH:mm")
+                                        -
+                                        @shift.EndTime.ToString("HH:mm")
+                                    </strong>
 
-                    <td>@shift.BreakDuration mins</td>
+                                    <br />
 
-                    <td>@shift.ShiftHours</td>
+                                    <small>
+                                        @shift.ShiftHours hrs
+                                    </small>
+                                }
+                            else
+                            {
+                                <span>OFF</span>
+                            }
+                            </td>
+                    }
 
                 </tr>
             }
@@ -125,5 +174,4 @@
         </tbody>
 
     </table>
-
 </div>

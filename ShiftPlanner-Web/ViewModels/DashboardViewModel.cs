@@ -8,9 +8,12 @@ namespace ShiftPlanner_Web.ViewModels
         public int ShiftCount { get; set; }
 
         public double TotalHours { get; set; }
+        public DateTime WeekStart { get; set; }
 
+        public double AverageContractHours { get; set; }
         public List<Shift> UpcomingShifts { get; set; } = new();
         public List<Employee> OverHoursEmployees { get; set; } = new();
         public List<Employee> NoShiftEmployees { get; set; } = new();
+        public List<Employee> Employees { get; set; } = new();
     }
 }

@@ -27,28 +27,39 @@ namespace ShiftPlanner_Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(DateTime? weekStart)
         {
-            var employees =
-            await _httpClient.GetFromJsonAsync<List<Employee>>
-            (
-                "https://localhost:7255/api/Employee"
-            );
+            weekStart ??= DateTime.Today;
 
-            var shifts =
-            await _httpClient.GetFromJsonAsync<List<Shift>>
-            (
-                "https://localhost:7255/api/Shift"
-            );
+            var monday = weekStart.Value;
 
-            double totalHours = 0;
-
-            foreach (var shift in shifts)
+            while (monday.DayOfWeek != DayOfWeek.Monday)
             {
-                totalHours += shift.ShiftHours;
+                monday = monday.AddDays(-1);
             }
 
-            totalHours = Math.Round(totalHours, 1);
+            var employees =
+                await _httpClient.GetFromJsonAsync<List<Employee>>
+                (
+                    "https://localhost:7255/api/Employee"
+                ) ?? new List<Employee>();
+
+            var shifts =
+                await _httpClient.GetFromJsonAsync<List<Shift>>
+                (
+                    "https://localhost:7255/api/Shift"
+                ) ?? new List<Shift>();
+
+            var totalHours =
+            Math.Round(
+            shifts.Sum(s => s.ShiftHours),
+            1);
+
+            var averageContractHours =
+            employees.Any()
+            ? Math.Round(
+            employees.Average(e => e.WeeklyHours),
+            1) : 0;
 
             var overHoursEmployees = employees.Where(employee =>
             shifts.Where(s => s.EmployeeID == employee.EmployeeID)
@@ -61,20 +72,33 @@ namespace ShiftPlanner_Web.Controllers
                 shift => shift.EmployeeID == employee.EmployeeID))
                 .ToList();
 
+            var weekEnd = monday.AddDays(7);
+            var weekShifts = shifts
+                .Where(s =>
+                    s.StartTime >= monday &&
+                    s.StartTime < weekEnd)
+                .ToList();
+
+            _logger.LogInformation(
+                "Week Start: {WeekStart}",
+                monday);
+
             var model = new DashboardViewModel
             {
+                WeekStart = monday,
+
                 EmployeeCount = employees.Count,
                 ShiftCount = shifts.Count,
-                TotalHours = totalHours,
 
-                UpcomingShifts = shifts
-                .OrderBy(s => s.Day)
-                .ThenBy(s => s.StartTime)
-                .Take(10)
-                .ToList(),
+                TotalHours = totalHours,
+                AverageContractHours = averageContractHours,
+
+                UpcomingShifts = weekShifts,
 
                 OverHoursEmployees = overHoursEmployees,
-                NoShiftEmployees = noShiftEmployees
+                NoShiftEmployees = noShiftEmployees,
+
+                Employees = employees
             };
 
             return View(model);
