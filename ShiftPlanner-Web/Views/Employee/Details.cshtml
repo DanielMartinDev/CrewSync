@@ -14,7 +14,7 @@
 
 <p>
     <strong>Job Title:</strong>
-    @Model.Role
+    @Model.Role.ToString().Replace("_"," ")
 </p>
 
 <p>
@@ -43,11 +43,30 @@ else
 }
 
 <p>
-    <strong>Utilisation:</strong>
-    @Model.Utilisation.ToString("0.0")%
+    Utilisation:
 </p>
+<div class="progress">
+    <div class="progress-bar"
+         style="width:@Model.Utilisation%">
+        @Model.Utilisation.ToString("0")%
+    </div>
+</div>
 
-
+<p>
+    Status:
+    @{
+        string status;
+        if (Model.ScheduledHours == 0)
+            status = "No Shifts";
+        else if (Model.ScheduledHours > Model.WeeklyHours)
+            status = "Over Contract";
+        else if (Model.Utilisation >= 90)
+            status = "Fully Scheduled";
+        else
+            status = "Under Hours";
+    }
+    @status
+</p>
 
 
 <h2> Assigned Shifts </h2>
@@ -57,7 +76,7 @@ else
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Day</th>
+                <th>Date</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Break</th>
@@ -69,7 +88,7 @@ else
             @foreach (var shift in Model.Shifts)
             {
                 <tr>
-                    <td>@shift.Day</td>
+                    <td>@shift.StartTime.ToShortDateString()</td>
                     <td>@shift.StartTime.ToString("HH:mm")</td>
                     <td>@shift.EndTime.ToString("HH:mm")</td>
                     <td>@shift.BreakDuration mins</td>

@@ -3,7 +3,12 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Weekly Hours</th>
+            <th>Role</th>
+            <th>Contract</th>
+            <th>Scheduled</th>
+            <th>Remaining</th>
+            <th>Utilisation</th>
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -13,30 +18,37 @@
             <tr>
                 <td>@employee.EmployeeID</td>
                 <td>@employee.Name</td>
+                <td>@employee.Role.ToString().Replace("_"," ")</td>
                 <td>@employee.WeeklyHours</td>
-                <td></td>
+                <td>@employee.ScheduledHours</td>
+                <td>@employee.RemainingHours</td>
+                <td>@(employee.Utilisation + "%")</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@employee.EmployeeID"> 
-                        View Details
-                    </a>
+                    @{
+                        string status;
+                        if (employee.ScheduledHours == 0)
+                            status = "No Shifts";
+                        else if (employee.ScheduledHours > employee.WeeklyHours)
+                            status = "Over Contract";
+                        else if (employee.Utilisation >= 90)
+                            status = "Fully Scheduled";
+                        else
+                            status = "Under Hours";
+                    }
+                    @status
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@employee.EmployeeID">
-                        Edit Employee
-                    </a>
+                    <a asp-action="Details" asp-route-id="@employee.EmployeeID">View Details</a>
                 </td>
                 <td>
-                    <a asp-action="Delete"
-                       asp-route-id="@employee.EmployeeID"
-                       class="btn btn-danger">
-                        Delete
-                    </a>
+                    <a asp-action="Edit" asp-route-id="@employee.EmployeeID">Edit Employee</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@employee.EmployeeID" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
-
-        <a asp-action="Create" class="btn btn-primary mb-3">
-            Add Employee
-        </a>
     </tbody>
 </table>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add Employee</a>

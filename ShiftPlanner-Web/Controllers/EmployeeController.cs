@@ -16,10 +16,23 @@ namespace ShiftPlanner_Web.Controllers
         public async Task<IActionResult> Index()
         {
             var employees =
-            await _httpClient.GetFromJsonAsync<List<Employee>>
-            (
-                "https://localhost:7255/api/Employee"
-            );
+                await _httpClient.GetFromJsonAsync<List<Employee>>
+                (
+                    "https://localhost:7255/api/Employee"
+                ) ?? new();
+
+            var shifts =
+                await _httpClient.GetFromJsonAsync<List<Shift>>
+                (
+                    "https://localhost:7255/api/Shift"
+                ) ?? new();
+
+            foreach (var employee in employees)
+            {
+                employee.Shifts = shifts
+                    .Where(s => s.EmployeeID == employee.EmployeeID)
+                    .ToList();
+            }
 
             return View(employees);
         }
@@ -72,8 +85,9 @@ namespace ShiftPlanner_Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var employee = await _httpClient.GetFromJsonAsync<Employee>(
-                            $"https://localhost:7255/api/Employee/{id}/schedule"
+            var employee = await _httpClient.GetFromJsonAsync<Employee>
+                (
+                   $"https://localhost:7255/api/Employee/{id}/schedule"
                 );
 
             if (employee == null)

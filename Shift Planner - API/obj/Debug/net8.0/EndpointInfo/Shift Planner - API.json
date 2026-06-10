@@ -507,6 +507,21 @@
               "$ref": "#/components/schemas/Shift"
             },
             "nullable": true
+          },
+          "scheduledHours": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "remainingHours": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "utilisation": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -555,6 +570,16 @@
           },
           "day": {
             "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "shiftHours": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "shiftLength": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
         },
         "additionalProperties": false
