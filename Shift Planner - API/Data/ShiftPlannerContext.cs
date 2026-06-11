@@ -8,6 +8,16 @@ namespace Shift_Planner___API.Data
     {
         public ShiftPlannerContext(DbContextOptions<ShiftPlannerContext> options) 
             : base(options) { }
+        protected override void OnModelCreating(
+    ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Employee>()
+                .HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId);
+        }
 
         public DbSet<Employee> Employees {  get; set; }
         public DbSet<Shift> Shifts { get; set; }

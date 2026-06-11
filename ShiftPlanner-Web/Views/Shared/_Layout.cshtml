@@ -46,7 +46,7 @@
 
                 <ul class="navbar-nav flex-grow-1">
 
-                    @if (User.Identity?.IsAuthenticated == true)
+                    @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Employee"))
                     {
                         <li class="nav-item">
 
@@ -91,6 +91,21 @@
                                asp-controller="HolidayRequest"
                                asp-action="Index">
                                 Holiday Requests
+                            </a>
+
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                               asp-controller="EmployeePortal"
+                               asp-action="Index">
+
+                                My Portal
+
                             </a>
 
                         </li>

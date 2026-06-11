@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shift_Planner___API.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shift_Planner___API.Models
 {
@@ -6,6 +7,8 @@ namespace Shift_Planner___API.Models
     {
         [Required]
         public int EmployeeID { get; set; }
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
         [Required(ErrorMessage = "Employee name is required")]
         [StringLength(100,

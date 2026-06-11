@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shift_Planner___API.Data;
 using Shift_Planner_Web.Models;
 using ShiftPlanner_Web.Models;
 using ShiftPlanner_Web.ViewModels;
@@ -12,21 +14,38 @@ namespace ShiftPlanner_Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HttpClient _httpClient;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory factory)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory factory, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _httpClient = factory.CreateClient();
-        }
-
-        public IActionResult Index()
-        {
-            return RedirectToAction(nameof(Dashboard));
+            _userManager = userManager;
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            if (!User.Identity?.IsAuthenticated ?? true)
+                return RedirectToAction("Login", "Account");
+
+            var user =
+                await _userManager.GetUserAsync(User);
+
+            if (user != null &&
+                await _userManager.IsInRoleAsync(user, "Employee"))
+            {
+                return RedirectToAction(
+                    "Index",
+                    "EmployeePortal");
+            }
+
+            return RedirectToAction(
+                "Dashboard");
         }
 
         public async Task<IActionResult> Dashboard(DateTime? weekStart)

@@ -90,6 +90,21 @@ namespace Shift_Planner___API.Data
                     employeeUser,
                     "Employee");
             }
+
+            var context =
+            services.GetRequiredService<ShiftPlannerContext>();
+
+            var employee =
+                context.Employees
+                    .FirstOrDefault(e => e.Name == "Daniel");
+
+            if (employee != null &&
+                string.IsNullOrEmpty(employee.UserId))
+            {
+                employee.UserId = employeeUser!.Id;
+
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿namespace Shift_Planner_Web.Models
+﻿using Shift_Planner___API.Data;
+
+namespace Shift_Planner_Web.Models
 {
     public class Employee
     {
         public int EmployeeID { get; set; }
-
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
         public string Name { get; set; } = "";
 
         public DateTime StartDate { get; set; }

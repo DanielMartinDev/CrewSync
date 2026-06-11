@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shift_Planner___API.Data;
 
@@ -10,9 +11,11 @@ using Shift_Planner___API.Data;
 namespace Shift_Planner___API.Migrations
 {
     [DbContext(typeof(ShiftPlannerContext))]
-    partial class ShiftPlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20260611212647_LinkEmployeeToUser")]
+    partial class LinkEmployeeToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.27");

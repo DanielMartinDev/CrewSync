@@ -54,6 +54,26 @@ namespace Shift_Planner___API.Services
                 .HolidayRequests
                 .Add(holidayRequest);
 
+            var existingRequest =
+            shiftPlannerContext.HolidayRequests
+            .Any(h =>
+            h.EmployeeID == holidayRequest.EmployeeID &&
+            holidayRequest.StartDate <= h.EndDate &&
+            holidayRequest.EndDate >= h.StartDate);
+
+            if (existingRequest)
+            {
+                throw new Exception(
+                    "You already have a holiday request for these dates.");
+            }
+
+            if (holidayRequest.EndDate <
+                holidayRequest.StartDate)
+            {
+                throw new Exception(
+                    "End date must be after start date.");
+            }
+
             shiftPlannerContext
                 .SaveChanges();
 

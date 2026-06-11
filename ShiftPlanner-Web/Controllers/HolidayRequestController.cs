@@ -39,7 +39,7 @@ namespace Shift_Planner_Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create(
-            HolidayRequest holidayRequest)
+        HolidayRequest holidayRequest)
         {
             holidayRequest.Status =
                 HolidayRequestStatus.Pending;
@@ -50,7 +50,19 @@ namespace Shift_Planner_Web.Controllers
                     holidayRequest);
 
             if (!response.IsSuccessStatusCode)
+            {
+                ViewBag.Error =
+                    await response.Content.ReadAsStringAsync();
+
                 return View(holidayRequest);
+            }
+
+            if (User.IsInRole("Employee"))
+            {
+                return RedirectToAction(
+                    "Index",
+                    "EmployeePortal");
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -152,6 +164,13 @@ namespace Shift_Planner_Web.Controllers
         {
             await _httpClient.DeleteAsync(
                 $"https://localhost:7255/api/HolidayRequest/{holidayRequest.HolidayRequestID}");
+
+            if (User.IsInRole("Employee"))
+            {
+                return RedirectToAction(
+                    "Index",
+                    "EmployeePortal");
+            }
 
             return RedirectToAction(nameof(Index));
         }

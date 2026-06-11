@@ -3,22 +3,33 @@ using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Data;
 using ShiftPlanner_Web.ViewModels;
 
-namespace Shift_Planner_Web.Controllers
+namespace ShiftPlanner_Web.Controllers
 {
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser>
-            _signInManager;
+        _signInManager;
+
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public AccountController(
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult Login()
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction(
+                    "Dashboard",
+                    "Home");
+            }
+
             return View();
         }
 
@@ -33,17 +44,51 @@ namespace Shift_Planner_Web.Controllers
                     false,
                     false);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return RedirectToAction(
-                    "Dashboard",
-                    "Home");
+                ViewBag.Error =
+                    "Invalid email or password";
+
+                return View(model);
             }
 
-            ViewBag.Error =
-                "Invalid email or password";
+            var user =
+                await _userManager.FindByEmailAsync(
+                    model.Email);
 
-            return View(model);
+            if (user != null)
+            {
+                if (await _userManager.IsInRoleAsync(
+                    user,
+                    "Employee"))
+                {
+                    return RedirectToAction(
+                        "Index",
+                        "EmployeePortal");
+                }
+
+                if (await _userManager.IsInRoleAsync(
+                    user,
+                    "Manager"))
+                {
+                    return RedirectToAction(
+                        "Dashboard",
+                        "Home");
+                }
+
+                if (await _userManager.IsInRoleAsync(
+                    user,
+                    "Admin"))
+                {
+                    return RedirectToAction(
+                        "Dashboard",
+                        "Home");
+                }
+            }
+
+            return RedirectToAction(
+                "Dashboard",
+                "Home");
         }
 
         [HttpPost]
@@ -51,7 +96,8 @@ namespace Shift_Planner_Web.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(
+                nameof(Login));
         }
     }
 }

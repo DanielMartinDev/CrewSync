@@ -1,5 +1,14 @@
 ﻿@model Shift_Planner_Web.Models.HolidayRequest
 
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+
+        @ViewBag.Error
+
+    </div>
+}
+
 <h2>Request Holiday</h2>
 
 <form asp-action="Create" method="post">
@@ -35,9 +44,20 @@
         Submit Request
     </button>
 
-    <a asp-action="Index"
-       class="btn btn-secondary">
-        Cancel
-    </a>
+    @if (User.IsInRole("Employee"))
+    {
+        <a asp-controller="EmployeePortal"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+    }
+    else
+    {
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+    }
 
 </form>

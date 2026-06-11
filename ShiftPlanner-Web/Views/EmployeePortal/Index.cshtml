@@ -1,0 +1,258 @@
+﻿@model List<Shift_Planner_Web.Models.Shift>
+
+@{
+    var employee =
+    ViewBag.Employee as Shift_Planner_Web.Models.Employee;
+
+var holidays =
+    ViewBag.Holidays as
+    List<Shift_Planner_Web.Models.HolidayRequest>;
+
+    var upcomingShiftCount =
+        Model.Count(s => s.StartTime >= DateTime.Today);
+
+    var pendingHolidayCount =
+        holidays?.Count(h =>
+            h.Status ==
+            Shift_Planner_Web.Models.HolidayRequestStatus.Pending) ?? 0;
+
+    var approvedHolidayCount =
+        holidays?.Count(h =>
+            h.Status ==
+            Shift_Planner_Web.Models.HolidayRequestStatus.Approved) ?? 0;
+}
+
+<h2>
+    Welcome @employee?.Name
+</h2>
+
+<hr />
+
+<div class="row mb-4">
+    <div class="col-md-4">
+
+        <div class="card text-center h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Upcoming Shifts
+                </h6>
+
+                <h2>
+                    @upcomingShiftCount
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card text-center h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Pending Holidays
+                </h6>
+
+                <h2>
+                    @pendingHolidayCount
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card text-center h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Approved Holidays
+                </h6>
+
+                <h2>
+                    @approvedHolidayCount
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header">
+                Upcoming Shifts
+            </div>
+
+            <div class="card-body">
+
+                @if (Model.Any())
+                {
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Shift</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var shift in Model.OrderBy(s => s.StartTime))
+                            {
+                                <tr>
+
+                                    <td>
+                                        @shift.StartTime.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        @shift.StartTime.ToString("HH:mm")
+                                        -
+                                        @shift.EndTime.ToString("HH:mm")
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                }
+                else
+                {
+                    <p class="mb-0">
+                        No shifts scheduled.
+                    </p>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-header">
+                My Holiday Requests
+            </div>
+
+            <div class="card-body">
+
+                @if (holidays != null &&
+                     holidays.Any())
+                {
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>Dates</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var holiday in holidays.OrderByDescending(h => h.StartDate))
+                            {
+                                <tr>
+
+                                    <td>
+                                        @holiday.StartDate.ToString("dd/MM/yyyy")
+                                        -
+                                        @holiday.EndDate.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+
+                                        @if (holiday.Status ==
+                                             Shift_Planner_Web.Models.HolidayRequestStatus.Approved)
+                                        {
+                                            <span class="badge bg-success">
+                                                Approved
+                                            </span>
+                                        }
+                                        else if (holiday.Status ==
+                                                 Shift_Planner_Web.Models.HolidayRequestStatus.Rejected)
+                                        {
+                                            <span class="badge bg-danger">
+                                                Rejected
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                Pending
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td>
+
+                                        @if (holiday.Status ==
+                                             Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
+                                        {
+                                            <a asp-controller="HolidayRequest"
+                                               asp-action="Delete"
+                                               asp-route-id="@holiday.HolidayRequestID"
+                                               class="btn btn-outline-danger btn-sm">
+
+                                                Cancel
+
+                                            </a>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                }
+                else
+                {
+                    <p class="mb-0">
+                        No holiday requests.
+                    </p>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-controller="HolidayRequest"
+       asp-action="Create"
+       asp-route-employeeId="@employee?.EmployeeID"
+       class="btn btn-primary">
+
+        Request Holiday
+
+    </a>
+</div>
