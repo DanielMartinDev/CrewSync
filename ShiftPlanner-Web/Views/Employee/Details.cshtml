@@ -102,3 +102,22 @@ else
 {
     <p>No shifts assigned.</p>
 }
+
+<div>
+    <a asp-controller="Availability"
+       asp-action="Index"
+       asp-route-employeeId="@Model.EmployeeID"
+       class="btn btn-primary">
+
+        Manage Availability
+
+    </a>
+
+<a asp-controller="HolidayRequest"
+   asp-action="Create"
+   asp-route-employeeId="@Model.EmployeeID"
+   class="btn btn-warning">
+    Request Holiday
+</a>
+
+</div>

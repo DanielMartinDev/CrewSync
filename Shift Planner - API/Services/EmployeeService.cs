@@ -27,6 +27,22 @@ namespace Shift_Planner___API.Services
         public Employee CreateEmployee(Employee employee)
         {
             shiftPlannerContext.Employees.Add(employee);
+
+            shiftPlannerContext.SaveChanges();
+
+            foreach (DayOfWeek day in Enum.GetValues<DayOfWeek>())
+            {
+                shiftPlannerContext.Availabilities.Add(
+                    new Availability
+                    {
+                        EmployeeID = employee.EmployeeID,
+                        DayOfWeek = day,
+                        IsAvailable = false,
+                        AvailableFrom = TimeSpan.Zero,
+                        AvailableTo = TimeSpan.Zero
+                    });
+            }
+
             shiftPlannerContext.SaveChanges();
 
             return employee;

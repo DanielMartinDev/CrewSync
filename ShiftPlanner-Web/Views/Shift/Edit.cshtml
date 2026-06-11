@@ -1,7 +1,13 @@
-﻿@using Shift_Planner_Web.Models
-@model Shift_Planner_Web.Models.Shift
+﻿@model Shift_Planner_Web.Models.Shift
 
 <h1>Edit Shift</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
 
 <form asp-action="Edit" method="post">
 
@@ -49,21 +55,14 @@
               class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Day"></label>
-
-        <select asp-for="Day"
-                class="form-select"
-                asp-items="Html.GetEnumSelectList<ShiftDay.DayOfWeek>()">
-        </select>
-
-        <span asp-validation-for="Day"
-              class="text-danger"></span>
-    </div>
-
     <button type="submit"
             class="btn btn-success">
         Save Changes
     </button>
 
+    <a asp-action="Delete"
+       asp-route-id="@Model.ShiftID"
+       class="btn btn-danger">
+        Delete
+    </a>
 </form>

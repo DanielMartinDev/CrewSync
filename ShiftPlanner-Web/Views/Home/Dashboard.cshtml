@@ -1,48 +1,36 @@
-﻿@model ShiftPlanner_Web.ViewModels.DashboardViewModel
+﻿@using Shift_Planner_Web.Models
+@model ShiftPlanner_Web.ViewModels.DashboardViewModel
 
-@if (Model.OverHoursEmployees.Any())
+@if (Model.OverHoursEmployees.Any() || Model.NoShiftEmployees.Any())
 {
-    <div class="alert alert-danger">
-
+    <div class="alert alert-warning mb-4">
         <h5>Warnings</h5>
 
-        <ul>
+        <ul class="mb-0">
+
             @foreach (var employee in Model.OverHoursEmployees)
             {
                 <li>
-                    @employee.Name exceeds
-                    contracted hours
+                    @employee.Name exceeds contracted hours
                 </li>
             }
-        </ul>
 
-    </div>
-}
-
-@if (Model.NoShiftEmployees.Any())
-{
-    <div class="alert alert-warning">
-
-        <h5>Warnings</h5>
-
-        <ul>
             @foreach (var employee in Model.NoShiftEmployees)
             {
                 <li>
-                    @employee.Name Has
-                    no shifts assigned
+                    @employee.Name has no shifts assigned this week
                 </li>
             }
+
         </ul>
 
     </div>
 }
 
 <div class="row">
-
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-center">
 
                 <h5>Total Employees</h5>
 
@@ -52,9 +40,9 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-center">
 
                 <h5>Total Shifts</h5>
 
@@ -64,9 +52,9 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-center">
 
                 <h5>Total Hours Used</h5>
 
@@ -76,102 +64,181 @@
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
+    <div class="col-md-6 mb-3">
 
-                <h5>Average Contract</h5>
-                <h2>@Model.AverageContractHours Hours</h2>
+        <a asp-controller="HolidayRequest"
+           asp-action="Index"
+           class="text-decoration-none text-dark">
+
+            <div class="card">
+
+                <div class="card-body text-center">
+
+                    <h5>Pending Holiday Requests</h5>
+
+                    <h2>
+                        @Model.PendingHolidayRequests.Count
+                    </h2>
+
+                </div>
+
             </div>
+
+        </a>
+
+    </div>
+</div>
+
+<h2>Weekly Schedule</h2>
+
+<div class="card">
+    <div class="card-header">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <a asp-action="Dashboard"
+               asp-route-weekStart="@Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd")"
+               class="btn btn-secondary">
+                Previous Week
+            </a>
+
+            <h5 class="mb-0">
+                Week Beginning
+                @Model.WeekStart.ToString("dd/MM/yyyy")
+            </h5>
+
+            <a asp-action="Dashboard"
+               asp-route-weekStart="@Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd")"
+               class="btn btn-secondary">
+                Next Week
+            </a>
+
         </div>
-    </div>
-
-    <h2>Weekly Schedule</h2>
-
-    <div class="d-flex justify-content-between mb-3">
-
-        <a asp-action="Dashboard"
-           asp-route-weekStart="@Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd")"
-           class="btn btn-secondary">
-            Previous Week
-        </a>
-
-        <h4>
-            Week Beginning
-            @Model.WeekStart.ToString("dd/MM/yyyy")
-        </h4>
-
-        <a asp-action="Dashboard"
-           asp-route-weekStart="@Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd")"
-           class="btn btn-secondary">
-            Next Week
-        </a>
 
     </div>
 
-<div>
-    <table class="table table-bordered">
+    <div class="card-body p-0">
 
-        <thead>
-            <tr>
-                <th>Employee</th>
+        <table class="table table-bordered mb-0">
 
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-                <th>Sun</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            @foreach (var employee in Model.Employees)
-            {
+            <thead>
                 <tr>
+                    <th>Employee</th>
 
-                    <td>
-                        @employee.Name
-                    </td>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
 
-                    @for (int i = 0; i < 7; i++)
-                    {
-                        var day = Model.WeekStart.AddDays(i);
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+
+                        <td>
+                            @employee.Name
+                        </td>
+
+                        @for (int i = 0; i < 7; i++)
+                        {
+                            var day = Model.WeekStart.AddDays(i);
 
                             var shift = Model.UpcomingShifts
                                 .FirstOrDefault(
                                     s =>
                                     s.EmployeeID == employee.EmployeeID &&
                                     s.StartTime.Date == day.Date);
+
+                            var holiday =
+                                Model.HolidayRequests
+                                .FirstOrDefault(h =>
+                                    h.EmployeeID == employee.EmployeeID &&
+                                    h.Status == HolidayRequestStatus.Approved &&
+                                    day.Date >= h.StartDate.Date &&
+                                    day.Date <= h.EndDate.Date);
+
                             <td class="text-center align-middle">
 
                                 @if (shift != null)
                                 {
-                                    <strong>
-                                        @shift.StartTime.ToString("HH:mm")
-                                        -
-                                        @shift.EndTime.ToString("HH:mm")
-                                    </strong>
+                                    <a asp-controller="Shift"
+                                       asp-action="Edit"
+                                       asp-route-id="@shift.ShiftID"
+                                       class="text-dark text-decoration-none d-block">
 
-                                    <br />
+                                        <div>
+                                            @shift.StartTime.ToString("HH:mm")
+                                            -
+                                            @shift.EndTime.ToString("HH:mm")
+                                        </div>
 
-                                    <small>
-                                        @shift.ShiftHours hrs
-                                    </small>
+                                        <small>
+                                            @shift.ShiftHours.ToString("0.0") hrs
+                                        </small>
+
+                                    </a>
                                 }
+                                else if (holiday != null)
+                                {
+                                    <span class="badge bg-success">
+                                        HOLIDAY
+                                    </span>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Shift"
+                                       asp-action="Create"
+                                       asp-route-employeeId="@employee.EmployeeID"
+                                       asp-route-date="@day.ToString("yyyy-MM-dd")"
+                                       class="text-secondary text-decoration-none">
+
+                                        <small>OFF</small>
+
+                                    </a>
+                                }
+
+                            </td>
+                        }
+
+                        <td>
+
+                            @{
+                                var weeklyHours = Model.UpcomingShifts
+                                    .Where(s => s.EmployeeID == employee.EmployeeID)
+                                    .Sum(s => s.ShiftHours);
+
+                                var overHours =
+                                    weeklyHours > employee.WeeklyHours;
+                            }
+
+                            @if (overHours)
+                            {
+                                <span class="text-danger fw-bold">
+                                    @weeklyHours.ToString("0.0") hrs
+                                </span>
+                            }
                             else
                             {
-                                <span>OFF</span>
+                                @weeklyHours.ToString("0.0")
+                                <text> hrs</text>
                             }
-                            </td>
-                    }
 
-                </tr>
-            }
+                        </td>
 
-        </tbody>
+                    </tr>
+                }
 
-    </table>
+            </tbody>
+
+        </table>
+
+    </div>
 </div>

@@ -81,3 +81,11 @@ C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-W
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\obj\Debug\net8.0\ShiftPlanner-Web.csproj.AssemblyReference.cache
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\obj\Debug\net8.0\ShiftPlanner-Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\obj\Debug\net8.0\ShiftPla.1D9AAB49.Up2Date
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Shift Planner - API.staticwebassets.runtime.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll

@@ -1,0 +1,83 @@
+﻿@model ShiftPlanner_Web.ViewModels.LoginViewModel
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+
+        <div class="card shadow">
+
+            <div class="card-header text-center">
+
+                <h2 class="mb-0">
+                    Shift Planner
+                </h2>
+
+            </div>
+
+            <div class="card-body">
+
+                <h4 class="text-center mb-4">
+                    Sign In
+                </h4>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+
+                        @ViewBag.Error
+
+                    </div>
+                }
+
+                <form asp-action="Login"
+                      method="post">
+
+                    <div class="mb-3">
+
+                        <label asp-for="Email"
+                               class="form-label">
+                            Email Address
+                        </label>
+
+                        <input asp-for="Email"
+                               class="form-control"
+                               placeholder="Enter your email" />
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="Password"
+                               class="form-label">
+                            Password
+                        </label>
+
+                        <input asp-for="Password"
+                               type="password"
+                               class="form-control"
+                               placeholder="Enter your password" />
+
+                    </div>
+
+                    <div class="d-grid">
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Login
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="card-footer text-center text-muted">
+
+                Shift Planner Management System
+
+            </div>
+        </div>
+    </div>
+</div>

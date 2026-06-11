@@ -3,6 +3,13 @@
 
 <h1>Create Shift</h1>
 
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
 <form asp-action="Create" method="post">
 
     <div asp-validation-summary="All"
@@ -10,7 +17,7 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="EmployeeID"></label>
+        <label asp-for="EmployeeID"> Employee </label>
 
         <select asp-for="EmployeeID"
                 class="form-select"
@@ -43,18 +50,6 @@
                class="form-control" />
 
         <span asp-validation-for="BreakDuration"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Day"></label>
-
-        <select asp-for="Day"
-                class="form-select"
-                asp-items="Html.GetEnumSelectList<ShiftDay.DayOfWeek>()">
-        </select>
-
-        <span asp-validation-for="Day"
               class="text-danger"></span>
     </div>
 

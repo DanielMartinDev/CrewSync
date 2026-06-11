@@ -4,11 +4,13 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Empoloyee</th>
-            <th>Day</th>
-            <th>Start Time</th>
-            <th>End Time</th>
+            <th>Employee</th>
+            <th>Date</th>
+            <th>Start</th>
+            <th>End</th>
             <th>Break</th>
+            <th>Length</th>
+            <th>Paid Hours</th>
         </tr>
     </thead>
 
@@ -18,10 +20,12 @@
             <tr>
                 <td>@shift.ShiftID</td>
                 <td>@shift.Employee?.Name</td>
-                <td>@shift.Day</td>
+                <td>@shift.StartTime.ToShortDateString()</td>
                 <td>@shift.StartTime.ToShortTimeString()</td>
                 <td>@shift.EndTime.ToShortTimeString()</td>
-                <td>@shift.BreakDuration</td>
+                <td>@shift.BreakDuration mins</td>
+                <td>@shift.ShiftLength.ToString("0.0")</td>
+                <td>@shift.ShiftHours.ToString("0.0")</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@shift.ShiftID"> 
                         View Shift

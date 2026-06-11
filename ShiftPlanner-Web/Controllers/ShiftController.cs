@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Shift_Planner_Web.Models;
 
 namespace ShiftPlanner_Web.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class ShiftController : Controller
     {
         private readonly HttpClient _httpClient;
@@ -24,21 +26,43 @@ namespace ShiftPlanner_Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(
+        int? employeeId,
+         DateTime? date)
         {
             await LoadEmployees();
 
-            return View();
+            var shift = new Shift();
+
+            if (employeeId.HasValue)
+                shift.EmployeeID = employeeId.Value;
+
+            if (date.HasValue)
+            {
+                shift.StartTime = date.Value;
+                shift.EndTime = date.Value;
+            }
+
+            return View(shift);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Shift shift)
         {
-            var response = 
-                await _httpClient.PostAsJsonAsync("https://localhost:7255/api/Shift", shift);
+            var response =
+                await _httpClient.PostAsJsonAsync(
+                    "https://localhost:7255/api/Shift",
+                    shift);
 
             if (!response.IsSuccessStatusCode)
+            {
+                ViewBag.Error =
+                    await response.Content.ReadAsStringAsync();
+
+                await LoadEmployees();
+
                 return View(shift);
+            }
 
             return RedirectToAction("Index");
         }
@@ -63,14 +87,19 @@ namespace ShiftPlanner_Web.Controllers
         public async Task<IActionResult> Edit(Shift shift)
         {
             var response =
-            await _httpClient.PutAsJsonAsync(
-            $"https://localhost:7255/api/Shift/{shift.ShiftID}",
-            shift);
-
-            await LoadEmployees();
+                await _httpClient.PutAsJsonAsync(
+                    $"https://localhost:7255/api/Shift/{shift.ShiftID}",
+                    shift);
 
             if (!response.IsSuccessStatusCode)
+            {
+                ViewBag.Error =
+                    await response.Content.ReadAsStringAsync();
+
+                await LoadEmployees();
+
                 return View(shift);
+            }
 
             return RedirectToAction(nameof(Index));
         }

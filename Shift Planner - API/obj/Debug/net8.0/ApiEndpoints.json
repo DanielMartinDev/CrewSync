@@ -1,5 +1,100 @@
 [
   {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "GetAll",
+    "RelativePath": "api/Availability",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "Create",
+    "RelativePath": "api/Availability",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "availability",
+        "Type": "Shift_Planner___API.Models.Availability",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "Get",
+    "RelativePath": "api/Availability/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "Update",
+    "RelativePath": "api/Availability/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "availability",
+        "Type": "Shift_Planner___API.Models.Availability",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "Delete",
+    "RelativePath": "api/Availability/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
+    "Method": "GetByEmployee",
+    "RelativePath": "api/Availability/employee/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Shift_Planner___API.Controllers.EmployeeController",
     "Method": "GetEmployees",
     "RelativePath": "api/Employee",
@@ -133,6 +228,115 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.HolidayRequestController",
+    "Method": "GetHolidayRequests",
+    "RelativePath": "api/HolidayRequest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Shift_Planner___API.Models.HolidayRequest, Shift Planner - API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.HolidayRequestController",
+    "Method": "CreateHolidayRequest",
+    "RelativePath": "api/HolidayRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "holidayRequest",
+        "Type": "Shift_Planner___API.Models.HolidayRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner___API.Models.HolidayRequest",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.HolidayRequestController",
+    "Method": "GetHolidayRequest",
+    "RelativePath": "api/HolidayRequest/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner___API.Models.HolidayRequest",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.HolidayRequestController",
+    "Method": "UpdateHolidayRequest",
+    "RelativePath": "api/HolidayRequest/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedHolidayRequest",
+        "Type": "Shift_Planner___API.Models.HolidayRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.HolidayRequestController",
+    "Method": "DeleteHolidayRequest",
+    "RelativePath": "api/HolidayRequest/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Shift_Planner___API.Controllers.ShiftController",

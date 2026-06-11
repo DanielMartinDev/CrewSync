@@ -14,8 +14,6 @@ namespace Shift_Planner___API.Models
         [Required]
         [Range(0, 180)]
         public int BreakDuration { get; set; }
-        public ShiftDay.DayOfWeek Day { get; set; }
-
         public double ShiftHours =>
             (EndTime - StartTime).TotalHours
             - (BreakDuration / 60.0);

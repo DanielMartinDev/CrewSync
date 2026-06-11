@@ -47,3 +47,8 @@ button.accept-policy[b-ke2uhcmmur] {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.schedule-cell:hover[b-ke2uhcmmur] {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}

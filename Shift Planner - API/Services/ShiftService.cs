@@ -32,8 +32,49 @@ namespace Shift_Planner___API.Services
 
         public Shift CreateShift(Shift shift)
         {
+            var availability =
+                shiftPlannerContext.Availabilities
+                    .FirstOrDefault(a =>
+                        a.EmployeeID == shift.EmployeeID &&
+                        a.DayOfWeek == shift.StartTime.DayOfWeek);
+
+            if (availability != null)
+            {
+                if (!availability.IsAvailable)
+                {
+                    throw new Exception(
+                        "Employee is unavailable on this day.");
+                }
+
+                if (shift.StartTime.TimeOfDay < availability.AvailableFrom ||
+                    shift.EndTime.TimeOfDay > availability.AvailableTo)
+                {
+                    throw new Exception(
+                        $"Employee is only available from " +
+                        $"{availability.AvailableFrom:hh\\:mm} to " +
+                        $"{availability.AvailableTo:hh\\:mm} on " +
+                        $"{availability.DayOfWeek}.");
+                }
+            }
+
+            var holiday =
+            shiftPlannerContext.HolidayRequests
+                .FirstOrDefault(h =>
+                h.EmployeeID == shift.EmployeeID &&
+                h.Status == HolidayRequestStatus.Approved &&
+                shift.StartTime.Date >= h.StartDate.Date &&
+                shift.StartTime.Date <= h.EndDate.Date);
+
+            if (holiday != null)
+            {
+                throw new Exception(
+                    "Employee is on approved holiday.");
+            }
+
             shiftPlannerContext.Shifts.Add(shift);
+
             shiftPlannerContext.SaveChanges();
+
             return shift;
         }
 
@@ -48,11 +89,49 @@ namespace Shift_Planner___API.Services
             if (shift == null)
                 return false;
 
+            var availability =
+            shiftPlannerContext.Availabilities
+                .FirstOrDefault(a =>
+                    a.EmployeeID == updatedShift.EmployeeID &&
+                    a.DayOfWeek == updatedShift.StartTime.DayOfWeek);
+
+            if (availability != null)
+            {
+                if (!availability.IsAvailable)
+                {
+                    throw new Exception(
+                        "Employee is unavailable on this day.");
+                }
+
+                if (updatedShift.StartTime.TimeOfDay < availability.AvailableFrom ||
+                    updatedShift.EndTime.TimeOfDay > availability.AvailableTo)
+                {
+                    throw new Exception(
+                        $"Employee is only available from " +
+                        $"{availability.AvailableFrom:hh\\:mm} to " +
+                        $"{availability.AvailableTo:hh\\:mm} on " +
+                        $"{availability.DayOfWeek}.");
+                }
+            }
+
+            var holiday =
+            shiftPlannerContext.HolidayRequests
+                .FirstOrDefault(h =>
+                    h.EmployeeID == shift.EmployeeID &&
+                    h.Status == HolidayRequestStatus.Approved &&
+                    shift.StartTime.Date >= h.StartDate.Date &&
+                    shift.StartTime.Date <= h.EndDate.Date);
+
+            if (holiday != null)
+            {
+                throw new Exception(
+                    "Employee is on approved holiday.");
+            }
+
             shift.EmployeeID = updatedShift.EmployeeID;
             shift.StartTime = updatedShift.StartTime;
             shift.EndTime = updatedShift.EndTime;
             shift.BreakDuration = updatedShift.BreakDuration;
-            shift.Day = updatedShift.Day;
 
             shiftPlannerContext.SaveChanges();
             return true;

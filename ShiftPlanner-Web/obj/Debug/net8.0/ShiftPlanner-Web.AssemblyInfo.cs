@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c51f3b887850a45d526028c9dfd46ab1c8adeb69")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c7d021264a758e04036313d9d1d25ad44c57f85")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

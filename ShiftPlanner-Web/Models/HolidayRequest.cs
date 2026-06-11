@@ -1,0 +1,16 @@
+﻿namespace Shift_Planner_Web.Models
+{
+    public class HolidayRequest
+    {
+        public int HolidayRequestID { get; set; }
+        public int EmployeeID { get; set; }
+
+        public Employee? Employee { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public HolidayRequestStatus Status { get; set; }
+    }
+}

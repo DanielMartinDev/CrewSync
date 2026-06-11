@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shift_Planner_Web.Models;
 using ShiftPlanner_Web.Models;
@@ -6,6 +7,7 @@ using System.Diagnostics;
 
 namespace ShiftPlanner_Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -50,6 +52,26 @@ namespace ShiftPlanner_Web.Controllers
                     "https://localhost:7255/api/Shift"
                 ) ?? new List<Shift>();
 
+            var holidayRequests =
+                await _httpClient.GetFromJsonAsync<List<HolidayRequest>>
+                (
+                    "https://localhost:7255/api/HolidayRequest"
+                ) ?? new List<HolidayRequest>();
+
+            var pendingHolidayRequests =
+                holidayRequests?
+                    .Where(h =>
+                        h.Status == HolidayRequestStatus.Pending)
+                    .ToList()
+                ?? new List<HolidayRequest>();
+
+            var weekEnd = monday.AddDays(7);
+            var weekShifts = shifts
+                .Where(s =>
+                    s.StartTime >= monday &&
+                    s.StartTime < weekEnd)
+                .ToList();
+
             var totalHours =
             Math.Round(
             shifts.Sum(s => s.ShiftHours),
@@ -61,23 +83,25 @@ namespace ShiftPlanner_Web.Controllers
             employees.Average(e => e.WeeklyHours),
             1) : 0;
 
-            var overHoursEmployees = employees.Where(employee =>
-            shifts.Where(s => s.EmployeeID == employee.EmployeeID)
-            .Sum(s => s.ShiftHours) > employee.WeeklyHours)
+            var overHoursEmployees = employees
+            .Where(employee =>
+                weekShifts
+                    .Where(s => s.EmployeeID == employee.EmployeeID)
+                    .Sum(s => s.ShiftHours) > employee.WeeklyHours)
             .ToList();
 
             var noShiftEmployees = employees
-                .Where(employee =>
-                !shifts.Any(
-                shift => shift.EmployeeID == employee.EmployeeID))
-                .ToList();
-
-            var weekEnd = monday.AddDays(7);
-            var weekShifts = shifts
-                .Where(s =>
-                    s.StartTime >= monday &&
-                    s.StartTime < weekEnd)
-                .ToList();
+            .Where(employee =>
+                !weekShifts.Any(
+                shift => shift.EmployeeID == employee.EmployeeID)
+            &&
+            !holidayRequests
+            .Any(h =>
+                h.EmployeeID == employee.EmployeeID &&
+                h.Status == HolidayRequestStatus.Approved &&
+                monday <= h.EndDate &&
+                weekEnd >= h.StartDate))
+            .ToList();
 
             _logger.LogInformation(
                 "Week Start: {WeekStart}",
@@ -97,6 +121,8 @@ namespace ShiftPlanner_Web.Controllers
 
                 OverHoursEmployees = overHoursEmployees,
                 NoShiftEmployees = noShiftEmployees,
+                HolidayRequests = holidayRequests ?? new(),
+                PendingHolidayRequests = pendingHolidayRequests ?? new(),
 
                 Employees = employees
             };

@@ -46,21 +46,36 @@ namespace Shift_Planner___API.Controllers
         [HttpPost]
         public ActionResult<Shift> CreateShift(Shift shift)
         {
-            var createdShift = _shiftService.CreateShift(shift);
+            try
+            {
+                var createdShift =
+                    _shiftService.CreateShift(shift);
 
-            return CreatedAtAction(
-                nameof(GetShift),
-                new { id = createdShift.ShiftID },
-                createdShift);
+                return CreatedAtAction(
+                    nameof(GetShift),
+                    new { id = createdShift.ShiftID },
+                    createdShift);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateEmployee(int id, Shift updatedShift)
         {
-            if (!_shiftService.UpdateShift(id, updatedShift))
-                return NotFound();
+            try
+            {
+                if (!_shiftService.UpdateShift(id, updatedShift))
+                    return NotFound();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]

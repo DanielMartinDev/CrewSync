@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shift_Planner_Web.Models;
 using ShiftPlanner_Web.Models;
 
 namespace ShiftPlanner_Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmployeeController : Controller
     {
         private readonly HttpClient _httpClient;

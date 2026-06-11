@@ -4,7 +4,7 @@
 
 <p>
     Are you sure you want to delete
-    <strong>@Model.Employee?.Name`s shift for @Model.Day starting at: @Model.StartTime and Ending at: @Model.EndTime</strong>?
+    <strong>@Model.Employee?.Name`s shift for @Model.StartTime.ToShortDateString() starting at: @Model.StartTime and Ending at: @Model.EndTime</strong>?
 </p>
 
 <form asp-action="Delete" method="post">
