@@ -850,6 +850,9 @@
           "accessFailedCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "mustChangePassword": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -911,6 +914,10 @@
             "format": "int32"
           },
           "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
             "type": "string",
             "nullable": true
           },

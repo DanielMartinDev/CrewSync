@@ -64,6 +64,8 @@ namespace Shift_Planner___API.Services
             employee.WeeklyHours = updatedEmployee.WeeklyHours;
             employee.StartDate = updatedEmployee.StartDate;
             employee.Role = updatedEmployee.Role;
+            employee.UserId = updatedEmployee.UserId;
+            employee.Email = updatedEmployee.Email;
 
             shiftPlannerContext.SaveChanges();
             return true;

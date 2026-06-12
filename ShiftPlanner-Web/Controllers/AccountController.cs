@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Data;
 using ShiftPlanner_Web.ViewModels;
@@ -23,7 +24,7 @@ namespace ShiftPlanner_Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (User.Identity?.IsAuthenticated == true)
+            if (User.Identity?.IsAuthenticated == true && User.IsInRole("Manager") || User.IsInRole("Admin"))
             {
                 return RedirectToAction(
                     "Dashboard",
@@ -56,6 +57,13 @@ namespace ShiftPlanner_Web.Controllers
                 await _userManager.FindByEmailAsync(
                     model.Email);
 
+            if (user != null &&
+                user.MustChangePassword)
+            {
+                return RedirectToAction(
+                    nameof(ChangePassword));
+            }
+
             if (user != null)
             {
                 if (await _userManager.IsInRoleAsync(
@@ -84,6 +92,83 @@ namespace ShiftPlanner_Web.Controllers
                         "Dashboard",
                         "Home");
                 }
+            }
+
+            return RedirectToAction(
+                "Dashboard",
+                "Home");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(
+    ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user =
+                await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return RedirectToAction("Login");
+
+            var result =
+                await _userManager.ChangePasswordAsync(
+                    user,
+                    model.CurrentPassword,
+                    model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(
+                        "",
+                        error.Description);
+                }
+
+                return View(model);
+            }
+
+            user.MustChangePassword = false;
+
+            await _userManager.UpdateAsync(user);
+
+            await _signInManager.RefreshSignInAsync(user);
+
+            if (await _userManager.IsInRoleAsync(
+                user,
+                "Employee"))
+            {
+                return RedirectToAction(
+                    "Index",
+                    "EmployeePortal");
+            }
+
+            if (await _userManager.IsInRoleAsync(
+                user,
+                "Manager"))
+            {
+                return RedirectToAction(
+                    "Dashboard",
+                    "Home");
+            }
+
+            if (await _userManager.IsInRoleAsync(
+                user,
+                "Admin"))
+            {
+                return RedirectToAction(
+                    "Dashboard",
+                    "Home");
             }
 
             return RedirectToAction(

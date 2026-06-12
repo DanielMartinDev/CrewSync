@@ -6,6 +6,8 @@ namespace Shift_Planner_Web.Models
     {
         public int EmployeeID { get; set; }
         public string? UserId { get; set; }
+        public string Email { get; set; } = string.Empty;
+
         public ApplicationUser? User { get; set; }
         public string Name { get; set; } = "";
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Shift_Planner___API.Data;
 using Shift_Planner_Web.Models;
 using ShiftPlanner_Web.Models;
 
@@ -9,10 +11,12 @@ namespace ShiftPlanner_Web.Controllers
     public class EmployeeController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EmployeeController(IHttpClientFactory factory)
+        public EmployeeController(IHttpClientFactory factory, UserManager<ApplicationUser> userManager)
         {
             _httpClient = factory.CreateClient();
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -49,10 +53,76 @@ namespace ShiftPlanner_Web.Controllers
         public async Task<IActionResult> Create(Employee employee)
         {
             var response =
-                await _httpClient.PostAsJsonAsync("https://localhost:7255/api/Employee", employee);
+                await _httpClient.PostAsJsonAsync(
+                    "https://localhost:7255/api/Employee",
+                    employee);
 
             if (!response.IsSuccessStatusCode)
                 return View(employee);
+
+            var createdEmployee =
+                await response.Content
+                    .ReadFromJsonAsync<Employee>();
+
+            var tempPassword = "Welcome123!";
+
+            var user = new ApplicationUser
+            {
+                UserName = employee.Email,
+                Email = employee.Email,
+                MustChangePassword = true
+            };
+
+            var result =
+                await _userManager.CreateAsync(
+                    user,
+                    tempPassword);
+
+            if (!result.Succeeded)
+            {
+                ViewBag.Error =
+                    string.Join(
+                        ", ",
+                        result.Errors.Select(
+                            e => e.Description));
+
+                return View(employee);
+            }
+
+            if (result.Succeeded)
+            {
+                string identityRole;
+
+                switch (employee.Role)
+                {
+                    case EmployeeRole.Role.Customer_Assistant:
+                    case EmployeeRole.Role.Shift_Manager:
+                        identityRole = "Employee";
+                        break;
+
+                    case EmployeeRole.Role.Deputy_Manager:
+                        identityRole = "Manager";
+                        break;
+
+                    case EmployeeRole.Role.Store_Manager:
+                        identityRole = "Admin";
+                        break;
+
+                    default:
+                        identityRole = "Employee";
+                        break;
+                }
+
+                await _userManager.AddToRoleAsync(
+                    user,
+                    identityRole);
+
+                createdEmployee!.UserId = user.Id;
+
+                await _httpClient.PutAsJsonAsync(
+                    $"https://localhost:7255/api/Employee/{createdEmployee.EmployeeID}",
+                    createdEmployee);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -108,12 +178,23 @@ namespace ShiftPlanner_Web.Controllers
 
             return View(employee);
         }
-
         [HttpPost]
         public async Task<IActionResult> Delete(Employee employee)
         {
+            if (!string.IsNullOrEmpty(employee.UserId))
+            {
+                var user =
+                    await _userManager.FindByIdAsync(
+                        employee.UserId);
+
+                if (user != null)
+                {
+                    await _userManager.DeleteAsync(user);
+                }
+            }
+
             await _httpClient.DeleteAsync(
-                 $"https://localhost:7255/api/Employee/{employee.EmployeeID}");
+                $"https://localhost:7255/api/Employee/{employee.EmployeeID}");
 
             return RedirectToAction(nameof(Index));
         }

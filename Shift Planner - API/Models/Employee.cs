@@ -8,8 +8,8 @@ namespace Shift_Planner___API.Models
         [Required]
         public int EmployeeID { get; set; }
         public string? UserId { get; set; }
+        public string Email { get; set; } = string.Empty;
         public ApplicationUser? User { get; set; }
-
         [Required(ErrorMessage = "Employee name is required")]
         [StringLength(100,
             ErrorMessage = "Name cannot exceed 100 characters")]

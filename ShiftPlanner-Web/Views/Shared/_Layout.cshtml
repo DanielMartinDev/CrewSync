@@ -126,13 +126,13 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <span class="badge bg-danger me-2">
-                                Admin
+                                Store Manager
                             </span>
                         }
                         else if (User.IsInRole("Manager"))
                         {
                             <span class="badge bg-warning text-dark me-2">
-                                Manager
+                                Deputy Store Manager
                             </span>
                         }
                         else if (User.IsInRole("Employee"))
