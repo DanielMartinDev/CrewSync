@@ -1,59 +1,67 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Shift Planner</title>
 
-<link rel="stylesheet"
-      href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet"
-      href="~/css/site.css"
-      asp-append-version="true" />
+    <title>
+        @ViewData["Title"] - CrewSync
+    </title>
 
-<link rel="stylesheet"
-      href="~/ShiftPlanner_Web.styles.css"
-      asp-append-version="true" />
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/ShiftPlanner_Web.styles.css"
+          asp-append-version="true" />
 
 </head>
 
-<body>
+<body class="bg-light">
 
-<header>
+    <div class="d-flex min-vh-100">
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <!-- Sidebar -->
 
-        <div class="container-fluid">
+        <aside class="bg-white border-end shadow-sm"
+               style="width:260px;">
 
-            <a class="navbar-brand"
-               asp-controller="Home"
-               asp-action="Dashboard">
-                Shift Planner
-            </a>
+            <div class="p-4 border-bottom">
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target=".navbar-collapse">
+                <h3 class="fw-bold text-primary mb-0">
+                    CrewSync
+                </h3>
 
-                <span class="navbar-toggler-icon"></span>
+                <small class="text-muted">
+                    Workforce Management
+                </small>
 
-            </button>
+            </div>
 
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <nav class="p-3">
 
-                <ul class="navbar-nav flex-grow-1">
+                <ul class="nav flex-column">
 
-                    @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Employee"))
+                    @if (User.Identity?.IsAuthenticated == true &&
+                         !User.IsInRole("Employee"))
                     {
-                        <li class="nav-item">
+                        <li class="nav-item mb-2">
 
-                            <a class="nav-link"
+                            <a class="nav-link text-dark"
                                asp-controller="Home"
                                asp-action="Dashboard">
-                                Dashboard
+
+                                📊 Dashboard
+
                             </a>
 
                         </li>
@@ -61,12 +69,14 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <li class="nav-item">
+                        <li class="nav-item mb-2">
 
-                            <a class="nav-link"
+                            <a class="nav-link text-dark"
                                asp-controller="Employee"
                                asp-action="Index">
-                                Employees
+
+                                👥 Employees
+
                             </a>
 
                         </li>
@@ -75,22 +85,26 @@
                     @if (User.IsInRole("Admin") ||
                          User.IsInRole("Manager"))
                     {
-                        <li class="nav-item">
+                        <li class="nav-item mb-2">
 
-                            <a class="nav-link"
+                            <a class="nav-link text-dark"
                                asp-controller="Shift"
                                asp-action="Index">
-                                Schedule
+
+                                📅 Schedule
+
                             </a>
 
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item mb-2">
 
-                            <a class="nav-link"
+                            <a class="nav-link text-dark"
                                asp-controller="HolidayRequest"
                                asp-action="Index">
-                                Holiday Requests
+
+                                🏖 Holiday Requests
+
                             </a>
 
                         </li>
@@ -98,13 +112,13 @@
 
                     @if (User.IsInRole("Employee"))
                     {
-                        <li class="nav-item">
+                        <li class="nav-item mb-2">
 
-                            <a class="nav-link"
+                            <a class="nav-link text-dark"
                                asp-controller="EmployeePortal"
                                asp-action="Index">
 
-                                My Portal
+                                👤 My Portal
 
                             </a>
 
@@ -113,97 +127,112 @@
 
                 </ul>
 
-                <div class="d-flex align-items-center">
+            </nav>
 
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <span class="navbar-text me-2">
+        </aside>
 
-                            @User.Identity.Name
+        <!-- Main Content -->
 
-                        </span>
+        <div class="flex-grow-1">
 
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <span class="badge bg-danger me-2">
-                                Store Manager
-                            </span>
-                        }
-                        else if (User.IsInRole("Manager"))
-                        {
-                            <span class="badge bg-warning text-dark me-2">
-                                Deputy Store Manager
-                            </span>
-                        }
-                        else if (User.IsInRole("Employee"))
-                        {
-                            <span class="badge bg-info me-2">
-                                Employee
-                            </span>
-                        }
+            <!-- Top Bar -->
 
-                        <form asp-controller="Account"
-                              asp-action="Logout"
-                              method="post">
+            <header class="bg-white border-bottom shadow-sm">
 
-                            <button type="submit"
-                                    class="btn btn-outline-danger btn-sm">
+                <div class="container-fluid">
 
-                                Logout
+                    <div class="d-flex justify-content-between align-items-center py-3">
 
-                            </button>
+                        <div>
 
-                        </form>
-                    }
-                    else
-                    {
-                        <a asp-controller="Account"
-                           asp-action="Login"
-                           class="btn btn-outline-primary btn-sm">
+                            <h5 class="mb-0 fw-semibold">
+                                @ViewData["Title"]
+                            </h5>
 
-                            Login
+                        </div>
 
-                        </a>
-                    }
+                        <div class="d-flex align-items-center gap-2">
+
+                            @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                <span class="text-muted">
+
+                                    @User.Identity.Name
+
+                                </span>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <span class="badge bg-danger">
+                                        Store Manager
+                                    </span>
+                                }
+                                else if (User.IsInRole("Manager"))
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Deputy Store Manager
+                                    </span>
+                                }
+                                else if (User.IsInRole("Employee"))
+                                {
+                                    <span class="badge bg-primary">
+                                        Employee
+                                    </span>
+                                }
+
+                                <form asp-controller="Account"
+                                      asp-action="Logout"
+                                      method="post">
+
+                                    <button type="submit"
+                                            class="btn btn-outline-danger btn-sm">
+
+                                        Logout
+
+                                    </button>
+
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account"
+                                   asp-action="Login"
+                                   class="btn btn-primary btn-sm">
+
+                                    Login
+
+                                </a>
+                            }
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </header>
+
+            <!-- Page Content -->
+
+            <main class="p-4">
+
+                @RenderBody()
+
+            </main>
 
         </div>
 
-    </nav>
-
-</header>
-
-<div class="container">
-
-    <main role="main" class="pb-3">
-
-        @RenderBody()
-
-    </main>
-
-</div>
-
-<footer class="border-top footer text-muted">
-
-    <div class="container">
-
-        &copy; 2026 - Shift Planner
-
     </div>
 
-</footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
 
-<script src="~/js/site.js"
-        asp-append-version="true"></script>
-
-@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
+
 </html>

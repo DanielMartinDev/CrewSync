@@ -71,8 +71,20 @@ namespace Shift_Planner___API.Services
                     "Employee is on approved holiday.");
             }
 
-            shiftPlannerContext.Shifts.Add(shift);
+            var overlappingShift =
+            shiftPlannerContext.Shifts
+            .Any(s =>
+                s.EmployeeID == shift.EmployeeID &&
+                shift.StartTime < s.EndTime &&
+                shift.EndTime > s.StartTime);
 
+            if (overlappingShift)
+            {
+                throw new Exception(
+                    "Employee already has a shift during this time.");
+            }
+
+            shiftPlannerContext.Shifts.Add(shift);
             shiftPlannerContext.SaveChanges();
 
             return shift;
@@ -127,6 +139,20 @@ namespace Shift_Planner___API.Services
                 throw new Exception(
                     "Employee is on approved holiday.");
             }
+            
+            var overlappingShift =
+            shiftPlannerContext.Shifts
+                .Any(s =>
+                s.EmployeeID == shift.EmployeeID &&
+                shift.StartTime < s.EndTime &&
+                shift.EndTime > s.StartTime);
+
+            if (overlappingShift)
+            {
+                throw new Exception(
+                    "Employee already has a shift during this time.");
+            }
+
 
             shift.EmployeeID = updatedShift.EmployeeID;
             shift.StartTime = updatedShift.StartTime;

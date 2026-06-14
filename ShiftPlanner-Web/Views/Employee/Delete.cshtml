@@ -1,27 +1,127 @@
 ﻿@model Shift_Planner_Web.Models.Employee
 
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
 <input asp-for="EmployeeID" type="hidden" />
 <input asp-for="UserId" type="hidden" />
 
-<h1>Delete Employee</h1>
+<div class="row justify-content-center">
 
-<p>
-    Are you sure you want to delete
-    <strong>@Model.Name</strong>?
-</p>
+    <div class="col-lg-6">
 
-<form asp-action="Delete" method="post">
+        <div class="card border-danger">
 
-    <input asp-for="EmployeeID" type="hidden" />
+            <div class="card-body p-4">
 
-    <button type="submit"
-            class="btn btn-danger">
-        Delete
-    </button>
+                <div class="text-center mb-4">
 
-    <a asp-action="Index"
-       class="btn btn-secondary">
-        Cancel
-    </a>
+                    <h1 class="text-danger fw-bold mb-2">
+                        Delete Employee
+                    </h1>
 
-</form>
+                    <p class="text-muted mb-0">
+                        This action cannot be undone.
+                    </p>
+
+                </div>
+
+                <div class="alert alert-danger">
+
+                    <strong>
+                        Warning:
+                    </strong>
+
+                    Deleting this employee will remove:
+
+                    <ul class="mt-2 mb-0">
+
+                        <li>Employee record</li>
+                        <li>Linked user account</li>
+                        <li>Portal access</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="card bg-light border-0 mb-4">
+
+                    <div class="card-body">
+
+                        <div class="text-muted small">
+                            Employee Name
+                        </div>
+
+                        <h4 class="mb-3">
+                            @Model.Name
+                        </h4>
+
+                        <div class="row">
+
+                            <div class="col-6">
+
+                                <div class="text-muted small">
+                                    Employee ID
+                                </div>
+
+                                <div>
+                                    @Model.EmployeeID
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <div class="text-muted small">
+                                    Weekly Hours
+                                </div>
+
+                                <div>
+                                    @Model.WeeklyHours hrs
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <form asp-action="Delete"
+                      method="post">
+
+                    <input asp-for="EmployeeID"
+                           type="hidden" />
+
+                    <input asp-for="UserId"
+                           type="hidden" />
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            Delete Employee
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,66 +1,156 @@
 ﻿@model List<ShiftPlanner_Web.Models.Availability>
 
-<h2>Manage Availability</h2>
+@{
+    ViewData["Title"] = "Availability";
+}
 
-<form asp-action="Index" method="post">
+<div class="mb-4">
 
-    <table class="table table-bordered align-middle">
+    <h1 class="fw-bold mb-1">
+        Availability
+    </h1>
 
-        <thead>
-            <tr>
-                <th>Day</th>
-                <th>Available</th>
-                <th>From</th>
-                <th>To</th>
-            </tr>
-        </thead>
+    <p class="text-muted mb-0">
+        Manage when this employee is available to work each week.
+    </p>
 
-        <tbody>
+</div>
 
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr>
+<div class="card">
 
-                    <td>
-                        @Model[i].DayOfWeek
+    <div class="card-body p-4">
 
-                        <input type="hidden"
-                               asp-for="@Model[i].AvailabilityID" />
+        <form asp-action="Index"
+              method="post">
 
-                        <input type="hidden"
-                               asp-for="@Model[i].EmployeeID" />
+            <div class="table-responsive">
 
-                        <input type="hidden"
-                               asp-for="@Model[i].DayOfWeek" />
-                    </td>
+                <table class="table align-middle">
 
-                    <td>
-                        <input asp-for="@Model[i].IsAvailable"
-                               class="form-check-input" />
-                    </td>
+                    <thead class="table-light">
 
-                    <td>
-                        <input asp-for="@Model[i].AvailableFrom"
-                               type="time"
-                               class="form-control" />
-                    </td>
+                        <tr>
 
-                    <td>
-                        <input asp-for="@Model[i].AvailableTo"
-                               type="time"
-                               class="form-control" />
-                    </td>
+                            <th style="width: 20%">
+                                Day
+                            </th>
 
-                </tr>
-            }
+                            <th style="width: 15%">
+                                Available
+                            </th>
 
-        </tbody>
+                            <th style="width: 30%">
+                                Available From
+                            </th>
 
-    </table>
+                            <th style="width: 30%">
+                                Available To
+                            </th>
 
-    <button type="submit"
-            class="btn btn-success">
-        Save Changes
-    </button>
+                        </tr>
 
-</form>
+                    </thead>
+
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+
+                                <td class="fw-semibold">
+
+                                    @Model[i].DayOfWeek
+
+                                    <input type="hidden"
+                                           asp-for="@Model[i].AvailabilityID" />
+
+                                    <input type="hidden"
+                                           asp-for="@Model[i].EmployeeID" />
+
+                                    <input type="hidden"
+                                           asp-for="@Model[i].DayOfWeek" />
+
+                                </td>
+
+                                <td>
+
+                                    <div class="form-check form-switch">
+
+                                        <input asp-for="@Model[i].IsAvailable"
+                                               class="form-check-input" />
+
+                                    </div>
+
+                                </td>
+
+                                <td>
+
+                                    <input asp-for="@Model[i].AvailableFrom"
+                                           type="time"
+                                           class="form-control" />
+
+                                </td>
+
+                                <td>
+
+                                    <input asp-for="@Model[i].AvailableTo"
+                                           type="time"
+                                           class="form-control" />
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-flex justify-content-between">
+
+                <a asp-controller="Employee"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+
+                    Back
+
+                </a>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    Save Availability
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="card mt-4">
+
+    <div class="card-body">
+
+        <h5 class="fw-bold">
+            Scheduling Information
+        </h5>
+
+        <p class="text-muted mb-0">
+
+            Managers will only be able to assign shifts within the
+            availability times configured here. Any shifts outside of
+            these hours will be blocked by CrewSync validation.
+
+        </p>
+
+    </div>
+
+</div>

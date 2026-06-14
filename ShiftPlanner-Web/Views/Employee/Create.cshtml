@@ -1,61 +1,184 @@
 ﻿@using Shift_Planner_Web.Models
 @model Shift_Planner_Web.Models.Employee
 
-<h1>Create Employee</h1>
+@{
+    ViewData["Title"] = "Create Employee";
+}
 
-<form asp-action="Create" method="post">
-   
-    <div asp-validation-summary="All"
-         class="text-danger">
+<div class="mb-4">
+
+    <h1 class="fw-bold mb-1">
+        Add Employee
+    </h1>
+
+    <p class="text-muted mb-0">
+        Create a new employee profile and portal account.
+    </p>
+
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card">
+
+            <div class="card-body p-4">
+
+                <form asp-action="Create"
+                      method="post">
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div asp-validation-summary="All"
+                             class="alert alert-danger">
+                        </div>
+                    }
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="Name"
+                                   class="form-label fw-semibold">
+
+                                Full Name
+
+                            </label>
+
+                            <input asp-for="Name"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="Name"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold">
+
+                                Email Address
+
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control form-control-lg"
+                                   placeholder="employee@crewsync.com" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="WeeklyHours"
+                                   class="form-label fw-semibold">
+
+                                Weekly Contract Hours
+
+                            </label>
+
+                            <input asp-for="WeeklyHours"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="WeeklyHours"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="StartDate"
+                                   class="form-label fw-semibold">
+
+                                Start Date
+
+                            </label>
+
+                            <input asp-for="StartDate"
+                                   type="date"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="StartDate"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="Role"
+                               class="form-label fw-semibold">
+
+                            Job Role
+
+                        </label>
+
+                        <select asp-for="Role"
+                                class="form-select form-select-lg"
+                                asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
+                        </select>
+
+                        <span asp-validation-for="Role"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <div class="alert alert-info">
+
+                        <strong>Portal Access</strong>
+
+                        <br />
+
+                        A login account will automatically be created for
+                        this employee using their email address.
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Create Employee
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Name"></label>
-        <input asp-for="Name"
-               class="form-control" />
+</div>
 
-       <span asp-validation-for="Name"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Email"></label>
-
-        <input asp-for="Email"
-               class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="WeeklyHours"></label>
-        <input asp-for="WeeklyHours"
-               class="form-control" />
-
-        <span asp-validation-for="WeeklyHours"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="StartDate"></label>
-        <input asp-for="StartDate"
-               class="form-control" />
-
-        <span asp-validation-for="StartDate"
-              class="text-danger"></span>
-    </div>
-
-   <div class="mb-3">
-       <label asp-for="Role"></label>
-
-       <select asp-for="Role" class="form-select" asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
-       </select>
-
-        <span asp-validation-for="Role"
-              class="text-danger"></span>
-   </div>
-
-    <button type="submit"
-            class="btn btn-success">
-        Save Employee
-    </button>
-
-</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

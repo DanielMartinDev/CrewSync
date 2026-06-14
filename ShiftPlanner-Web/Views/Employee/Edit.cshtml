@@ -1,49 +1,130 @@
 ﻿@using Shift_Planner_Web.Models
 @model Shift_Planner_Web.Models.Employee
 
-<h1>Edit Employee</h1>
+@{
+    ViewData["Title"] = "Edit Employee";
+}
 
-<form asp-action="Edit" method="post">
+<div class="mb-4">
 
-    <input asp-for="EmployeeID" type="hidden" />
-    
-    <div asp-validation-summary="All"
-         class="text-danger">
+    <h1 class="fw-bold mb-1">
+        Edit Employee
+    </h1>
+
+    <p class="text-muted mb-0">
+        Update employee details, contract hours and role assignments.
+    </p>
+
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card">
+
+            <div class="card-body p-4">
+
+                <form asp-action="Edit"
+                      method="post">
+
+                    <input asp-for="EmployeeID"
+                           type="hidden" />
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div asp-validation-summary="All"
+                             class="alert alert-danger">
+                        </div>
+                    }
+
+                    <div class="mb-4">
+
+                        <label asp-for="Name"
+                               class="form-label fw-semibold">
+
+                            Employee Name
+
+                        </label>
+
+                        <input asp-for="Name"
+                               class="form-control form-control-lg" />
+
+                        <span asp-validation-for="Name"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="WeeklyHours"
+                               class="form-label fw-semibold">
+
+                            Weekly Contract Hours
+
+                        </label>
+
+                        <input asp-for="WeeklyHours"
+                               class="form-control form-control-lg" />
+
+                        <span asp-validation-for="WeeklyHours"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="Role"
+                               class="form-label fw-semibold">
+
+                            Job Role
+
+                        </label>
+
+                        <select asp-for="Role"
+                                class="form-select form-select-lg"
+                                asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
+                        </select>
+
+                        <span asp-validation-for="Role"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Name"></label>
-        <input asp-for="Name"
-               class="form-control" />
+</div>
 
-        <span asp-validation-for="Name"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="WeeklyHours"></label>
-        <input asp-for="WeeklyHours"
-               class="form-control" />
-
-        <span asp-validation-for="WeeklyHours"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Role"></label>
-
-        <select asp-for="Role"
-                class="form-select"
-                asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
-        </select>
-
-        <span asp-validation-for="Role"
-              class="text-danger"></span>
-    </div>
-
-    <button type="submit"
-            class="btn btn-success">
-        Save Changes
-    </button>
-
-</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

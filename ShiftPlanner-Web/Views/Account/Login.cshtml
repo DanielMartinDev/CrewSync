@@ -1,23 +1,41 @@
 ﻿@model ShiftPlanner_Web.ViewModels.LoginViewModel
 
-<div class="row justify-content-center mt-5">
-    <div class="col-md-5">
+@{
+    ViewData["Title"] = "Login";
+}
 
-        <div class="card shadow">
+<div class="row justify-content-center align-items-center"
+     style="min-height: 80vh;">
 
-            <div class="card-header text-center">
+    <div class="col-lg-5 col-md-7">
 
-                <h2 class="mb-0">
-                    CrewSync
-                </h2>
+        <div class="text-center mb-4">
 
-            </div>
+            <h1 class="fw-bold text-primary mb-2">
+                CrewSync
+            </h1>
 
-            <div class="card-body">
+            <p class="text-muted mb-0">
+                Workforce Management Platform
+            </p>
 
-                <h4 class="text-center mb-4">
-                    Sign In
-                </h4>
+        </div>
+
+        <div class="card">
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-4">
+
+                    <h3 class="fw-bold mb-2">
+                        Welcome Back
+                    </h3>
+
+                    <p class="text-muted mb-0">
+                        Sign in to access your schedule, employees and workforce tools.
+                    </p>
+
+                </div>
 
                 @if (ViewBag.Error != null)
                 {
@@ -31,39 +49,51 @@
                 <form asp-action="Login"
                       method="post">
 
-                    <div class="mb-3">
+                    <div class="mb-4">
 
                         <label asp-for="Email"
-                               class="form-label">
+                               class="form-label fw-semibold">
+
                             Email Address
+
                         </label>
 
                         <input asp-for="Email"
-                               class="form-control"
-                               placeholder="Enter your email" />
+                               class="form-control form-control-lg"
+                               placeholder="name@company.com" />
+
+                        <span asp-validation-for="Email"
+                              class="text-danger">
+                        </span>
 
                     </div>
 
                     <div class="mb-4">
 
                         <label asp-for="Password"
-                               class="form-label">
+                               class="form-label fw-semibold">
+
                             Password
+
                         </label>
 
                         <input asp-for="Password"
                                type="password"
-                               class="form-control"
+                               class="form-control form-control-lg"
                                placeholder="Enter your password" />
+
+                        <span asp-validation-for="Password"
+                              class="text-danger">
+                        </span>
 
                     </div>
 
                     <div class="d-grid">
 
                         <button type="submit"
-                                class="btn btn-primary">
+                                class="btn btn-primary btn-lg">
 
-                            Login
+                            Sign In
 
                         </button>
 
@@ -73,11 +103,21 @@
 
             </div>
 
-            <div class="card-footer text-center text-muted">
-
-                Workforce Management Platform
-
-            </div>
         </div>
+
+        <div class="text-center mt-3">
+
+            <small class="text-muted">
+                CrewSync © 2026
+            </small>
+
+        </div>
+
     </div>
+
 </div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

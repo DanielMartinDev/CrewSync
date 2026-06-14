@@ -51,3 +51,26 @@ button.accept-policy {
     background-color: #f8f9fa;
     cursor: pointer;
 }
+
+/* CrewSync Styling */
+.card {
+    border-radius: 14px;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .5rem rgba(0,0,0,.08) !important;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.schedule-cell {
+    min-width: 120px;
+}
+
+.dashboard-stat {
+    font-size: 2rem;
+    font-weight: 700;
+}

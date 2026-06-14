@@ -51,3 +51,26 @@ button.accept-policy[b-ke2uhcmmur] {
     background-color: #f8f9fa;
     cursor: pointer;
 }
+
+/* CrewSync Styling */
+.card[b-ke2uhcmmur] {
+    border-radius: 14px;
+}
+
+.shadow-sm[b-ke2uhcmmur] {
+    box-shadow: 0 .125rem .5rem rgba(0,0,0,.08) !important;
+}
+
+.table td[b-ke2uhcmmur],
+.table th[b-ke2uhcmmur] {
+    vertical-align: middle;
+}
+
+.schedule-cell[b-ke2uhcmmur] {
+    min-width: 120px;
+}
+
+.dashboard-stat[b-ke2uhcmmur] {
+    font-size: 2rem;
+    font-weight: 700;
+}

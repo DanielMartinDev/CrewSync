@@ -1,43 +1,196 @@
 ﻿@model Shift_Planner_Web.Models.Shift
 
-<h1> Shift Details </h1>
+@{
+    ViewData["Title"] = "Shift Details";
+}
 
-<p>
-    <strong>Name:</strong>
-    @Model.Employee?.Name
-</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-<p>
-    <strong>Role:</strong>
-    @Model.Employee?.Role
-</p>
+    <div>
 
-<p>
-    <strong>Start Time:</strong>
-    @Model.StartTime.ToShortTimeString()
-</p>
+        <h1 class="fw-bold mb-1">
+            Shift Details
+        </h1>
 
-<p>
-    <strong>End Time:</strong>
-    @Model.EndTime.ToShortTimeString()
-</p>
+        <p class="text-muted mb-0">
+            View scheduled shift information.
+        </p>
 
-<p>
-    <strong>Break Duration:</strong>
-    @Model.BreakDuration
-</p>
+    </div>
 
-<p>
-    <strong> Working Day:</strong>
-    @Model.StartTime.ToShortDateString()
-</p>
+</div>
 
-<p>
-    <strong>Shift Length:</strong>
-    @Model.ShiftLength Hours
-</p>
+<div class="row mb-4">
 
-<p>
-    <strong>Paid Hours:</strong>
-    @Model.ShiftHours Hours
-</p>
+    <div class="col-md-3 mb-3">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="text-muted small">
+                    Employee
+                </div>
+
+                <h5 class="mb-0">
+                    @Model.Employee?.Name
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="text-muted small">
+                    Role
+                </div>
+
+                <h5 class="mb-0">
+                    @Model.Employee?.Role.ToString().Replace("_", " ")
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="text-muted small">
+                    Working Day
+                </div>
+
+                <h5 class="mb-0">
+                    @Model.StartTime.ToString("dd MMM yyyy")
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card h-100">
+
+            <div class="card-body">
+
+                <div class="text-muted small">
+                    Paid Hours
+                </div>
+
+                <h5 class="mb-0">
+                    @Model.ShiftHours hrs
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="fw-bold mb-4">
+            Shift Information
+        </h4>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+
+                <div class="text-muted small">
+                    Start Time
+                </div>
+
+                <div class="fs-5 fw-semibold">
+                    @Model.StartTime.ToString("HH:mm")
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="text-muted small">
+                    End Time
+                </div>
+
+                <div class="fs-5 fw-semibold">
+                    @Model.EndTime.ToString("HH:mm")
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="text-muted small">
+                    Break Duration
+                </div>
+
+                <div class="fs-5">
+                    @Model.BreakDuration mins
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="text-muted small">
+                    Shift Length
+                </div>
+
+                <div class="fs-5">
+                    @Model.ShiftLength hrs
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="d-flex gap-2">
+
+    <a asp-action="Edit"
+       asp-route-id="@Model.ShiftID"
+       class="btn btn-primary">
+
+        Edit Shift
+
+    </a>
+
+    <a asp-action="Delete"
+       asp-route-id="@Model.ShiftID"
+       class="btn btn-outline-danger">
+
+        Delete Shift
+
+    </a>
+
+    <a asp-action="Index"
+       class="btn btn-outline-secondary">
+
+        Back to Schedule
+
+    </a>
+
+</div>

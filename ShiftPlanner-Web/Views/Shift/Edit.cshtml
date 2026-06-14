@@ -1,68 +1,201 @@
 ﻿@model Shift_Planner_Web.Models.Shift
 
-<h1>Edit Shift</h1>
-
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">
-        @ViewBag.Error
-    </div>
+@{
+    ViewData["Title"] = "Edit Shift";
 }
 
-<form asp-action="Edit" method="post">
+<div class="mb-4">
 
-    <input asp-for="ShiftID" type="hidden" />
+    <h1 class="fw-bold mb-1">
+        Edit Shift
+    </h1>
 
-    <div asp-validation-summary="All"
-         class="text-danger">
+    <p class="text-muted mb-0">
+        Update shift details, working hours and assigned employee.
+    </p>
+
+</div>
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card">
+
+            <div class="card-body p-4">
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mb-4">
+
+                        @ViewBag.Error
+
+                    </div>
+                }
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div asp-validation-summary="All"
+                         class="alert alert-danger mb-4">
+                    </div>
+                }
+
+                <form asp-action="Edit"
+                      method="post">
+
+                    <input asp-for="ShiftID"
+                           type="hidden" />
+
+                    <div class="mb-4">
+
+                        <label asp-for="EmployeeID"
+                               class="form-label fw-semibold">
+
+                            Employee
+
+                        </label>
+
+                        <select asp-for="EmployeeID"
+                                class="form-select form-select-lg"
+                                asp-items="ViewBag.Employees">
+
+                            <option value="">
+                                Select Employee
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="StartTime"
+                                   class="form-label fw-semibold">
+
+                                Shift Start
+
+                            </label>
+
+                            <input asp-for="StartTime"
+                                   type="datetime-local"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="StartTime"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label asp-for="EndTime"
+                                   class="form-label fw-semibold">
+
+                                Shift End
+
+                            </label>
+
+                            <input asp-for="EndTime"
+                                   type="datetime-local"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="EndTime"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="BreakDuration"
+                               class="form-label fw-semibold">
+
+                            Break Duration (Minutes)
+
+                        </label>
+
+                        <input asp-for="BreakDuration"
+                               class="form-control form-control-lg" />
+
+                        <span asp-validation-for="BreakDuration"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <div class="alert alert-info">
+
+                        <strong>Scheduling Rules</strong>
+
+                        <ul class="mb-0 mt-2">
+
+                            <li>
+                                Availability validation is checked automatically.
+                            </li>
+
+                            <li>
+                                Holiday conflicts are prevented automatically.
+                            </li>
+
+                            <li>
+                                Contracted hours are monitored during scheduling.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@Model.ShiftID"
+                               class="btn btn-outline-danger">
+
+                                Delete Shift
+
+                            </a>
+
+                        </div>
+
+                        <div class="d-flex gap-2">
+
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary">
+
+                                Cancel
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label asp-for="EmployeeID"></label>
+</div>
 
-        <select asp-for="EmployeeID"
-                class="form-select"
-                asp-items="ViewBag.Employees">
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="StartTime"></label>
-        <input asp-for="StartTime"
-               type="datetime-local"
-               class="form-control" />
-
-        <span asp-validation-for="StartTime"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="EndTime"></label>
-        <input asp-for="EndTime"
-               type="datetime-local"
-               class="form-control" />
-
-        <span asp-validation-for="EndTime"
-              class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="BreakDuration"></label>
-        <input asp-for="BreakDuration"
-               class="form-control" />
-
-        <span asp-validation-for="BreakDuration"
-              class="text-danger"></span>
-    </div>
-
-    <button type="submit"
-            class="btn btn-success">
-        Save Changes
-    </button>
-
-    <a asp-action="Delete"
-       asp-route-id="@Model.ShiftID"
-       class="btn btn-danger">
-        Delete
-    </a>
-</form>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
