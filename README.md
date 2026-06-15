@@ -133,4 +133,3 @@ The goal is to provide a modern workforce management solution for small and medi
 Daniel Martin
 
 Built as a portfolio project and potential SaaS platform.
-````
