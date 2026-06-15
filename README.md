@@ -1,4 +1,3 @@
-````markdown
 # CrewSync
 
 Workforce management made simple.
