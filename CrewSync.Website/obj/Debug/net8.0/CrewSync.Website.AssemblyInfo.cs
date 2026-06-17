@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+919ae588f68be0fd21caa2dd3a5a6d585af1d9f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b80b1e1cfc1edde9eb948681e712e097750c07c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
