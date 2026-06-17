@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShiftPlanner-Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+672fb2c3216ab82e4e57583918e5b33e363e9638")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b74a24cfaeeafb1e405a8f8bade5a513080d7c8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShiftPlanner-Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShiftPlanner-Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

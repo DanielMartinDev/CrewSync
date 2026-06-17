@@ -1,0 +1,47 @@
+﻿@model List<CrewSync.Website.Models.WaitlistEntry>
+
+<h1>Waitlist Signups</h1>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+
+            <th> Name </th>
+            <th> Email </th>
+            <th> Company </th>
+            <th> Industry </th>
+            <th> Employees </th>
+            <th> Date </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var person in Model)
+        {
+            <tr>
+
+                <td> @person.Name </td>
+
+                <td> @person.Email </td>
+
+                <td> @person.CompanyName </td>
+
+                <td> @person.Industry </td>
+
+                <td> @person.EmployeeCount </td>
+
+                <td>
+                    @person.CreatedAt.ToString("dd/MM/yyyy")
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
