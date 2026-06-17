@@ -14,6 +14,7 @@
             <th> Industry </th>
             <th> Employees </th>
             <th> Date </th>
+            <th> Privacy Consent </th>
 
         </tr>
 
@@ -37,6 +38,10 @@
 
                 <td>
                     @person.CreatedAt.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>
+                    @person.PrivacyConsent
                 </td>
 
             </tr>

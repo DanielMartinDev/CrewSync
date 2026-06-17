@@ -1,4 +1,5 @@
-﻿<section class="py-5 text-center">
+﻿
+<section class="py-5 text-center">
     <div class="container">
 
         <span class="badge bg-primary mb-3">
@@ -444,6 +445,31 @@
                           class="form-control"
                           rows="3"
                           placeholder="What scheduling problems are you looking to solve?"></textarea>
+
+            </div>
+
+            <div class="form-check mb-3">
+
+                <input name="PrivacyConsent"
+                       type="checkbox"
+                       value="true"
+                       required />
+
+                <label class="form-check-label"
+                       for="privacyConsent">
+
+                    I agree to receive updates about CrewSync and
+                    understand my information will be stored in accordance
+                    with the
+
+                    <a asp-controller="Home"
+                       asp-action="Privacy">
+
+                        Privacy Policy
+
+                    </a>.
+
+                </label>
 
             </div>
 

@@ -3,22 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\controllers\\waitlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\views\\admin\\waitlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\models\\waitlistentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B3FEBA47-9FE7-46FA-AA03-5D4AC9802FD2}|..\\CrewSync.Website\\CrewSync.Website.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.website\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -36,15 +30,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WaitListEntry.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Models\\WaitListEntry.cs",
-              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Models\\WaitListEntry.cs",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Models\\WaitListEntry.cs",
-              "RelativeToolTip": "..\\CrewSync.Website\\Models\\WaitListEntry.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T17:24:33.874Z",
+              "DocumentIndex": 1,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "..\\CrewSync.Website\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T19:44:36.473Z",
               "EditorCaption": ""
             },
             {
@@ -55,61 +49,35 @@
               "RelativeDocumentMoniker": "..\\CrewSync.Website\\Views\\Admin\\Waitlist.cshtml",
               "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Admin\\Waitlist.cshtml",
               "RelativeToolTip": "..\\CrewSync.Website\\Views\\Admin\\Waitlist.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-17T17:22:27.797Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "..\\CrewSync.Website\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T17:17:17.111Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "..\\CrewSync.Website\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAIgBAAAAAAAAAAAAAJ4BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-17T16:55:22.772Z",
+              "WhenOpened": "2026-06-17T19:43:32.872Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "WaitListController.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\WaitListController.cs",
-              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Controllers\\WaitListController.cs",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\WaitListController.cs",
-              "RelativeToolTip": "..\\CrewSync.Website\\Controllers\\WaitListController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T16:55:07.722Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "..\\CrewSync.Website\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T19:31:24.681Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Program.cs",
-              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Program.cs",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Program.cs",
-              "RelativeToolTip": "..\\CrewSync.Website\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "..\\CrewSync.Website\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "..\\CrewSync.Website\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T16:26:00.347Z",
+              "WhenOpened": "2026-06-17T19:23:57.913Z",
               "EditorCaption": ""
             }
           ]

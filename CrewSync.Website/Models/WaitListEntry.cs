@@ -18,4 +18,6 @@ public class WaitlistEntry
 
     public DateTime CreatedAt { get; set; }
     = DateTime.UtcNow;
+
+    public bool PrivacyConsent { get; set; }
 }
