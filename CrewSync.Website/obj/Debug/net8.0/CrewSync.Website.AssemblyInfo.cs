@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fe311bfb493199e627d79cd41e47ad2e646514f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92c373fc9845271c0df69d40d71454702259901f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrewSync.Website")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
