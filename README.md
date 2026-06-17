@@ -10,19 +10,19 @@ CrewSync is a workforce scheduling and employee management platform built with A
 
 ### Dashboard
 
-[dashboard screenshot]
+<img width="2543" height="1354" alt="Dashboard" src="https://github.com/user-attachments/assets/c32ed3f3-d9cd-4a57-87f0-8304c1c43c9f" />
 
 ### Employee Management
 
-[employee screenshot]
+<img width="2538" height="823" alt="Employees" src="https://github.com/user-attachments/assets/1174e1f5-161c-4776-8c62-adcf9201ef6c" />
 
 ### Employee Portal
 
-[portal screenshot]
+<img width="2544" height="673" alt="EmployeePortal" src="https://github.com/user-attachments/assets/cef72bb9-5dd3-424d-8810-75e1da471d4a" />
 
 ### Holiday Requests
 
-[holiday screenshot]
+<img width="2541" height="862" alt="HolidayRequests" src="https://github.com/user-attachments/assets/e9391189-c169-4cfe-b2b5-d8cc1b3f0498" />
 
 ---
 
