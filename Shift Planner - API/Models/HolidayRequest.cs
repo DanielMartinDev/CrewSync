@@ -12,5 +12,6 @@
         public DateTime EndDate { get; set; }
 
         public HolidayRequestStatus Status { get; set; }
+        public string? ManagerNotes { get; set; }
     }
 }

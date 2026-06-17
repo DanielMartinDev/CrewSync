@@ -26,8 +26,10 @@ namespace Shift_Planner_Web.Models
             WeeklyHours - ScheduledHours;
 
         public double Utilisation =>
-            WeeklyHours == 0
-                ? 0
-                : (ScheduledHours / WeeklyHours) * 100;
+    WeeklyHours == 0
+        ? 0
+        : Math.Round(
+            (ScheduledHours / WeeklyHours) * 100,
+            1);
     }
 }

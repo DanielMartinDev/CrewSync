@@ -101,7 +101,9 @@ namespace ShiftPlanner_Web.Controllers
                 return View(shift);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(
+                "Dashboard",
+                "Home");
         }
 
         public async Task<IActionResult> Details(int id)

@@ -4,6 +4,8 @@
     ViewData["Title"] = "Edit Shift";
 }
 
+<input asp-for="ShiftID" type="hidden" />
+
 <div class="mb-4">
 
     <h1 class="fw-bold mb-1">
@@ -124,6 +126,22 @@
                         <span asp-validation-for="BreakDuration"
                               class="text-danger">
                         </span>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label asp-for="Notes"
+                               class="form-label fw-semibold">
+
+                            Shift Notes
+
+                        </label>
+
+                        <textarea asp-for="Notes"
+                                  class="form-control"
+                                  rows="3">
+                        </textarea>
 
                     </div>
 

@@ -71,12 +71,11 @@ namespace Shift_Planner___API.Services
                     "Employee is on approved holiday.");
             }
 
-            var overlappingShift =
-            shiftPlannerContext.Shifts
-            .Any(s =>
-                s.EmployeeID == shift.EmployeeID &&
-                shift.StartTime < s.EndTime &&
-                shift.EndTime > s.StartTime);
+            var overlappingShift = shiftPlannerContext.Shifts.Any(s =>
+            s.EmployeeID == shift.EmployeeID &&
+            s.ShiftID != shift.ShiftID &&
+            shift.StartTime < s.EndTime &&
+            shift.EndTime > s.StartTime);
 
             if (overlappingShift)
             {
@@ -139,13 +138,12 @@ namespace Shift_Planner___API.Services
                 throw new Exception(
                     "Employee is on approved holiday.");
             }
-            
-            var overlappingShift =
-            shiftPlannerContext.Shifts
-                .Any(s =>
-                s.EmployeeID == shift.EmployeeID &&
-                shift.StartTime < s.EndTime &&
-                shift.EndTime > s.StartTime);
+
+            var overlappingShift = shiftPlannerContext.Shifts.Any(s =>
+            s.EmployeeID == shift.EmployeeID &&
+            s.ShiftID != shift.ShiftID &&
+            shift.StartTime < s.EndTime &&
+            shift.EndTime > s.StartTime);
 
             if (overlappingShift)
             {
@@ -158,6 +156,7 @@ namespace Shift_Planner___API.Services
             shift.StartTime = updatedShift.StartTime;
             shift.EndTime = updatedShift.EndTime;
             shift.BreakDuration = updatedShift.BreakDuration;
+            shift.Notes = updatedShift.Notes;
 
             shiftPlannerContext.SaveChanges();
             return true;

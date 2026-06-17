@@ -162,6 +162,25 @@
 
             </div>
 
+            @if (!string.IsNullOrWhiteSpace(Model.Notes))
+            {
+                <div class="card mb-4">
+
+                    <div class="card-body">
+
+                        <h5 class="fw-bold">
+                            Shift Notes
+                        </h5>
+
+                        <p class="mb-0">
+                            @Model.Notes
+                        </p>
+
+                    </div>
+
+                </div>
+            }
+
         </div>
 
     </div>

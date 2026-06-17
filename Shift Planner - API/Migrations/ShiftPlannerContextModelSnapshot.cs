@@ -286,6 +286,9 @@ namespace Shift_Planner___API.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ManagerNotes")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
@@ -312,6 +315,9 @@ namespace Shift_Planner___API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartTime")

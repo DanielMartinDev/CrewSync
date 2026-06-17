@@ -101,7 +101,7 @@ var holidays =
 
             <div class="card-body">
 
-                @if (Model.Any())
+                @if (Model.Any(s => s.StartTime >= DateTime.Today))
                 {
                     <table class="table">
 
@@ -114,7 +114,9 @@ var holidays =
 
                         <tbody>
 
-                            @foreach (var shift in Model.OrderBy(s => s.StartTime))
+                            @foreach (var shift in Model
+                                .Where(s => s.StartTime >= DateTime.Today)
+                                .OrderBy(s => s.StartTime))
                             {
                                 <tr>
 
@@ -138,7 +140,7 @@ var holidays =
                 else
                 {
                     <p class="mb-0">
-                        No shifts scheduled.
+                        No upcoming shifts scheduled.
                     </p>
                 }
 
@@ -167,6 +169,7 @@ var holidays =
                             <tr>
                                 <th>Dates</th>
                                 <th>Status</th>
+                                <th>Notes</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -206,6 +209,10 @@ var holidays =
                                             </span>
                                         }
 
+                                    </td>
+
+                                    <td>
+                                        @holiday.ManagerNotes
                                     </td>
 
                                     <td>

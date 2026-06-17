@@ -105,6 +105,9 @@ namespace Shift_Planner___API.Services
             holidayRequest.Status =
                 updatedHolidayRequest.Status;
 
+            holidayRequest.ManagerNotes = 
+                updatedHolidayRequest.ManagerNotes;
+
             shiftPlannerContext
                 .SaveChanges();
 

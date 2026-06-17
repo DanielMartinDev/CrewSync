@@ -18,5 +18,7 @@
             - (BreakDuration / 60.0);
 
         public double ShiftLength => (EndTime - StartTime).TotalHours;
+
+        public string? Notes { get; set; }
     }
 }

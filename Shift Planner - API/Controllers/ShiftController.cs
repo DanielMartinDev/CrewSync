@@ -63,7 +63,7 @@ namespace Shift_Planner___API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployee(int id, Shift updatedShift)
+        public IActionResult UpdateShift(int id, Shift updatedShift)
         {
             try
             {

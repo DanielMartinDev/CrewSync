@@ -412,7 +412,7 @@
   },
   {
     "ContainingType": "Shift_Planner___API.Controllers.ShiftController",
-    "Method": "UpdateEmployee",
+    "Method": "UpdateShift",
     "RelativePath": "api/Shift/{id}",
     "HttpMethod": "PUT",
     "IsController": true,

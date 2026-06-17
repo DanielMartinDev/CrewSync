@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba0f905ff887814bef8dfc170c4a184db64e361e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+672fb2c3216ab82e4e57583918e5b33e363e9638")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShiftPlanner-Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -991,6 +991,10 @@
           },
           "status": {
             "$ref": "#/components/schemas/HolidayRequestStatus"
+          },
+          "managerNotes": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1055,6 +1059,10 @@
             "type": "number",
             "format": "double",
             "readOnly": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
