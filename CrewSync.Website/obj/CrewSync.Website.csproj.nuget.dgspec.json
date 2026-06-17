@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\crewsync.website\\CrewSync.Website.csproj": {}
+    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\CrewSync.Website.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\crewsync.website\\CrewSync.Website.csproj": {
+    "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\CrewSync.Website.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\crewsync.website\\CrewSync.Website.csproj",
+        "projectUniqueName": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\CrewSync.Website.csproj",
         "projectName": "CrewSync.Website",
-        "projectPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\crewsync.website\\CrewSync.Website.csproj",
+        "projectPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\CrewSync.Website.csproj",
         "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\crewsync.website\\obj\\",
+        "outputPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.Website\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
