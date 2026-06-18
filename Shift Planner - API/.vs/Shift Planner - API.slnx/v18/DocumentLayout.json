@@ -1,11 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{4F165EF7-A207-412E-92D8-B7A354179B9D}|..\\CrewSync.DatabaseMigration\\CrewSync.DatabaseMigration.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\crewsync.databasemigration\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -13,24 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.DatabaseMigration\\Program.cs",
-              "RelativeDocumentMoniker": "..\\CrewSync.DatabaseMigration\\Program.cs",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\CrewSync.DatabaseMigration\\Program.cs",
-              "RelativeToolTip": "..\\CrewSync.DatabaseMigration\\Program.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAmwFMAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T21:47:33.233Z",
-              "EditorCaption": ""
             }
           ]
         }
