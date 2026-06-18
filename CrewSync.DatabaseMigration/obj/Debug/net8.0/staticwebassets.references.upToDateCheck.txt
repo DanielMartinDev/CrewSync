@@ -1,0 +1,6 @@
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.build.json

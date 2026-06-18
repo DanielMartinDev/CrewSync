@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../CrewSync.DatabaseMigration/CrewSync.DatabaseMigration.csproj" Id="4f165ef7-a207-412e-92d8-b7a354179b9d" />
   <Project Path="../CrewSync.Website/CrewSync.Website.csproj" Id="b3feba47-9fe7-46fa-aa03-5d4ac9802fd2" />
   <Project Path="../ShiftPlanner-Shared/ShiftPlanner-Shared.csproj" Id="b005ae33-03fb-4e58-8fc5-742860d4efa5" />
   <Project Path="../ShiftPlanner-Web/ShiftPlanner-Web.csproj" Id="66604c90-262b-4520-88ea-4421f200bed7" />
