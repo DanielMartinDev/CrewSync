@@ -9,14 +9,33 @@ namespace Shift_Planner___API.Data
         public ShiftPlannerContext(DbContextOptions<ShiftPlannerContext> options) 
             : base(options) { }
         protected override void OnModelCreating(
-    ModelBuilder builder)
+        ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<Employee>()
-                .HasOne(e => e.User)
-                .WithMany()
-                .HasForeignKey(e => e.UserId);
+                .Property(e => e.StartDate)
+                .HasColumnType("timestamp without time zone");
+
+            builder.Entity<Employee>()
+                 .Property(e => e.StartDate)
+                 .HasColumnType("timestamp without time zone");
+
+            builder.Entity<Shift>()
+                .Property(s => s.StartTime)
+                .HasColumnType("timestamp without time zone");
+
+            builder.Entity<Shift>()
+                .Property(s => s.EndTime)
+                .HasColumnType("timestamp without time zone");
+
+            builder.Entity<HolidayRequest>()
+                .Property(h => h.StartDate)
+                .HasColumnType("timestamp without time zone");
+
+            builder.Entity<HolidayRequest>()
+                .Property(h => h.EndDate)
+                .HasColumnType("timestamp without time zone");
         }
 
         public DbSet<Employee> Employees {  get; set; }

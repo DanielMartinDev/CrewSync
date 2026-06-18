@@ -1,7 +1,7 @@
 ﻿@model Shift_Planner_Web.Models.Employee
 
 @{
-    ViewData["Title"] = "Employee Details";
+    ViewData["Title"] = "Employee Profile";
 
     string status;
     string badgeClass;
@@ -28,61 +28,50 @@
     }
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
 
-    <div>
+        <div class="d-flex justify-content-between align-items-center">
 
-        <h1 class="fw-bold mb-1">
-            @Model.Name
-        </h1>
+            <div>
 
-        <p class="text-muted mb-0">
-            Employee Profile
-        </p>
+                <h1 class="fw-bold mb-1">
+                    @Model.Name
+                </h1>
+
+                <div class="text-muted">
+
+                    @Model.Role.ToString().Replace("_", " ")
+                    • Started
+                    @Model.StartDate.ToString("dd MMM yyyy")
+
+                </div>
+
+            </div>
+
+            <span class="badge @badgeClass fs-6">
+                @status
+            </span>
+
+        </div>
 
     </div>
-
-    <span class="badge @badgeClass fs-6">
-        @status
-    </span>
-
 </div>
 
 <div class="row mb-4">
+    <div class="col-md-3">
 
-    <div class="col-md-3 mb-3">
+        <div class="card shadow-sm border-0">
 
-        <div class="card h-100">
+            <div class="card-body text-center">
 
-            <div class="card-body">
-
-                <div class="text-muted small">
-                    Job Role
-                </div>
-
-                <h5 class="mb-0">
-                    @Model.Role.ToString().Replace("_", " ")
-                </h5>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-3 mb-3">
-
-        <div class="card h-100">
-
-            <div class="card-body">
-
-                <div class="text-muted small">
+                <div class="text-muted">
                     Contract Hours
                 </div>
 
-                <h5 class="mb-0">
-                    @Model.WeeklyHours hrs
-                </h5>
+                <h2>
+                    @Model.WeeklyHours
+                </h2>
 
             </div>
 
@@ -90,19 +79,19 @@
 
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
 
-        <div class="card h-100">
+        <div class="card shadow-sm border-0">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <div class="text-muted small">
-                    Scheduled Hours
+                <div class="text-muted">
+                    Scheduled
                 </div>
 
-                <h5 class="mb-0">
-                    @Model.ScheduledHours hrs
-                </h5>
+                <h2>
+                    @Model.ScheduledHours
+                </h2>
 
             </div>
 
@@ -110,19 +99,19 @@
 
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
 
-        <div class="card h-100">
+        <div class="card shadow-sm border-0">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <div class="text-muted small">
-                    Start Date
+                <div class="text-muted">
+                    Remaining
                 </div>
 
-                <h5 class="mb-0">
-                    @Model.StartDate.ToString("dd MMM yyyy")
-                </h5>
+                <h2>
+                    @Model.RemainingHours
+                </h2>
 
             </div>
 
@@ -130,168 +119,157 @@
 
     </div>
 
+    <div class="col-md-3">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body text-center">
+
+                <div class="text-muted">
+                    Utilisation
+                </div>
+
+                <h2>
+                    @Model.Utilisation%
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
-<div class="card mb-4">
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white">
+
+        <h5 class="mb-0">
+            Workload
+        </h5>
+
+    </div>
 
     <div class="card-body">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-
-            <h5 class="mb-0">
-                Utilisation
-            </h5>
-
-            <strong>
-                @Model.Utilisation%
-            </strong>
-
-        </div>
-
         <div class="progress"
-             style="height: 25px;">
+             style="height: 30px;">
 
-            <div class="progress-bar"
-                 role="progressbar"
+            <div class="progress-bar
+                @(Model.Utilisation >= 100 ? "bg-danger" :
+                   Model.Utilisation >= 90 ? "bg-success" :
+                   "bg-warning")"
                  style="width:@Model.Utilisation%">
 
                 @Model.Utilisation%
+
             </div>
 
         </div>
 
-        <div class="mt-3">
+    </div>
+</div>
 
-            @if (Model.RemainingHours < 0)
-            {
-                <span class="text-danger fw-semibold">
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
-                    Overtime:
-                    @Math.Abs(Model.RemainingHours) hrs
+        <h5 class="mb-0">
+            Upcoming Shifts
+        </h5>
 
-                </span>
-            }
-            else
-            {
-                <span class="text-success fw-semibold">
-
-                    Remaining:
-                    @Model.RemainingHours hrs
-
-                </span>
-            }
-
-        </div>
+        <span class="badge bg-primary">
+            @Model.Shifts.Count()
+        </span>
 
     </div>
 
+    <div class="card-body p-0">
+
+        <table class="table table-hover mb-0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Break</th>
+                    <th>Hours</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var shift in Model.Shifts
+                    .Where(s => s.StartTime >= DateTime.Today)
+                    .OrderBy(s => s.StartTime))
+                {
+                    <tr>
+
+                        <td>
+                            @shift.StartTime.ToString("ddd dd MMM")
+                        </td>
+
+                        <td>
+
+                            @shift.StartTime.ToString("HH:mm")
+                            -
+                            @shift.EndTime.ToString("HH:mm")
+
+                        </td>
+
+                        <td>
+                            @shift.BreakDuration mins
+                        </td>
+
+                        <td>
+                            @shift.ShiftHours hrs
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
 </div>
 
-<div class="card mb-4">
+<div class="card shadow-sm border-0">
 
+    ```
     <div class="card-body">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex gap-2 flex-wrap">
 
-            <h4 class="mb-0">
-                Assigned Shifts
-            </h4>
+            <a asp-controller="Availability"
+               asp-action="Index"
+               asp-route-employeeId="@Model.EmployeeID"
+               class="btn btn-primary">
+
+                Manage Availability
+
+            </a>
+
+            <a asp-controller="HolidayRequest"
+               asp-action="Create"
+               asp-route-employeeId="@Model.EmployeeID"
+               class="btn btn-warning">
+
+                Request Holiday
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+
+                Back To Employees
+
+            </a>
 
         </div>
 
-        @if (Model.Shifts.Any())
-        {
-            <div class="table-responsive">
-
-                <table class="table table-hover align-middle">
-
-                    <thead class="table-light">
-
-                        <tr>
-
-                            <th>Date</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Break</th>
-                            <th>Hours</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        @foreach (var shift in Model.Shifts)
-                        {
-                            <tr>
-
-                                <td>
-                                    @shift.StartTime.ToString("dd MMM yyyy")
-                                </td>
-
-                                <td>
-                                    @shift.StartTime.ToString("HH:mm")
-                                </td>
-
-                                <td>
-                                    @shift.EndTime.ToString("HH:mm")
-                                </td>
-
-                                <td>
-                                    @shift.BreakDuration mins
-                                </td>
-
-                                <td>
-                                    @shift.ShiftHours hrs
-                                </td>
-
-                            </tr>
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
-        }
-        else
-        {
-            <div class="text-center py-4 text-muted">
-
-                No shifts assigned.
-
-            </div>
-        }
-
     </div>
-
-</div>
-
-<div class="d-flex gap-2">
-
-    <a asp-controller="Availability"
-       asp-action="Index"
-       asp-route-employeeId="@Model.EmployeeID"
-       class="btn btn-primary">
-
-        Manage Availability
-
-    </a>
-
-    <a asp-controller="HolidayRequest"
-       asp-action="Create"
-       asp-route-employeeId="@Model.EmployeeID"
-       class="btn btn-warning">
-
-        Request Holiday
-
-    </a>
-
-    <a asp-action="Index"
-       class="btn btn-outline-secondary">
-
-        Back to Employees
-
-    </a>
-
 </div>

@@ -8,8 +8,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<ShiftPlannerContext>(
-    options => options.UseSqlite(
-        @"Data Source=..\Shift Planner - API\shiftplanner.db"));
+    options => options.UseNpgsql(
+        builder.Configuration.GetConnectionString(
+            "DefaultConnection")));
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>()
