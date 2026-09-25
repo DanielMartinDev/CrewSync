@@ -7,25 +7,37 @@ namespace Shift_Planner___API.Models
     {
         [Required]
         public int EmployeeID { get; set; }
+
         public string? UserId { get; set; }
+
         public string Email { get; set; } = string.Empty;
+
         public ApplicationUser? User { get; set; }
+
         [Required(ErrorMessage = "Employee name is required")]
-        [StringLength(100,
+        [StringLength(
+            100,
             ErrorMessage = "Name cannot exceed 100 characters")]
         public string Name { get; set; } = string.Empty;
-        public DateTime StartDate {  get; set; } = DateTime.Now.Date;
+
+        public DateTime StartDate { get; set; } = DateTime.Now.Date;
 
         [Display(Name = "Contracted Hours")]
         [Range(1, 60)]
         public int WeeklyHours { get; set; }
 
+        public int HolidayAllowance { get; set; } = 28;
+
+        public List<HolidayRequest>? HolidayRequests { get; set; }
+
         [Required]
         public EmployeeRole.Role Role { get; set; }
-        public ICollection<Shift> Shifts { get; set; } = new List<Shift>();
+
+        public ICollection<Shift> Shifts { get; set; } =
+            new List<Shift>();
 
         public double ScheduledHours =>
-        Shifts.Sum(s => s.ShiftHours);
+            Shifts.Sum(s => s.ShiftHours);
 
         public double RemainingHours =>
             WeeklyHours - ScheduledHours;

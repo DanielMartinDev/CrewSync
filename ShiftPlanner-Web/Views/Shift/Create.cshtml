@@ -17,34 +17,65 @@
 
 </div>
 
+
 <div class="row justify-content-center">
 
-    <div class="col-lg-8">
+    <div class="col-xl-8 col-lg-9">
 
-        <div class="card">
+        <div class="card border-0 shadow-sm">
 
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
 
                 @if (ViewBag.Error != null)
                 {
-                    <div class="alert alert-danger mb-4">
+                    <div class="shift-error mb-4">
 
-                        @ViewBag.Error
+                        <div class="fw-semibold mb-1">
+                            Unable to create shift
+                        </div>
+
+                        <div>
+                            @ViewBag.Error
+                        </div>
 
                     </div>
                 }
+
 
                 @if (!ViewData.ModelState.IsValid)
                 {
-                    <div asp-validation-summary="All"
-                         class="alert alert-danger mb-4">
+                    <div class="shift-validation mb-4">
+
+                        <div class="fw-semibold mb-1">
+                            Please check the details below
+                        </div>
+
+                        <div asp-validation-summary="All"></div>
+
                     </div>
                 }
+
 
                 <form asp-action="Create"
                       method="post">
 
-                    <div class="mb-4">
+
+                    <!-- EMPLOYEE -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Employee
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Select the employee this shift is for.
+                            </p>
+
+                        </div>
+
 
                         <label asp-for="EmployeeID"
                                class="form-label fw-semibold">
@@ -54,7 +85,7 @@
                         </label>
 
                         <select asp-for="EmployeeID"
-                                class="form-select form-select-lg"
+                                class="form-select"
                                 asp-items="ViewBag.Employees">
 
                             <option value="">
@@ -63,51 +94,98 @@
 
                         </select>
 
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-6 mb-4">
-
-                            <label asp-for="StartTime"
-                                   class="form-label fw-semibold">
-
-                                Shift Start
-
-                            </label>
-
-                            <input asp-for="StartTime"
-                                   type="datetime-local"
-                                   class="form-control form-control-lg" />
-
-                            <span asp-validation-for="StartTime"
-                                  class="text-danger">
-                            </span>
-
-                        </div>
-
-                        <div class="col-md-6 mb-4">
-
-                            <label asp-for="EndTime"
-                                   class="form-label fw-semibold">
-
-                                Shift End
-
-                            </label>
-
-                            <input asp-for="EndTime"
-                                   type="datetime-local"
-                                   class="form-control form-control-lg" />
-
-                            <span asp-validation-for="EndTime"
-                                  class="text-danger">
-                            </span>
-
-                        </div>
+                        <span asp-validation-for="EmployeeID"
+                              class="text-danger small">
+                        </span>
 
                     </div>
 
-                    <div class="mb-4">
+
+                    <hr class="my-4" />
+
+
+                    <!-- SHIFT TIMES -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Shift Times
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Set when the employee starts and finishes their shift.
+                            </p>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label asp-for="StartTime"
+                                       class="form-label fw-semibold">
+
+                                    Shift Start
+
+                                </label>
+
+                                <input asp-for="StartTime"
+                                       type="datetime-local"
+                                       class="form-control" />
+
+                                <span asp-validation-for="StartTime"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="EndTime"
+                                       class="form-label fw-semibold">
+
+                                    Shift End
+
+                                </label>
+
+                                <input asp-for="EndTime"
+                                       type="datetime-local"
+                                       class="form-control" />
+
+                                <span asp-validation-for="EndTime"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- BREAK -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Break
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Enter the total unpaid break duration for this shift.
+                            </p>
+
+                        </div>
+
 
                         <label asp-for="BreakDuration"
                                class="form-label fw-semibold">
@@ -116,57 +194,107 @@
 
                         </label>
 
-                        <input asp-for="BreakDuration"
-                               class="form-control form-control-lg" />
+                        <div class="input-group">
+
+                            <input asp-for="BreakDuration"
+                                   type="number"
+                                   min="0"
+                                   class="form-control"
+                                   placeholder="0" />
+
+                            <span class="input-group-text">
+                                minutes
+                            </span>
+
+                        </div>
 
                         <span asp-validation-for="BreakDuration"
-                              class="text-danger">
+                              class="text-danger small">
                         </span>
 
                     </div>
 
-                    <div class="mb-4">
+
+                    <hr class="my-4" />
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Shift Notes
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Add any optional information about this shift.
+                            </p>
+
+                        </div>
+
 
                         <label asp-for="Notes"
                                class="form-label fw-semibold">
 
-                            Shift Notes
+                            Notes
 
                         </label>
 
                         <textarea asp-for="Notes"
                                   class="form-control"
-                                  rows="3"
-                                  placeholder="Optional notes for this shift...">
-                        </textarea>
+                                  rows="4"
+                                  placeholder="Optional notes for this shift..."></textarea>
+
+                        <span asp-validation-for="Notes"
+                              class="text-danger small">
+                        </span>
 
                     </div>
 
-                    <div class="alert alert-info">
 
-                        <strong>Scheduling Rules</strong>
+                    <!-- SCHEDULING RULES -->
 
-                        <ul class="mb-0 mt-2">
+                    <div class="rules-panel mb-4">
 
-                            <li>
-                                Availability validation is applied automatically.
-                            </li>
+                        <div class="rules-icon">
+                            ✓
+                        </div>
 
-                            <li>
-                                Holiday conflicts are blocked automatically.
-                            </li>
+                        <div>
 
-                            <li>
-                                Contracted hours are monitored during scheduling.
-                            </li>
+                            <div class="fw-semibold mb-2">
+                                Scheduling Rules
+                            </div>
 
-                        </ul>
+                            <ul class="mb-0">
+
+                                <li>
+                                    Availability validation is applied automatically.
+                                </li>
+
+                                <li>
+                                    Holiday conflicts are blocked automatically.
+                                </li>
+
+                                <li>
+                                    Contracted hours are monitored during scheduling.
+                                </li>
+
+                            </ul>
+
+                        </div>
 
                     </div>
+
 
                     <hr class="my-4" />
 
-                    <div class="d-flex justify-content-between">
+
+                    <!-- ACTIONS -->
+
+                    <div class="d-flex justify-content-between align-items-center">
 
                         <a asp-action="Index"
                            class="btn btn-outline-secondary">
@@ -176,7 +304,7 @@
                         </a>
 
                         <button type="submit"
-                                class="btn btn-primary">
+                                class="btn btn-primary px-4">
 
                             Create Shift
 
@@ -193,6 +321,106 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .form-section {
+        position: relative;
+    }
+
+    .section-heading h5 {
+        font-size: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 7px;
+    }
+
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        border-radius: 8px;
+    }
+
+    textarea.form-control {
+        min-height: 110px;
+    }
+
+    .input-group .form-control {
+        border-radius: 8px 0 0 8px;
+    }
+
+    .input-group-text {
+        border-radius: 0 8px 8px 0;
+        background: #f8f9fa;
+    }
+
+    .shift-error,
+    .shift-validation {
+        padding: 14px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .shift-error {
+        border-left: 4px solid #dc3545;
+        background: #fff5f5;
+        color: #842029;
+    }
+
+    .shift-validation {
+        border-left: 4px solid #dc3545;
+        background: #fff5f5;
+        color: #842029;
+    }
+
+        .shift-validation ul {
+            margin-bottom: 0;
+            padding-left: 18px;
+        }
+
+    .rules-panel {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 18px;
+        border: 1px solid #cfe2ff;
+        border-radius: 10px;
+        background: #f4f8ff;
+        color: #495057;
+        font-size: 14px;
+    }
+
+    .rules-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 10px;
+        background: #e2ecff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    .rules-panel ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+        color: #6c757d;
+    }
+
+    .rules-panel li {
+        margin-bottom: 4px;
+    }
+
+        .rules-panel li:last-child {
+            margin-bottom: 0;
+        }
+
+</style>
+
 
 @section Scripts
 {

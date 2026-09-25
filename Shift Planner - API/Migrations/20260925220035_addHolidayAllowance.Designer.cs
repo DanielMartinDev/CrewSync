@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Shift_Planner___API.Data;
@@ -11,9 +12,11 @@ using Shift_Planner___API.Data;
 namespace Shift_Planner___API.Migrations
 {
     [DbContext(typeof(ShiftPlannerContext))]
-    partial class ShiftPlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20260925220035_addHolidayAllowance")]
+    partial class addHolidayAllowance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,9 +297,6 @@ namespace Shift_Planner___API.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("HolidayAllowance")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -466,7 +466,7 @@ namespace Shift_Planner___API.Migrations
             modelBuilder.Entity("Shift_Planner___API.Models.HolidayRequest", b =>
                 {
                     b.HasOne("Shift_Planner___API.Models.Employee", "Employee")
-                        .WithMany("HolidayRequests")
+                        .WithMany()
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -487,8 +487,6 @@ namespace Shift_Planner___API.Migrations
 
             modelBuilder.Entity("Shift_Planner___API.Models.Employee", b =>
                 {
-                    b.Navigation("HolidayRequests");
-
                     b.Navigation("Shifts");
                 });
 #pragma warning restore 612, 618

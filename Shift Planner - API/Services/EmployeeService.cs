@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shift_Planner___API.Data;
 using Shift_Planner___API.Models;
+using Shift_Planner___API.DTOs;
 
 namespace Shift_Planner___API.Services
 {
@@ -10,18 +11,45 @@ namespace Shift_Planner___API.Services
 
         public EmployeeService(ShiftPlannerContext context)
         {
-             shiftPlannerContext = context;
+            shiftPlannerContext = context;
         }
 
         public List<Employee> GetEmployees()
         {
-            return shiftPlannerContext.Employees.ToList();
+            return shiftPlannerContext.Employees
+                .Include(e => e.HolidayRequests)
+                .ToList();
+        }
+
+        public EmployeeHolidayDto? GetEmployeeHoliday(int employeeId)
+        {
+            var employee = shiftPlannerContext.Employees
+                .Include(e => e.HolidayRequests)
+                .FirstOrDefault(e => e.EmployeeID == employeeId);
+
+            if (employee == null)
+                return null;
+
+            var daysUsed = employee.HolidayRequests
+                .Where(h => h.Status == HolidayRequestStatus.Approved)
+                .Sum(h =>
+                    (h.EndDate.Date - h.StartDate.Date).Days + 1);
+
+            return new EmployeeHolidayDto
+            {
+                EmployeeID = employee.EmployeeID,
+                HolidayAllowance = employee.HolidayAllowance,
+                HolidayDaysUsed = daysUsed,
+                HolidayDaysRemaining =
+                    employee.HolidayAllowance - daysUsed
+            };
         }
 
         public Employee? GetEmployee(int id)
         {
-            return shiftPlannerContext.Employees.FirstOrDefault(
-                e => e.EmployeeID == id);
+            return shiftPlannerContext.Employees
+                .Include(e => e.HolidayRequests)
+                .FirstOrDefault(e => e.EmployeeID == id);
         }
 
         public Employee CreateEmployee(Employee employee)
@@ -50,12 +78,15 @@ namespace Shift_Planner___API.Services
 
         public Employee? GetEmployeeWithShifts(int id)
         {
-            return shiftPlannerContext.Employees.Include(e => e.Shifts).FirstOrDefault(e => e.EmployeeID == id);
+            return shiftPlannerContext.Employees
+                .Include(e => e.Shifts)
+                .FirstOrDefault(e => e.EmployeeID == id);
         }
 
         public bool UpdateEmployee(int id, Employee updatedEmployee)
         {
-            var employee = shiftPlannerContext.Employees.FirstOrDefault(e => e.EmployeeID == id);
+            var employee = shiftPlannerContext.Employees
+                .FirstOrDefault(e => e.EmployeeID == id);
 
             if (employee == null)
                 return false;
@@ -66,20 +97,25 @@ namespace Shift_Planner___API.Services
             employee.Role = updatedEmployee.Role;
             employee.UserId = updatedEmployee.UserId;
             employee.Email = updatedEmployee.Email;
+            employee.HolidayAllowance = updatedEmployee.HolidayAllowance;
 
             shiftPlannerContext.SaveChanges();
+
             return true;
         }
 
         public bool DeleteEmployee(int id)
         {
-            var employee = shiftPlannerContext.Employees.FirstOrDefault(e => e.EmployeeID == id);
+            var employee = shiftPlannerContext.Employees
+                .FirstOrDefault(e => e.EmployeeID == id);
 
             if (employee == null)
                 return false;
 
             shiftPlannerContext.Employees.Remove(employee);
+
             shiftPlannerContext.SaveChanges();
+
             return true;
         }
     }

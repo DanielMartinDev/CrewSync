@@ -20,19 +20,26 @@
 
 </div>
 
-<div class="row mb-4">
 
-    <div class="col-md-3 mb-3">
+<!-- SUMMARY CARDS -->
 
-        <div class="card h-100">
+<div class="row g-3 mb-4">
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted small">
+                <div class="summary-icon">
+                    👤
+                </div>
+
+                <div class="text-muted small mb-1">
                     Employee
                 </div>
 
-                <h5 class="mb-0">
+                <h5 class="fw-bold mb-0">
                     @Model.Employee?.Name
                 </h5>
 
@@ -42,17 +49,22 @@
 
     </div>
 
-    <div class="col-md-3 mb-3">
 
-        <div class="card h-100">
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted small">
+                <div class="summary-icon">
+                    💼
+                </div>
+
+                <div class="text-muted small mb-1">
                     Role
                 </div>
 
-                <h5 class="mb-0">
+                <h5 class="fw-bold mb-0">
                     @Model.Employee?.Role.ToString().Replace("_", " ")
                 </h5>
 
@@ -62,17 +74,22 @@
 
     </div>
 
-    <div class="col-md-3 mb-3">
 
-        <div class="card h-100">
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted small">
+                <div class="summary-icon">
+                    📅
+                </div>
+
+                <div class="text-muted small mb-1">
                     Working Day
                 </div>
 
-                <h5 class="mb-0">
+                <h5 class="fw-bold mb-0">
                     @Model.StartTime.ToString("dd MMM yyyy")
                 </h5>
 
@@ -82,17 +99,22 @@
 
     </div>
 
-    <div class="col-md-3 mb-3">
 
-        <div class="card h-100">
+    <div class="col-xl-3 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted small">
+                <div class="summary-icon">
+                    ⏱
+                </div>
+
+                <div class="text-muted small mb-1">
                     Paid Hours
                 </div>
 
-                <h5 class="mb-0">
+                <h5 class="fw-bold mb-0">
                     @Model.ShiftHours hrs
                 </h5>
 
@@ -104,82 +126,94 @@
 
 </div>
 
-<div class="card mb-4">
 
-    <div class="card-body">
+<!-- SHIFT INFORMATION -->
 
-        <h4 class="fw-bold mb-4">
-            Shift Information
-        </h4>
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body p-4 p-md-5">
+
+        <div class="section-heading mb-4">
+
+            <h4 class="fw-bold mb-1">
+                Shift Information
+            </h4>
+
+            <p class="text-muted small mb-0">
+                Details of the scheduled working hours and break.
+            </p>
+
+        </div>
+
 
         <div class="row g-4">
 
             <div class="col-md-6">
 
-                <div class="text-muted small">
-                    Start Time
-                </div>
+                <div class="detail-card">
 
-                <div class="fs-5 fw-semibold">
-                    @Model.StartTime.ToString("HH:mm")
-                </div>
+                    <div class="detail-label">
+                        Start Time
+                    </div>
 
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="text-muted small">
-                    End Time
-                </div>
-
-                <div class="fs-5 fw-semibold">
-                    @Model.EndTime.ToString("HH:mm")
-                </div>
-
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="text-muted small">
-                    Break Duration
-                </div>
-
-                <div class="fs-5">
-                    @Model.BreakDuration mins
-                </div>
-
-            </div>
-
-            <div class="col-md-6">
-
-                <div class="text-muted small">
-                    Shift Length
-                </div>
-
-                <div class="fs-5">
-                    @Model.ShiftLength hrs
-                </div>
-
-            </div>
-
-            @if (!string.IsNullOrWhiteSpace(Model.Notes))
-            {
-                <div class="card mb-4">
-
-                    <div class="card-body">
-
-                        <h5 class="fw-bold">
-                            Shift Notes
-                        </h5>
-
-                        <p class="mb-0">
-                            @Model.Notes
-                        </p>
-
+                    <div class="detail-value">
+                        @Model.StartTime.ToString("HH:mm")
                     </div>
 
                 </div>
-            }
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        End Time
+                    </div>
+
+                    <div class="detail-value">
+                        @Model.EndTime.ToString("HH:mm")
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Break Duration
+                    </div>
+
+                    <div class="detail-value">
+                        @Model.BreakDuration mins
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="detail-card">
+
+                    <div class="detail-label">
+                        Shift Length
+                    </div>
+
+                    <div class="detail-value">
+                        @Model.ShiftLength hrs
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -187,11 +221,43 @@
 
 </div>
 
-<div class="d-flex gap-2">
+
+<!-- SHIFT NOTES -->
+@if (!string.IsNullOrWhiteSpace(Model.Notes))
+{
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="section-heading mb-3">
+
+                <h5 class="fw-bold mb-1">
+                    Shift Notes
+                </h5>
+
+                <p class="text-muted small mb-0">
+                    Additional information for this shift.
+                </p>
+
+            </div>
+
+            <div class="notes-box">
+                @Model.Notes
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+<!-- ACTIONS -->
+
+<div class="d-flex flex-wrap gap-2">
 
     <a asp-action="Edit"
        asp-route-id="@Model.ShiftID"
-       class="btn btn-primary">
+       class="btn btn-primary px-4">
 
         Edit Shift
 
@@ -199,17 +265,70 @@
 
     <a asp-action="Delete"
        asp-route-id="@Model.ShiftID"
-       class="btn btn-outline-danger">
+       class="btn btn-outline-danger px-4">
 
         Delete Shift
 
     </a>
 
     <a asp-action="Index"
-       class="btn btn-outline-secondary">
+       class="btn btn-outline-secondary px-4">
 
         Back to Schedule
 
     </a>
 
 </div>
+
+
+<style>
+
+    .summary-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        font-size: 18px;
+    }
+
+    .section-heading h4,
+    .section-heading h5 {
+        font-size: 1.05rem;
+    }
+
+    .detail-card {
+        padding: 16px;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        background: #f8f9fa;
+    }
+
+    .detail-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 5px;
+    }
+
+    .detail-value {
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    .notes-box {
+        padding: 16px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        color: #495057;
+        line-height: 1.6;
+        white-space: pre-wrap;
+    }
+
+</style>

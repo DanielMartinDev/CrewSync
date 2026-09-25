@@ -2,34 +2,68 @@
 
 @{
     var employee =
-    ViewBag.Employee as Shift_Planner_Web.Models.Employee;
+        ViewBag.Employee as Shift_Planner_Web.Models.Employee;
 
-var holidays =
-    ViewBag.Holidays as
-    List<Shift_Planner_Web.Models.HolidayRequest>;
+    var holidays =
+        ViewBag.Holidays as
+        List<Shift_Planner_Web.Models.HolidayRequest>
+        ?? new List<Shift_Planner_Web.Models.HolidayRequest>();
+
+    var holidaySummary =
+        ViewBag.HolidaySummary
+        as ShiftPlanner_Web.Models.EmployeeHolidayDto;
+
+    var today = DateTime.Today;
+
+    // Monday of the current week
+    var weekStart = today.AddDays(
+        -(((int)today.DayOfWeek + 6) % 7));
+
+    var weekEnd = weekStart.AddDays(6);
 
     var upcomingShiftCount =
         Model.Count(s => s.StartTime >= DateTime.Today);
 
     var pendingHolidayCount =
-        holidays?.Count(h =>
+        holidays.Count(h =>
             h.Status ==
-            Shift_Planner_Web.Models.HolidayRequestStatus.Pending) ?? 0;
+            Shift_Planner_Web.Models.HolidayRequestStatus.Pending);
 
     var approvedHolidayCount =
-        holidays?.Count(h =>
+        holidays.Count(h =>
             h.Status ==
-            Shift_Planner_Web.Models.HolidayRequestStatus.Approved) ?? 0;
+            Shift_Planner_Web.Models.HolidayRequestStatus.Approved);
+
+    var weekShifts = Model
+        .Where(s =>
+            s.StartTime.Date >= weekStart.Date &&
+            s.StartTime.Date <= weekEnd.Date)
+        .OrderBy(s => s.StartTime)
+        .ToList();
+
+    var weeklyHours =
+        weekShifts.Sum(s => s.ShiftHours);
 }
 
-<h2>
-    Welcome @employee?.Name
-</h2>
+<div class="mb-4">
 
-<hr />
+    <h2 class="fw-bold mb-1">
+        Welcome @employee?.Name
+    </h2>
+
+    <p class="text-muted mb-0">
+        Here's your schedule and holiday information for this week.
+    </p>
+
+</div>
+
+<hr class="mb-4" />
+
+<!-- Summary Cards -->
 
 <div class="row mb-4">
-    <div class="col-md-4">
+
+    <div class="col-md-4 mb-3">
 
         <div class="card text-center h-100">
 
@@ -49,7 +83,7 @@ var holidays =
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3">
 
         <div class="card text-center h-100">
 
@@ -69,7 +103,7 @@ var holidays =
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3">
 
         <div class="card text-center h-100">
 
@@ -88,61 +122,31 @@ var holidays =
         </div>
 
     </div>
+
 </div>
 
-<div class="row">
-    <div class="col-md-6">
 
-        <div class="card">
+<!-- Holiday Allowance -->
 
-            <div class="card-header">
-                Upcoming Shifts
-            </div>
+<div class="row mb-4">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card text-center h-100">
 
             <div class="card-body">
 
-                @if (Model.Any(s => s.StartTime >= DateTime.Today))
-                {
-                    <table class="table">
+                <h6 class="text-muted">
+                    Holiday Allowance
+                </h6>
 
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Shift</th>
-                            </tr>
-                        </thead>
+                <h2>
+                    @(holidaySummary?.HolidayAllowance ?? 0)
+                </h2>
 
-                        <tbody>
-
-                            @foreach (var shift in Model
-                                .Where(s => s.StartTime >= DateTime.Today)
-                                .OrderBy(s => s.StartTime))
-                            {
-                                <tr>
-
-                                    <td>
-                                        @shift.StartTime.ToString("dd/MM/yyyy")
-                                    </td>
-
-                                    <td>
-                                        @shift.StartTime.ToString("HH:mm")
-                                        -
-                                        @shift.EndTime.ToString("HH:mm")
-                                    </td>
-
-                                </tr>
-                            }
-
-                        </tbody>
-
-                    </table>
-                }
-                else
-                {
-                    <p class="mb-0">
-                        No upcoming shifts scheduled.
-                    </p>
-                }
+                <div class="text-muted">
+                    days per year
+                </div>
 
             </div>
 
@@ -150,9 +154,233 @@ var holidays =
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4 mb-3">
 
-        <div class="card">
+        <div class="card text-center h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Holiday Used
+                </h6>
+
+                <h2>
+                    @(holidaySummary?.HolidayDaysUsed ?? 0)
+                </h2>
+
+                <div class="text-muted">
+                    days taken
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="card text-center h-100">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Holiday Remaining
+                </h6>
+
+                <h2>
+                    @(holidaySummary?.HolidayDaysRemaining ?? 0)
+                </h2>
+
+                <div class="text-muted">
+                    days remaining
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Weekly Schedule -->
+
+<div class="card mb-4">
+
+    <div class="card-header">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <strong>
+                    This Week
+                </strong>
+
+                <div class="text-muted small">
+                    @weekStart.ToString("dd MMM yyyy")
+                    -
+                    @weekEnd.ToString("dd MMM yyyy")
+                </div>
+
+            </div>
+
+            <span class="badge bg-primary">
+                @weeklyHours.ToString("0.0") hrs
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>
+                            Day
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Schedule
+                        </th>
+
+                        <th>
+                            Hours
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for (int i = 0; i < 7; i++)
+                    {
+                        var day = weekStart.AddDays(i);
+
+                        var shift = weekShifts
+                            .FirstOrDefault(s =>
+                                s.StartTime.Date == day.Date);
+
+                        var holiday = holidays.FirstOrDefault(h =>
+                            h.EmployeeID == employee!.EmployeeID &&
+                            h.Status ==
+                                Shift_Planner_Web.Models.HolidayRequestStatus.Approved &&
+                            day.Date >= h.StartDate.Date &&
+                            day.Date <= h.EndDate.Date);
+
+                        var isToday =
+                            day.Date == today.Date;
+
+                        <tr class="@(isToday ? "table-primary" : "")">
+
+                            <td class="fw-semibold">
+
+                                @day.ToString("dddd")
+
+                                @if (isToday)
+                                {
+                                    <span class="badge bg-primary ms-2">
+                                        Today
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+                                @day.ToString("dd/MM/yyyy")
+                            </td>
+
+                            <td>
+
+                                @if (holiday != null)
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Holiday
+                                    </span>
+                                }
+                                else if (shift != null)
+                                {
+                                    <strong>
+                                        @shift.StartTime.ToString("HH:mm")
+                                        -
+                                        @shift.EndTime.ToString("HH:mm")
+                                    </strong>
+
+                                    @if (!string.IsNullOrWhiteSpace(shift.Notes))
+                                    {
+                                        <div class="small text-muted">
+                                            @shift.Notes
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Off
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                @if (holiday != null)
+                                {
+                                    <span class="text-muted">
+                                        —
+                                    </span>
+                                }
+                                else if (shift != null)
+                                {
+                                    @shift.ShiftHours.ToString("0.0")
+                                    <span class="text-muted">
+                                        hrs
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        —
+                                    </span>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Holiday Requests -->
+
+<div class="row">
+
+    <div class="col-md-8 mb-4">
+
+        <div class="card h-100">
 
             <div class="card-header">
                 My Holiday Requests
@@ -160,84 +388,124 @@ var holidays =
 
             <div class="card-body">
 
-                @if (holidays != null &&
-                     holidays.Any())
+                @if (holidays.Any())
                 {
-                    <table class="table">
+                    <div class="table-responsive">
 
-                        <thead>
-                            <tr>
-                                <th>Dates</th>
-                                <th>Status</th>
-                                <th>Notes</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
+                        <table class="table align-middle">
 
-                        <tbody>
+                            <thead>
 
-                            @foreach (var holiday in holidays.OrderByDescending(h => h.StartDate))
-                            {
                                 <tr>
 
-                                    <td>
-                                        @holiday.StartDate.ToString("dd/MM/yyyy")
-                                        -
-                                        @holiday.EndDate.ToString("dd/MM/yyyy")
-                                    </td>
+                                    <th>
+                                        Dates
+                                    </th>
 
-                                    <td>
+                                    <th>
+                                        Status
+                                    </th>
 
-                                        @if (holiday.Status ==
-                                             Shift_Planner_Web.Models.HolidayRequestStatus.Approved)
-                                        {
-                                            <span class="badge bg-success">
-                                                Approved
-                                            </span>
-                                        }
-                                        else if (holiday.Status ==
-                                                 Shift_Planner_Web.Models.HolidayRequestStatus.Rejected)
-                                        {
-                                            <span class="badge bg-danger">
-                                                Rejected
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-warning text-dark">
-                                                Pending
-                                            </span>
-                                        }
+                                    <th>
+                                        Notes
+                                    </th>
 
-                                    </td>
-
-                                    <td>
-                                        @holiday.ManagerNotes
-                                    </td>
-
-                                    <td>
-
-                                        @if (holiday.Status ==
-                                             Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
-                                        {
-                                            <a asp-controller="HolidayRequest"
-                                               asp-action="Delete"
-                                               asp-route-id="@holiday.HolidayRequestID"
-                                               class="btn btn-outline-danger btn-sm">
-
-                                                Cancel
-
-                                            </a>
-                                        }
-
-                                    </td>
+                                    <th>
+                                        Actions
+                                    </th>
 
                                 </tr>
-                            }
 
-                        </tbody>
+                            </thead>
 
-                    </table>
+                            <tbody>
+
+                                @foreach (var holiday in holidays
+                                    .OrderByDescending(h => h.StartDate))
+                                {
+                                    <tr>
+
+                                        <td>
+
+                                            @holiday.StartDate.ToString("dd/MM/yyyy")
+
+                                            @if (holiday.EndDate.Date !=
+                                                holiday.StartDate.Date)
+                                            {
+                                                <span>
+                                                    -
+                                                    @holiday.EndDate.ToString("dd/MM/yyyy")
+                                                </span>
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            @if (holiday.Status ==
+                                                Shift_Planner_Web.Models.HolidayRequestStatus.Approved)
+                                            {
+                                                <span class="badge bg-success">
+                                                    Approved
+                                                </span>
+                                            }
+                                            else if (holiday.Status ==
+                                                Shift_Planner_Web.Models.HolidayRequestStatus.Rejected)
+                                            {
+                                                <span class="badge bg-danger">
+                                                    Rejected
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">
+                                                    Pending
+                                                </span>
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            @if (string.IsNullOrWhiteSpace(
+                                                holiday.ManagerNotes))
+                                            {
+                                                <span class="text-muted">
+                                                    —
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                @holiday.ManagerNotes
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            @if (holiday.Status ==
+                                                Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
+                                            {
+                                                <a asp-controller="HolidayRequest"
+                                                   asp-action="Delete"
+                                                   asp-route-id="@holiday.HolidayRequestID"
+                                                   class="btn btn-outline-danger btn-sm">
+
+                                                    Cancel
+
+                                                </a>
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
                 }
                 else
                 {
@@ -251,15 +519,41 @@ var holidays =
         </div>
 
     </div>
-</div>
 
-<div class="mt-3">
-    <a asp-controller="HolidayRequest"
-       asp-action="Create"
-       asp-route-employeeId="@employee?.EmployeeID"
-       class="btn btn-primary">
 
-        Request Holiday
+    <!-- Request Holiday -->
 
-    </a>
+    <div class="col-md-4 mb-4">
+
+        <div class="card h-100">
+
+            <div class="card-body d-flex flex-column">
+
+                <h5 class="fw-semibold">
+                    Need Time Off?
+                </h5>
+
+                <p class="text-muted">
+                    Submit a holiday request for your manager to review.
+                </p>
+
+                <div class="mt-auto">
+
+                    <a asp-controller="HolidayRequest"
+                       asp-action="Create"
+                       asp-route-employeeId="@employee?.EmployeeID"
+                       class="btn btn-primary">
+
+                        Request Holiday
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>

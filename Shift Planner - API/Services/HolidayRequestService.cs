@@ -47,21 +47,8 @@ namespace Shift_Planner___API.Services
         }
 
         public HolidayRequest CreateHolidayRequest(
-               HolidayRequest holidayRequest)
+    HolidayRequest holidayRequest)
         {
-            var existingRequest =
-            shiftPlannerContext.HolidayRequests
-            .Any(h =>
-            h.EmployeeID == holidayRequest.EmployeeID &&
-            holidayRequest.StartDate <= h.EndDate &&
-            holidayRequest.EndDate >= h.StartDate);
-
-            if (existingRequest)
-            {
-                throw new Exception(
-                    "You already have a holiday request for these dates.");
-            }
-
             if (holidayRequest.EndDate <
                 holidayRequest.StartDate)
             {
@@ -69,12 +56,56 @@ namespace Shift_Planner___API.Services
                     "End date must be after start date.");
             }
 
-            shiftPlannerContext
-                .HolidayRequests
-                .Add(holidayRequest);
+            var existingRequest =
+                shiftPlannerContext.HolidayRequests
+                    .Any(h =>
+                        h.EmployeeID == holidayRequest.EmployeeID &&
+                        holidayRequest.StartDate <= h.EndDate &&
+                        holidayRequest.EndDate >= h.StartDate);
 
-            shiftPlannerContext
-                .SaveChanges();
+            if (existingRequest)
+            {
+                throw new Exception(
+                    "You already have a holiday request for these dates.");
+            }
+
+            var employee =
+                shiftPlannerContext.Employees
+                    .Include(e => e.HolidayRequests)
+                    .FirstOrDefault(
+                        e => e.EmployeeID == holidayRequest.EmployeeID);
+
+            if (employee == null)
+            {
+                throw new Exception(
+                    "Employee could not be found.");
+            }
+
+            var requestedDays =
+                (holidayRequest.EndDate.Date -
+                 holidayRequest.StartDate.Date).Days + 1;
+
+            var usedDays = employee.HolidayRequests
+                .Where(h =>
+                    h.Status == HolidayRequestStatus.Approved)
+                .Sum(h =>
+                    (h.EndDate.Date -
+                     h.StartDate.Date).Days + 1);
+
+            var remainingDays =
+                employee.HolidayAllowance - usedDays;
+
+            if (requestedDays > remainingDays)
+            {
+                throw new Exception(
+                    $"This holiday request uses {requestedDays} days, " +
+                    $"but the employee only has {remainingDays} days remaining.");
+            }
+
+            shiftPlannerContext.HolidayRequests.Add(
+                holidayRequest);
+
+            shiftPlannerContext.SaveChanges();
 
             return holidayRequest;
         }

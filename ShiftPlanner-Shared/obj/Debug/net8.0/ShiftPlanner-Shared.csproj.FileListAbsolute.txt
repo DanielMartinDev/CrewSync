@@ -28,3 +28,4 @@ C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-S
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Shared\obj\Debug\net8.0\ShiftPlanner-Shared.pdb
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Shared\obj\Debug\net8.0\ShiftPlanner-Shared.genruntimeconfig.cache
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Shared\obj\Debug\net8.0\ref\ShiftPlanner-Shared.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\ShiftPlanner-Shared\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

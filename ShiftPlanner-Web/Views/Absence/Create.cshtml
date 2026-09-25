@@ -8,8 +8,13 @@
         ?? new List<Shift_Planner_Web.Models.Employee>();
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+
+<!-- HEADER -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
     <div>
+
         <h1 class="fw-bold mb-1">
             Record Absence
         </h1>
@@ -17,146 +22,278 @@
         <p class="text-muted mb-0">
             Record an employee absence.
         </p>
+
     </div>
 
     <a asp-action="Index"
-       class="btn btn-outline-secondary">
+       class="btn btn-outline-secondary mt-3 mt-md-0">
+
         Back to Absences
+
     </a>
+
 </div>
 
-<div class="card border-0 shadow-sm">
-    <div class="card-body">
 
-        <form asp-action="Create" method="post">
+<div class="row justify-content-center">
 
-            <div asp-validation-summary="ModelOnly"
-                 class="text-danger mb-3">
+    <div class="col-xl-9 col-lg-10">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body p-4 p-md-5">
+
+                <form asp-action="Create"
+                      method="post">
+
+
+                    <!-- VALIDATION -->
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="alert alert-danger mb-4">
+                    </div>
+
+
+                    <!-- ABSENCE DETAILS -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Absence Details
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Select the employee and record the absence dates.
+                            </p>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-12">
+
+                                <label asp-for="EmployeeID"
+                                       class="form-label fw-semibold">
+
+                                    Employee
+
+                                </label>
+
+                                <select asp-for="EmployeeID"
+                                        class="form-select">
+
+                                    <option value="">
+                                        Select employee
+                                    </option>
+
+                                    @foreach (var employee in employees)
+                                    {
+                                        <option value="@employee.EmployeeID">
+                                            @employee.Name
+                                        </option>
+                                    }
+
+                                </select>
+
+                                <span asp-validation-for="EmployeeID"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="StartDate"
+                                       class="form-label fw-semibold">
+
+                                    Start Date
+
+                                </label>
+
+                                <input asp-for="StartDate"
+                                       type="date"
+                                       class="form-control" />
+
+                                <span asp-validation-for="StartDate"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="EndDate"
+                                       class="form-label fw-semibold">
+
+                                    End Date
+
+                                </label>
+
+                                <input asp-for="EndDate"
+                                       type="date"
+                                       class="form-control" />
+
+                                <span asp-validation-for="EndDate"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- ABSENCE TYPE -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Absence Type
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Select the reason category for this absence.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <label asp-for="Type"
+                                   class="form-label fw-semibold">
+
+                                Type
+
+                            </label>
+
+                            <select asp-for="Type"
+                                    class="form-select"
+                                    asp-items="Html.GetEnumSelectList<Shift_Planner_Web.Models.AbsenceType>()">
+                            </select>
+
+                            <span asp-validation-for="Type"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Notes
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Add any additional information about the absence.
+                            </p>
+
+                        </div>
+
+
+                        <label asp-for="Notes"
+                               class="form-label fw-semibold">
+
+                            Notes
+
+                        </label>
+
+                        <textarea asp-for="Notes"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Optional notes about the absence..."></textarea>
+
+                        <span asp-validation-for="Notes"
+                              class="text-danger small">
+                        </span>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-primary px-4">
+
+                            Record Absence
+
+                        </button>
+
+                    </div>
+
+                </form>
+
             </div>
 
-            <div class="mb-3">
-
-                <label asp-for="EmployeeID"
-                       class="form-label fw-semibold">
-                    Employee
-                </label>
-
-                <select asp-for="EmployeeID"
-                        class="form-select">
-
-                    <option value="">
-                        Select employee
-                    </option>
-
-                    @foreach (var employee in employees)
-                    {
-                        <option value="@employee.EmployeeID">
-                            @employee.Name
-                        </option>
-                    }
-
-                </select>
-
-                <span asp-validation-for="EmployeeID"
-                      class="text-danger">
-                </span>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6 mb-3">
-
-                    <label asp-for="StartDate"
-                           class="form-label fw-semibold">
-                        Start Date
-                    </label>
-
-                    <input asp-for="StartDate"
-                           type="date"
-                           class="form-control" />
-
-                    <span asp-validation-for="StartDate"
-                          class="text-danger">
-                    </span>
-
-                </div>
-
-                <div class="col-md-6 mb-3">
-
-                    <label asp-for="EndDate"
-                           class="form-label fw-semibold">
-                        End Date
-                    </label>
-
-                    <input asp-for="EndDate"
-                           type="date"
-                           class="form-control" />
-
-                    <span asp-validation-for="EndDate"
-                          class="text-danger">
-                    </span>
-
-                </div>
-
-            </div>
-
-            <div class="mb-3">
-
-                <label asp-for="Type"
-                       class="form-label fw-semibold">
-                    Absence Type
-                </label>
-
-                <select asp-for="Type"
-                        class="form-select"
-                        asp-items="Html.GetEnumSelectList<Shift_Planner_Web.Models.AbsenceType>()">
-                </select>
-
-                <span asp-validation-for="Type"
-                      class="text-danger">
-                </span>
-
-            </div>
-
-            <div class="mb-4">
-
-                <label asp-for="Notes"
-                       class="form-label fw-semibold">
-                    Notes
-                </label>
-
-                <textarea asp-for="Notes"
-                          class="form-control"
-                          rows="4"
-                          placeholder="Optional notes about the absence..."></textarea>
-
-                <span asp-validation-for="Notes"
-                      class="text-danger">
-                </span>
-
-            </div>
-
-            <div class="d-flex justify-content-end gap-2">
-
-                <a asp-action="Index"
-                   class="btn btn-outline-secondary">
-                    Cancel
-                </a>
-
-                <button type="submit"
-                        class="btn btn-primary">
-                    Record Absence
-                </button>
-
-            </div>
-
-        </form>
+        </div>
 
     </div>
+
 </div>
 
-@section Scripts {
+
+<style>
+
+    .form-section {
+        position: relative;
+    }
+
+    .section-heading h5 {
+        font-size: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 7px;
+    }
+
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        border-radius: 8px;
+    }
+
+    textarea.form-control {
+        min-height: 110px;
+    }
+
+</style>
+
+
+@section Scripts
+{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

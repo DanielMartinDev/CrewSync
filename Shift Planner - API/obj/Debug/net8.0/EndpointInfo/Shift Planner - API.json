@@ -523,6 +523,46 @@
         }
       }
     },
+    "/api/Employee/{id}/holiday": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeHolidayDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeHolidayDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeHolidayDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Employee/{id}/schedule": {
       "get": {
         "tags": [
@@ -1167,6 +1207,17 @@
             "type": "integer",
             "format": "int32"
           },
+          "holidayAllowance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "holidayRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HolidayRequest"
+            },
+            "nullable": true
+          },
           "role": {
             "$ref": "#/components/schemas/Role"
           },
@@ -1191,6 +1242,28 @@
             "type": "number",
             "format": "double",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeHolidayDto": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "holidayAllowance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "holidayDaysUsed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "holidayDaysRemaining": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

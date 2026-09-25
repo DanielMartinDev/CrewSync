@@ -2,10 +2,22 @@
 
 @{
     ViewData["Title"] = "Absences";
+
+    var totalAbsences = Model.Count;
+
+    var sicknessCount = Model.Count(a =>
+        a.Type == Shift_Planner_Web.Models.AbsenceType.Sickness);
+
+    var otherCount = totalAbsences - sicknessCount;
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+
+<!-- HEADER -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
     <div>
+
         <h1 class="fw-bold mb-1">
             Absences
         </h1>
@@ -13,18 +25,30 @@
         <p class="text-muted mb-0">
             Record and manage employee absences.
         </p>
+
     </div>
 
     <a asp-action="Create"
-       class="btn btn-primary">
+       class="btn btn-primary mt-3 mt-md-0">
+
         Record Absence
+
     </a>
+
 </div>
+
 
 @if (!Model.Any())
 {
+    <!-- EMPTY STATE -->
+
     <div class="card border-0 shadow-sm">
-        <div class="card-body text-center py-5">
+
+        <div class="card-body text-center py-5 px-3">
+
+            <div class="absence-empty-icon mb-3">
+                ✓
+            </div>
 
             <h5 class="fw-bold mb-2">
                 No absences recorded
@@ -36,59 +60,253 @@
 
             <a asp-action="Create"
                class="btn btn-primary">
+
                 Record Absence
+
             </a>
 
         </div>
+
     </div>
 }
 else
 {
+    <!-- SUMMARY -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="text-primary small fw-semibold text-uppercase mb-2">
+                        Total Absences
+                    </div>
+
+                    <div class="fs-2 fw-bold">
+                        @totalAbsences
+                    </div>
+
+                    <div class="text-muted small mt-1">
+                        Recorded absence entries
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="text-danger small fw-semibold text-uppercase mb-2">
+                        Sickness
+                    </div>
+
+                    <div class="fs-2 fw-bold">
+                        @sicknessCount
+                    </div>
+
+                    <div class="text-muted small mt-1">
+                        Sickness-related absences
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="text-secondary small fw-semibold text-uppercase mb-2">
+                        Other
+                    </div>
+
+                    <div class="fs-2 fw-bold">
+                        @otherCount
+                    </div>
+
+                    <div class="text-muted small mt-1">
+                        Other absence types
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ABSENCE TABLE -->
+
     <div class="card border-0 shadow-sm">
 
         <div class="table-responsive">
 
-            <table class="table table-hover align-middle mb-0">
+            <table class="table table-hover align-middle mb-0 absence-table">
 
                 <thead class="table-light">
+
                     <tr>
-                        <th>Employee</th>
-                        <th>Dates</th>
-                        <th>Type</th>
-                        <th>Notes</th>
-                        <th class="text-end">Actions</th>
+
+                        <th class="ps-4">
+                            Employee
+                        </th>
+
+                        <th>
+                            Dates
+                        </th>
+
+                        <th>
+                            Duration
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Notes
+                        </th>
+
+                        <th class="text-end pe-4">
+                            Actions
+                        </th>
+
                     </tr>
+
                 </thead>
+
 
                 <tbody>
 
                     @foreach (var absence in Model.OrderByDescending(a => a.StartDate))
                     {
+                        var duration =
+                            (absence.EndDate.ToDateTime(TimeOnly.MinValue) -
+                             absence.StartDate.ToDateTime(TimeOnly.MinValue)).Days + 1;
+
+
+                        string badgeClass =
+                            absence.Type switch
+                            {
+                                Shift_Planner_Web.Models.AbsenceType.Sickness
+                                    => "bg-danger-subtle text-danger border",
+
+                                Shift_Planner_Web.Models.AbsenceType.Personal
+                                    => "bg-primary-subtle text-primary border",
+
+                                Shift_Planner_Web.Models.AbsenceType.Emergency
+                                    => "bg-warning-subtle text-warning-emphasis border",
+
+                                Shift_Planner_Web.Models.AbsenceType.Unauthorised
+                                    => "bg-dark-subtle text-dark border",
+
+                                _ => "bg-secondary-subtle text-secondary border"
+                            };
+
+
                         <tr>
 
-                            <td class="fw-semibold">
-                                @absence.Employee?.Name
+                            <!-- Employee -->
+
+                            <td class="ps-4">
+
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <div class="absence-avatar">
+
+                                        @(string.IsNullOrWhiteSpace(absence.Employee?.Name)
+                                            ? "?"
+                                            : absence.Employee.Name
+                                                .Substring(0, 1)
+                                                .ToUpper())
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="fw-semibold">
+                                            @absence.Employee?.Name
+                                        </div>
+
+                                        <div class="small text-muted">
+                                            Employee absence
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
                             </td>
 
-                            <td>
-                                @absence.StartDate.ToString("dd MMM yyyy")
 
-                                @if (absence.EndDate != absence.StartDate)
-                                {
-                                    <span>
-                                        -
-                                        @absence.EndDate.ToString("dd MMM yyyy")
-                                    </span>
-                                }
+                            <!-- Dates -->
+
+                            <td>
+
+                                <div class="fw-medium">
+
+                                    @absence.StartDate.ToString("dd MMM yyyy")
+
+                                    @if (absence.EndDate != absence.StartDate)
+                                    {
+                                        <span class="text-muted">
+                                            –
+                                            @absence.EndDate.ToString("dd MMM yyyy")
+                                        </span>
+                                    }
+
+                                </div>
+
                             </td>
 
+
+                            <!-- Duration -->
+
                             <td>
-                                <span class="badge bg-danger">
+
+                                <span class="fw-semibold">
+                                    @duration
+                                </span>
+
+                                <span class="text-muted small">
+                                    day@(duration == 1 ? "" : "s")
+                                </span>
+
+                            </td>
+
+
+                            <!-- Type -->
+
+                            <td>
+
+                                <span class="badge @badgeClass px-3 py-2">
                                     @absence.Type
                                 </span>
+
                             </td>
 
+
+                            <!-- Notes -->
+
                             <td>
+
                                 @if (string.IsNullOrWhiteSpace(absence.Notes))
                                 {
                                     <span class="text-muted">
@@ -97,24 +315,38 @@ else
                                 }
                                 else
                                 {
-                                    @absence.Notes
+                                    <span class="absence-notes"
+                                          title="@absence.Notes">
+
+                                        @absence.Notes
+
+                                    </span>
                                 }
+
                             </td>
 
-                            <td class="text-end">
+
+                            <!-- Actions -->
+
+                            <td class="pe-4">
 
                                 <div class="d-flex justify-content-end gap-2">
 
                                     <a asp-action="Edit"
                                        asp-route-id="@absence.AbsenceID"
                                        class="btn btn-outline-secondary btn-sm">
+
                                         Edit
+
                                     </a>
+
 
                                     <a asp-action="Delete"
                                        asp-route-id="@absence.AbsenceID"
                                        class="btn btn-outline-danger btn-sm">
+
                                         Delete
+
                                     </a>
 
                                 </div>
@@ -132,3 +364,59 @@ else
 
     </div>
 }
+
+
+<style>
+
+    .absence-table th {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        color: #6c757d;
+        font-weight: 650;
+        white-space: nowrap;
+    }
+
+    .absence-table td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .absence-avatar {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 50%;
+        background: #f1f3f5;
+        color: #495057;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .absence-notes {
+        display: inline-block;
+        max-width: 240px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+    .absence-empty-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: #e9f7ef;
+        color: #198754;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+</style>

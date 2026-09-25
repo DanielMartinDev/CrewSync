@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Data;
 using Shift_Planner_Web.Models;
+using ShiftPlanner_Web.Models;
 
 namespace ShiftPlanner_Web.Controllers
 {
@@ -31,9 +32,24 @@ namespace ShiftPlanner_Web.Controllers
                     "https://localhost:7255/api/Employee"
                 );
 
-            return employees?
+            var employee = employees?
                 .FirstOrDefault(
                     e => e.UserId == user!.Id);
+
+            if (employee == null)
+            {
+                var employeeIds = employees?
+                    .Select(e => $"{e.Name}: {e.UserId}")
+                    .ToList();
+
+                throw new Exception(
+                    $"Logged in UserId: {user?.Id}. " +
+                    $"Employees: {string.Join(
+                        " | ",
+                        employeeIds ?? new List<string>())}");
+            }
+
+            return employee;
         }
 
         public async Task<IActionResult> Index()
@@ -56,7 +72,15 @@ namespace ShiftPlanner_Web.Controllers
                     "https://localhost:7255/api/HolidayRequest"
                 ) ?? new();
 
+            var holidaySummary =
+                await _httpClient.GetFromJsonAsync<EmployeeHolidayDto>
+                (
+                    $"https://localhost:7255/api/Employee/{employee.EmployeeID}/holiday"
+                );
+
             ViewBag.Employee = employee;
+
+            ViewBag.HolidaySummary = holidaySummary;
 
             ViewBag.Holidays =
                 holidays.Where(

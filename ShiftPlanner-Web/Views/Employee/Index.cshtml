@@ -4,8 +4,12 @@
     ViewData["Title"] = "Employees";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<!-- Header -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
     <div>
+
         <h1 class="fw-bold mb-1">
             Employees
         </h1>
@@ -13,95 +17,184 @@
         <p class="text-muted mb-0">
             Manage your workforce, contracts and availability.
         </p>
+
     </div>
 
     <a asp-action="Create"
-       class="btn btn-primary">
-        Add Employee
+       class="btn btn-primary mt-3 mt-md-0">
+
+        + Add Employee
+
     </a>
+
 </div>
 
-<div class="row">
-    @foreach (var employee in Model)
-    {
-        <div class="col-lg-4 col-md-6 mb-4">
 
-            <div class="card h-100 shadow-sm">
+<!-- Employee count -->
 
-                <div class="card-body">
+<div class="d-flex align-items-center mb-4">
 
-                    <div class="d-flex justify-content-between align-items-start mb-4">
+    <span class="badge bg-light text-dark border px-3 py-2">
+        @Model.Count employee@(Model.Count == 1 ? "" : "s")
+    </span>
 
-                        <div>
-                            <h5 class="mb-1">
-                                @employee.Name
-                            </h5>
+</div>
 
-                            <small class="text-muted">
-                                @employee.Role.ToString().Replace("_", " ")
-                            </small>
+
+<!-- Employees -->
+@if (Model.Any())
+{
+    <div class="row g-4">
+
+        @foreach (var employee in Model)
+        {
+            <div class="col-xl-4 col-md-6">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <div class="card-body p-4">
+
+                        <!-- Employee header -->
+
+                        <div class="d-flex align-items-center mb-4">
+
+                            <div class="rounded-circle bg-primary bg-opacity-10 text-primary
+                                d-flex align-items-center justify-content-center me-3"
+                                 style="width: 48px; height: 48px; font-weight: 700;">
+
+                                @(string.IsNullOrWhiteSpace(employee.Name)
+                                    ? "?"
+                                    : employee.Name.Substring(0, 1).ToUpper())
+
+                            </div>
+
+                            <div class="min-width-0">
+
+                                <h5 class="fw-bold mb-1">
+                                    @employee.Name
+                                </h5>
+
+                                <div class="text-muted small">
+                                    @employee.Role.ToString().Replace("_", " ")
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Employee information -->
+
+                        <div class="row g-3 mb-4">
+
+                            <div class="col-6">
+
+                                <div class="border rounded-3 p-3 h-100">
+
+                                    <div class="text-muted small mb-1">
+                                        Contract
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        @employee.WeeklyHours
+                                        hrs/week
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-6">
+
+                                <div class="border rounded-3 p-3 h-100">
+
+                                    <div class="text-muted small mb-1">
+                                        Availability
+                                    </div>
+
+                                    <div class="fw-semibold">
+                                        Configured
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
 
-                    <div class="row mb-3">
 
-                        <div class="col-6">
+                    <!-- Actions -->
 
-                            <small class="text-muted d-block">
-                                Contract
-                            </small>
+                    <div class="card-footer bg-white border-0 px-4 pb-4 pt-0">
 
-                            <strong>
-                                @employee.WeeklyHours hrs/week
-                            </strong>
+                        <div class="d-flex gap-2">
+
+                            <a asp-action="Details"
+                               asp-route-id="@employee.EmployeeID"
+                               class="btn btn-primary btn-sm flex-fill">
+
+                                View
+
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@employee.EmployeeID"
+                               class="btn btn-outline-secondary btn-sm flex-fill">
+
+                                Edit
+
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@employee.EmployeeID"
+                               class="btn btn-outline-danger btn-sm">
+
+                                Delete
+
+                            </a>
 
                         </div>
-
-                        <div class="col-6">
-
-                            <small class="text-muted d-block">
-                                Availability
-                            </small>
-
-                            <strong>
-                                Configured
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="card-footer bg-transparent">
-
-                    <div class="d-flex gap-2">
-
-                        <a asp-action="Details"
-                           asp-route-id="@employee.EmployeeID"
-                           class="btn btn-outline-primary btn-sm flex-fill">
-                            View
-                        </a>
-
-                        <a asp-action="Edit"
-                           asp-route-id="@employee.EmployeeID"
-                           class="btn btn-outline-secondary btn-sm flex-fill">
-                            Edit
-                        </a>
-
-                        <a asp-action="Delete"
-                           asp-route-id="@employee.EmployeeID"
-                           class="btn btn-outline-danger btn-sm">
-                            Delete
-                        </a>
 
                     </div>
 
                 </div>
 
             </div>
+        }
+
+    </div>
+}
+else
+{
+    <!-- Empty state -->
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body text-center py-5">
+
+            <div class="fs-1 mb-3">
+                👥
+            </div>
+
+            <h5 class="fw-bold">
+                No employees yet
+            </h5>
+
+            <p class="text-muted mb-4">
+                Add your first employee to start building the rota.
+            </p>
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+
+                Add Employee
+
+            </a>
 
         </div>
-    }
-</div>
+
+    </div>
+}

@@ -4,113 +4,147 @@
     ViewData["Title"] = "Availability";
 }
 
-<div class="mb-4">
+<!-- HEADER -->
 
-    <h1 class="fw-bold mb-1">
-        Availability
-    </h1>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
 
-    <p class="text-muted mb-0">
-        Manage when this employee is available to work each week.
-    </p>
+    <div>
+
+        <h1 class="fw-bold mb-1">
+            Availability
+        </h1>
+
+        <p class="text-muted mb-0">
+            Manage when this employee is available to work each week.
+        </p>
+
+    </div>
 
 </div>
 
-<div class="card">
 
-    <div class="card-body p-4">
+<!-- AVAILABILITY CARD -->
+
+<div class="card border-0 shadow-sm">
+
+    <div class="card-body p-4 p-md-5">
 
         <form asp-action="Index"
               method="post">
 
-            <div class="table-responsive">
 
-                <table class="table align-middle">
+            <div class="availability-table-wrapper">
 
-                    <thead class="table-light">
+                <div class="table-responsive">
 
-                        <tr>
+                    <table class="table align-middle mb-0 availability-table">
 
-                            <th style="width: 20%">
-                                Day
-                            </th>
+                        <thead class="table-light">
 
-                            <th style="width: 15%">
-                                Available
-                            </th>
-
-                            <th style="width: 30%">
-                                Available From
-                            </th>
-
-                            <th style="width: 30%">
-                                Available To
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        @for (int i = 0; i < Model.Count; i++)
-                        {
                             <tr>
 
-                                <td class="fw-semibold">
+                                <th class="ps-3">
+                                    Day
+                                </th>
 
-                                    @Model[i].DayOfWeek
+                                <th class="text-center">
+                                    Available
+                                </th>
 
-                                    <input type="hidden"
-                                           asp-for="@Model[i].AvailabilityID" />
+                                <th>
+                                    Available From
+                                </th>
 
-                                    <input type="hidden"
-                                           asp-for="@Model[i].EmployeeID" />
-
-                                    <input type="hidden"
-                                           asp-for="@Model[i].DayOfWeek" />
-
-                                </td>
-
-                                <td>
-
-                                    <div class="form-check form-switch">
-
-                                        <input asp-for="@Model[i].IsAvailable"
-                                               class="form-check-input" />
-
-                                    </div>
-
-                                </td>
-
-                                <td>
-
-                                    <input asp-for="@Model[i].AvailableFrom"
-                                           type="time"
-                                           class="form-control" />
-
-                                </td>
-
-                                <td>
-
-                                    <input asp-for="@Model[i].AvailableTo"
-                                           type="time"
-                                           class="form-control" />
-
-                                </td>
+                                <th>
+                                    Available To
+                                </th>
 
                             </tr>
-                        }
 
-                    </tbody>
+                        </thead>
 
-                </table>
+
+                        <tbody>
+
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+
+                                    <!-- DAY -->
+
+                                    <td class="ps-3">
+
+                                        <div class="day-name">
+
+                                            @Model[i].DayOfWeek
+
+                                        </div>
+
+                                        <input type="hidden"
+                                               asp-for="@Model[i].AvailabilityID" />
+
+                                        <input type="hidden"
+                                               asp-for="@Model[i].EmployeeID" />
+
+                                        <input type="hidden"
+                                               asp-for="@Model[i].DayOfWeek" />
+
+                                    </td>
+
+
+                                    <!-- AVAILABLE -->
+
+                                    <td class="text-center">
+
+                                        <div class="form-check form-switch availability-switch">
+
+                                            <input asp-for="@Model[i].IsAvailable"
+                                                   class="form-check-input" />
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- FROM -->
+
+                                    <td>
+
+                                        <input asp-for="@Model[i].AvailableFrom"
+                                               type="time"
+                                               class="form-control" />
+
+                                    </td>
+
+
+                                    <!-- TO -->
+
+                                    <td>
+
+                                        <input asp-for="@Model[i].AvailableTo"
+                                               type="time"
+                                               class="form-control" />
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
+
             <hr class="my-4" />
 
-            <div class="d-flex justify-content-between">
+
+            <!-- ACTIONS -->
+
+            <div class="d-flex justify-content-between align-items-center">
 
                 <a asp-controller="Employee"
                    asp-action="Index"
@@ -121,7 +155,7 @@
                 </a>
 
                 <button type="submit"
-                        class="btn btn-primary">
+                        class="btn btn-primary px-4">
 
                     Save Availability
 
@@ -135,22 +169,118 @@
 
 </div>
 
-<div class="card mt-4">
 
-    <div class="card-body">
+<!-- INFORMATION -->
 
-        <h5 class="fw-bold">
-            Scheduling Information
-        </h5>
+<div class="card border-0 shadow-sm mt-4">
 
-        <p class="text-muted mb-0">
+    <div class="card-body p-4">
 
-            Managers will only be able to assign shifts within the
-            availability times configured here. Any shifts outside of
-            these hours will be blocked by CrewSync validation.
+        <div class="d-flex gap-3 align-items-start">
 
-        </p>
+            <div class="availability-info-icon">
+                ℹ
+            </div>
+
+            <div>
+
+                <h5 class="fw-bold mb-1">
+                    Scheduling Information
+                </h5>
+
+                <p class="text-muted small mb-0">
+                    Managers will only be able to assign shifts within the
+                    availability times configured here. Any shifts outside
+                    of these hours will be blocked by CrewSync validation.
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
+
+
+<style>
+
+    .availability-table-wrapper {
+        border: 1px solid #e5e8ed;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .availability-table {
+        margin: 0;
+    }
+
+        .availability-table th {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            color: #6c757d;
+            font-weight: 650;
+            white-space: nowrap;
+            padding-top: 13px;
+            padding-bottom: 13px;
+        }
+
+        .availability-table td {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .availability-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+    .day-name {
+        font-weight: 650;
+        color: #212529;
+    }
+
+    .availability-table .form-control {
+        min-height: 44px;
+        border-radius: 8px;
+    }
+
+    .availability-switch {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+        .availability-switch .form-check-input {
+            width: 2.7em;
+            height: 1.4em;
+            cursor: pointer;
+        }
+
+    .availability-info-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 10px;
+        background: #eaf2ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    @@media (max-width: 768px) {
+
+        .availability-table th,
+        .availability-table td {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .availability-table .form-control {
+            min-width: 140px;
+        }
+    }
+
+</style>

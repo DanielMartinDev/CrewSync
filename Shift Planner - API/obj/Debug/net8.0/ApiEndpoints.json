@@ -314,6 +314,32 @@
   },
   {
     "ContainingType": "Shift_Planner___API.Controllers.EmployeeController",
+    "Method": "GetEmployeeHoliday",
+    "RelativePath": "api/Employee/{id}/holiday",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner___API.DTOs.EmployeeHolidayDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner___API.Controllers.EmployeeController",
     "Method": "GetEmployeeSchedule",
     "RelativePath": "api/Employee/{id}/schedule",
     "HttpMethod": "GET",

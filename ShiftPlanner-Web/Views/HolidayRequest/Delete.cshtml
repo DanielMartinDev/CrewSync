@@ -2,91 +2,161 @@
 
 @{
     ViewData["Title"] = "Delete Holiday Request";
+
+    var duration =
+        (Model.EndDate.Date - Model.StartDate.Date).Days + 1;
+
+    string badgeClass =
+        Model.Status switch
+        {
+            Shift_Planner_Web.Models.HolidayRequestStatus.Pending
+                => "bg-warning-subtle text-warning-emphasis border",
+
+            Shift_Planner_Web.Models.HolidayRequestStatus.Approved
+                => "bg-success-subtle text-success border",
+
+            Shift_Planner_Web.Models.HolidayRequestStatus.Rejected
+                => "bg-danger-subtle text-danger border",
+
+            _ => "bg-secondary-subtle text-secondary border"
+        };
 }
+
+
+<!-- HEADER -->
+
+<div class="mb-4">
+
+    <h1 class="fw-bold mb-1">
+        Delete Holiday Request
+    </h1>
+
+    <p class="text-muted mb-0">
+        Confirm that you want to permanently remove this holiday request.
+    </p>
+
+</div>
+
 
 <div class="row justify-content-center">
 
-    <div class="col-lg-6">
+    <div class="col-xl-8 col-lg-9">
 
-        <div class="card border-danger">
+        <div class="card border-0 shadow-sm">
 
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
 
-                <div class="text-center mb-4">
 
-                    <h1 class="text-danger fw-bold mb-2">
-                        Delete Holiday Request
-                    </h1>
+                <!-- WARNING -->
 
-                    <p class="text-muted mb-0">
-                        This action cannot be undone.
-                    </p>
+                <div class="delete-warning mb-4">
+
+                    <div class="delete-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <div class="fw-semibold mb-1">
+                            Delete this holiday request?
+                        </div>
+
+                        <div class="text-muted small">
+                            This action cannot be undone.
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="alert alert-danger">
 
-                    <strong>
-                        Warning:
-                    </strong>
+                <!-- REQUEST DETAILS -->
 
-                    This holiday request will be permanently removed
-                    from CrewSync.
+                <div class="request-details">
 
-                </div>
+                    <div class="request-header">
 
-                <div class="card bg-light border-0 mb-4">
+                        <div class="employee-avatar">
 
-                    <div class="card-body">
+                            @(string.IsNullOrWhiteSpace(Model.Employee?.Name)
+                                ? "?"
+                                : Model.Employee.Name
+                                    .Substring(0, 1)
+                                    .ToUpper())
 
-                        <div class="row g-3">
+                        </div>
 
-                            <div class="col-md-6">
+                        <div>
 
-                                <div class="text-muted small">
-                                    Employee
-                                </div>
-
-                                <div class="fw-semibold">
-                                    @Model.Employee?.Name
-                                </div>
-
+                            <div class="fw-bold fs-5">
+                                @Model.Employee?.Name
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="text-muted small">
+                                Holiday Request
+                            </div>
 
-                                <div class="text-muted small">
-                                    Status
-                                </div>
+                        </div>
 
-                                <div>
+                    </div>
+
+
+                    <div class="request-detail-grid">
+
+                        <div>
+
+                            <div class="detail-label">
+                                Status
+                            </div>
+
+                            <div>
+
+                                <span class="badge @badgeClass px-3 py-2">
                                     @Model.Status
-                                </div>
+                                </span>
 
                             </div>
 
-                            <div class="col-md-6">
+                        </div>
 
-                                <div class="text-muted small">
-                                    Start Date
-                                </div>
 
-                                <div>
-                                    @Model.StartDate.ToString("dd MMM yyyy")
-                                </div>
+                        <div>
+
+                            <div class="detail-label">
+                                Duration
+                            </div>
+
+                            <div class="fw-semibold">
+
+                                @duration
+                                day@(duration == 1 ? "" : "s")
 
                             </div>
 
-                            <div class="col-md-6">
+                        </div>
 
-                                <div class="text-muted small">
-                                    End Date
-                                </div>
 
-                                <div>
-                                    @Model.EndDate.ToString("dd MMM yyyy")
-                                </div>
+                        <div>
 
+                            <div class="detail-label">
+                                Start Date
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.StartDate.ToString("dd MMM yyyy")
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="detail-label">
+                                End Date
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.EndDate.ToString("dd MMM yyyy")
                             </div>
 
                         </div>
@@ -95,13 +165,18 @@
 
                 </div>
 
+
+                <!-- FORM -->
+
                 <form asp-action="Delete"
-                      method="post">
+                      method="post"
+                      class="mt-4">
 
                     <input asp-for="HolidayRequestID"
                            type="hidden" />
 
-                    <div class="d-flex justify-content-between">
+
+                    <div class="d-flex justify-content-between align-items-center">
 
                         <a asp-action="Index"
                            class="btn btn-outline-secondary">
@@ -111,7 +186,7 @@
                         </a>
 
                         <button type="submit"
-                                class="btn btn-danger">
+                                class="btn btn-danger px-4">
 
                             Delete Request
 
@@ -128,3 +203,95 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .delete-warning {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 18px;
+        border: 1px solid #f1c2c2;
+        border-radius: 10px;
+        background: #fff5f5;
+    }
+
+    .delete-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 50%;
+        background: #f8d7da;
+        color: #dc3545;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 20px;
+    }
+
+    .request-details {
+        border: 1px solid #e5e8ed;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .request-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e8ed;
+    }
+
+    .employee-avatar {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        border-radius: 50%;
+        background: #eaf2ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .request-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+        .request-detail-grid > div {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+            .request-detail-grid > div:nth-child(odd) {
+                border-right: 1px solid #e9ecef;
+            }
+
+    .detail-label {
+        color: #6c757d;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        margin-bottom: 5px;
+    }
+
+    @@media (max-width: 576px) {
+
+        .request-detail-grid {
+            grid-template-columns: 1fr;
+        }
+
+            .request-detail-grid > div:nth-child(odd) {
+                border-right: 0;
+            }
+    }
+
+</style>

@@ -4,83 +4,156 @@
     ViewData["Title"] = "Delete Employee";
 }
 
-<input asp-for="EmployeeID" type="hidden" />
-<input asp-for="UserId" type="hidden" />
+<div class="mb-4">
+
+    <h1 class="fw-bold mb-1">
+        Delete Employee
+    </h1>
+
+    <p class="text-muted mb-0">
+        Confirm that you want to permanently remove this employee.
+    </p>
+
+</div>
+
 
 <div class="row justify-content-center">
 
-    <div class="col-lg-6">
+    <div class="col-xl-8 col-lg-9">
 
-        <div class="card border-danger">
+        <div class="card border-0 shadow-sm">
 
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
 
-                <div class="text-center mb-4">
 
-                    <h1 class="text-danger fw-bold mb-2">
-                        Delete Employee
-                    </h1>
+                <!-- WARNING -->
 
-                    <p class="text-muted mb-0">
-                        This action cannot be undone.
-                    </p>
+                <div class="delete-warning mb-4">
+
+                    <div class="delete-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <div class="fw-semibold mb-1">
+                            Delete this employee?
+                        </div>
+
+                        <div class="text-muted small">
+                            This action cannot be undone.
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="alert alert-danger">
 
-                    <strong>
-                        Warning:
-                    </strong>
+                <!-- CONSEQUENCES -->
 
-                    Deleting this employee will remove:
+                <div class="account-warning mb-4">
 
-                    <ul class="mt-2 mb-0">
+                    <div class="fw-semibold mb-2">
+                        This will remove:
+                    </div>
 
-                        <li>Employee record</li>
-                        <li>Linked user account</li>
-                        <li>Portal access</li>
+                    <ul class="mb-0">
+
+                        <li>
+                            Employee record
+                        </li>
+
+                        <li>
+                            Linked user account
+                        </li>
+
+                        <li>
+                            Portal access
+                        </li>
 
                     </ul>
 
                 </div>
 
-                <div class="card bg-light border-0 mb-4">
 
-                    <div class="card-body">
+                <!-- EMPLOYEE DETAILS -->
 
-                        <div class="text-muted small">
-                            Employee Name
+                <div class="employee-details mb-4">
+
+                    <div class="employee-header">
+
+                        <div class="employee-avatar">
+
+                            @(string.IsNullOrWhiteSpace(Model.Name)
+                                ? "?"
+                                : Model.Name.Substring(0, 1).ToUpper())
+
                         </div>
 
-                        <h4 class="mb-3">
-                            @Model.Name
-                        </h4>
+                        <div>
 
-                        <div class="row">
-
-                            <div class="col-6">
-
-                                <div class="text-muted small">
-                                    Employee ID
-                                </div>
-
-                                <div>
-                                    @Model.EmployeeID
-                                </div>
-
+                            <div class="fw-bold fs-5">
+                                @Model.Name
                             </div>
 
-                            <div class="col-6">
+                            <div class="text-muted small">
+                                Employee Profile
+                            </div>
 
-                                <div class="text-muted small">
-                                    Weekly Hours
-                                </div>
+                        </div>
 
-                                <div>
-                                    @Model.WeeklyHours hrs
-                                </div>
+                    </div>
 
+
+                    <div class="employee-detail-grid">
+
+                        <div>
+
+                            <div class="detail-label">
+                                Employee ID
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.EmployeeID
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="detail-label">
+                                Weekly Hours
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.WeeklyHours hrs
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="detail-label">
+                                Role
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.Role.ToString().Replace("_", " ")
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="detail-label">
+                                Start Date
+                            </div>
+
+                            <div class="fw-semibold">
+                                @Model.StartDate.ToString("dd MMM yyyy")
                             </div>
 
                         </div>
@@ -88,6 +161,9 @@
                     </div>
 
                 </div>
+
+
+                <!-- FORM -->
 
                 <form asp-action="Delete"
                       method="post">
@@ -98,7 +174,8 @@
                     <input asp-for="UserId"
                            type="hidden" />
 
-                    <div class="d-flex justify-content-between">
+
+                    <div class="d-flex justify-content-between align-items-center">
 
                         <a asp-action="Index"
                            class="btn btn-outline-secondary">
@@ -108,7 +185,7 @@
                         </a>
 
                         <button type="submit"
-                                class="btn btn-danger">
+                                class="btn btn-danger px-4">
 
                             Delete Employee
 
@@ -125,3 +202,117 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .delete-warning {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 18px;
+        border: 1px solid #f1c2c2;
+        border-radius: 10px;
+        background: #fff5f5;
+    }
+
+    .delete-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 50%;
+        background: #f8d7da;
+        color: #dc3545;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 20px;
+    }
+
+    .account-warning {
+        padding: 16px 18px;
+        border: 1px solid #ffe69c;
+        border-radius: 10px;
+        background: #fff9e6;
+        color: #664d03;
+        font-size: 14px;
+    }
+
+        .account-warning ul {
+            padding-left: 20px;
+        }
+
+        .account-warning li {
+            margin-bottom: 4px;
+        }
+
+            .account-warning li:last-child {
+                margin-bottom: 0;
+            }
+
+    .employee-details {
+        border: 1px solid #e5e8ed;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .employee-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e8ed;
+    }
+
+    .employee-avatar {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        border-radius: 50%;
+        background: #eaf2ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .employee-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+    }
+
+        .employee-detail-grid > div {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+            .employee-detail-grid > div:nth-child(odd) {
+                border-right: 1px solid #e9ecef;
+            }
+
+    .detail-label {
+        color: #6c757d;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        margin-bottom: 4px;
+    }
+
+    @@media (max-width: 576px) {
+
+        .employee-detail-grid {
+            grid-template-columns: 1fr;
+        }
+
+            .employee-detail-grid > div:nth-child(odd) {
+                border-right: 0;
+            }
+    }
+
+</style>

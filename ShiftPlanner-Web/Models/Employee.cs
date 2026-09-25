@@ -15,6 +15,9 @@ namespace Shift_Planner_Web.Models
 
         public int WeeklyHours { get; set; }
 
+        public int HolidayAllowance { get; set; } = 28;
+        public List<HolidayRequest> HolidayRequests { get; set; } = new();
+
         public EmployeeRole.Role Role { get; set; }
 
         public List<Shift> Shifts { get; set; } = new();
@@ -26,7 +29,7 @@ namespace Shift_Planner_Web.Models
             WeeklyHours - ScheduledHours;
 
         public double Utilisation =>
-    WeeklyHours == 0
+        WeeklyHours == 0
         ? 0
         : Math.Round(
             (ScheduledHours / WeeklyHours) * 100,

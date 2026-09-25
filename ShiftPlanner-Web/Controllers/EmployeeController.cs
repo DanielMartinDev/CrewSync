@@ -64,6 +64,14 @@ namespace ShiftPlanner_Web.Controllers
                 await response.Content
                     .ReadFromJsonAsync<Employee>();
 
+            if (createdEmployee == null)
+            {
+                ViewBag.Error =
+                    "Employee was created, but the employee details could not be read.";
+
+                return View(employee);
+            }
+
             var tempPassword = "Welcome123!";
 
             var user = new ApplicationUser
@@ -89,39 +97,57 @@ namespace ShiftPlanner_Web.Controllers
                 return View(employee);
             }
 
-            if (result.Succeeded)
+            string identityRole;
+
+            switch (employee.Role)
             {
-                string identityRole;
+                case EmployeeRole.Role.Customer_Assistant:
+                case EmployeeRole.Role.Shift_Manager:
+                    identityRole = "Employee";
+                    break;
 
-                switch (employee.Role)
-                {
-                    case EmployeeRole.Role.Customer_Assistant:
-                    case EmployeeRole.Role.Shift_Manager:
-                        identityRole = "Employee";
-                        break;
+                case EmployeeRole.Role.Deputy_Manager:
+                    identityRole = "Manager";
+                    break;
 
-                    case EmployeeRole.Role.Deputy_Manager:
-                        identityRole = "Manager";
-                        break;
+                case EmployeeRole.Role.Store_Manager:
+                    identityRole = "Admin";
+                    break;
 
-                    case EmployeeRole.Role.Store_Manager:
-                        identityRole = "Admin";
-                        break;
+                default:
+                    identityRole = "Employee";
+                    break;
+            }
 
-                    default:
-                        identityRole = "Employee";
-                        break;
-                }
-
+            var roleResult =
                 await _userManager.AddToRoleAsync(
                     user,
                     identityRole);
 
-                createdEmployee!.UserId = user.Id;
+            if (!roleResult.Succeeded)
+            {
+                ViewBag.Error =
+                    string.Join(
+                        ", ",
+                        roleResult.Errors.Select(
+                            e => e.Description));
 
+                return View(employee);
+            }
+
+            createdEmployee.UserId = user.Id;
+
+            var linkResponse =
                 await _httpClient.PutAsJsonAsync(
                     $"https://localhost:7255/api/Employee/{createdEmployee.EmployeeID}",
                     createdEmployee);
+
+            if (!linkResponse.IsSuccessStatusCode)
+            {
+                ViewBag.Error =
+                    "Employee account was created, but the employee could not be linked to the account.";
+
+                return View(employee);
             }
 
             return RedirectToAction(nameof(Index));

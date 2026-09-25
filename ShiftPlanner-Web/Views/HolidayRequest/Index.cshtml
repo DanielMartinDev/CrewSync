@@ -2,9 +2,24 @@
 
 @{
     ViewData["Title"] = "Holiday Requests";
+
+    var pendingCount = Model.Count(r =>
+        r.Status ==
+        Shift_Planner_Web.Models.HolidayRequestStatus.Pending);
+
+    var approvedCount = Model.Count(r =>
+        r.Status ==
+        Shift_Planner_Web.Models.HolidayRequestStatus.Approved);
+
+    var rejectedCount = Model.Count(r =>
+        r.Status ==
+        Shift_Planner_Web.Models.HolidayRequestStatus.Rejected);
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+
+<!-- HEADER -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
 
     <div>
 
@@ -18,167 +33,375 @@
 
     </div>
 
-    <div class="badge bg-warning text-dark fs-6">
 
-        @Model.Count(r =>
-            r.Status == Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
+    <div class="d-flex gap-2 mt-3 mt-md-0">
 
-        Pending
+        <span class="badge bg-warning-subtle text-warning-emphasis border px-3 py-2">
+            @pendingCount Pending
+        </span>
+
+        <span class="badge bg-success-subtle text-success border px-3 py-2">
+            @approvedCount Approved
+        </span>
 
     </div>
 
 </div>
 
-<div class="card">
+
+<!-- REQUEST SUMMARY -->
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+                <div class="text-warning-emphasis small fw-semibold text-uppercase mb-2">
+                    Pending
+                </div>
+
+                <div class="fs-2 fw-bold">
+                    @pendingCount
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Requests waiting for review
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+                <div class="text-success small fw-semibold text-uppercase mb-2">
+                    Approved
+                </div>
+
+                <div class="fs-2 fw-bold">
+                    @approvedCount
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Approved holiday requests
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+                <div class="text-danger small fw-semibold text-uppercase mb-2">
+                    Rejected
+                </div>
+
+                <div class="fs-2 fw-bold">
+                    @rejectedCount
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Rejected requests
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- REQUEST TABLE -->
+
+<div class="card border-0 shadow-sm">
 
     <div class="card-body p-0">
 
-        <div class="table-responsive">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
 
-            <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0 holiday-table">
 
-                <thead class="table-light">
-
-                    <tr>
-
-                        <th>Employee</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
-                        <th class="text-end">Actions</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @foreach (var request in Model)
-                    {
-                        string badgeClass = request.Status switch
-                        {
-                            Shift_Planner_Web.Models.HolidayRequestStatus.Pending
-                                => "bg-warning text-dark",
-
-                            Shift_Planner_Web.Models.HolidayRequestStatus.Approved
-                                => "bg-success",
-
-                            Shift_Planner_Web.Models.HolidayRequestStatus.Rejected
-                                => "bg-danger",
-
-                            _ => "bg-secondary"
-                        };
+                    <thead class="table-light">
 
                         <tr>
 
-                            <td>
+                            <th class="ps-4">
+                                Employee
+                            </th>
 
-                                <div class="fw-semibold">
-                                    @request.Employee?.Name
-                                </div>
+                            <th>
+                                Start Date
+                            </th>
 
-                            </td>
+                            <th>
+                                End Date
+                            </th>
 
-                            <td>
-                                @request.StartDate.ToString("dd MMM yyyy")
-                            </td>
+                            <th>
+                                Duration
+                            </th>
 
-                            <td>
-                                @request.EndDate.ToString("dd MMM yyyy")
-                            </td>
+                            <th>
+                                Status
+                            </th>
 
-                            <td>
-
-                                <span class="badge @badgeClass">
-
-                                    @request.Status
-
-                                </span>
-
-                            </td>
-
-                            <td>
-
-                                <div class="d-flex justify-content-end gap-2">
-
-                                    @if (request.Status ==
-                                         Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
-                                    {
-                                        <form asp-action="Approve"
-                                              asp-route-id="@request.HolidayRequestID"
-                                              method="post">
-
-                                            <button type="submit"
-                                                    class="btn btn-success btn-sm">
-
-                                                Approve
-
-                                            </button>
-
-                                        </form>
-
-                                        <form asp-action="Reject"
-                                              asp-route-id="@request.HolidayRequestID"
-                                              method="post">
-
-                                            <button type="submit"
-                                                    class="btn btn-outline-danger btn-sm">
-
-                                                Reject
-
-                                            </button>
-
-                                        </form>
-                                    }
-
-                                    <a asp-action="Edit"
-                                       asp-route-id="@request.HolidayRequestID"
-                                       class="btn btn-outline-secondary btn-sm">
-
-                                        Edit
-
-                                    </a>
-
-                                    <a asp-action="Delete"
-                                       asp-route-id="@request.HolidayRequestID"
-                                       class="btn btn-outline-danger btn-sm">
-
-                                        Delete
-
-                                    </a>
-
-                                </div>
-
-                            </td>
+                            <th class="text-end pe-4">
+                                Actions
+                            </th>
 
                         </tr>
-                    }
 
-                </tbody>
+                    </thead>
 
-            </table>
 
-        </div>
+                    <tbody>
+
+                        @foreach (var request in Model)
+                        {
+                            var duration =
+                                (request.EndDate.Date -
+                                 request.StartDate.Date).Days + 1;
+
+                            string badgeClass =
+                                request.Status switch
+                                {
+                                    Shift_Planner_Web.Models.HolidayRequestStatus.Pending
+                                        => "bg-warning-subtle text-warning-emphasis border",
+
+                                    Shift_Planner_Web.Models.HolidayRequestStatus.Approved
+                                        => "bg-success-subtle text-success border",
+
+                                    Shift_Planner_Web.Models.HolidayRequestStatus.Rejected
+                                        => "bg-danger-subtle text-danger border",
+
+                                    _ => "bg-secondary-subtle text-secondary border"
+                                };
+
+
+                            <tr>
+
+                                <!-- Employee -->
+
+                                <td class="ps-4">
+
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <div class="holiday-avatar">
+
+                                            @(string.IsNullOrWhiteSpace(request.Employee?.Name)
+                                                ? "?"
+                                                : request.Employee.Name
+                                                    .Substring(0, 1)
+                                                    .ToUpper())
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="fw-semibold">
+                                                @request.Employee?.Name
+                                            </div>
+
+                                            <div class="small text-muted">
+                                                Holiday request
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Start -->
+
+                                <td>
+
+                                    <div class="fw-medium">
+                                        @request.StartDate.ToString("dd MMM yyyy")
+                                    </div>
+
+                                </td>
+
+
+                                <!-- End -->
+
+                                <td>
+
+                                    <div class="fw-medium">
+                                        @request.EndDate.ToString("dd MMM yyyy")
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Duration -->
+
+                                <td>
+
+                                    <span class="fw-semibold">
+                                        @duration
+                                    </span>
+
+                                    <span class="text-muted small">
+                                        day@(duration == 1 ? "" : "s")
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Status -->
+
+                                <td>
+
+                                    <span class="badge @badgeClass px-3 py-2">
+                                        @request.Status
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Actions -->
+
+                                <td class="pe-4">
+
+                                    <div class="d-flex justify-content-end gap-2">
+
+                                        @if (request.Status ==
+                                             Shift_Planner_Web.Models.HolidayRequestStatus.Pending)
+                                        {
+                                            <form asp-action="Approve"
+                                                  asp-route-id="@request.HolidayRequestID"
+                                                  method="post">
+
+                                                <button type="submit"
+                                                        class="btn btn-success btn-sm">
+
+                                                    Approve
+
+                                                </button>
+
+                                            </form>
+
+
+                                            <form asp-action="Reject"
+                                                  asp-route-id="@request.HolidayRequestID"
+                                                  method="post">
+
+                                                <button type="submit"
+                                                        class="btn btn-outline-danger btn-sm">
+
+                                                    Reject
+
+                                                </button>
+
+                                            </form>
+                                        }
+
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@request.HolidayRequestID"
+                                           class="btn btn-outline-secondary btn-sm">
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@request.HolidayRequestID"
+                                           class="btn btn-outline-danger btn-sm">
+
+                                            Delete
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5 px-3">
+
+                <div class="fs-1 mb-3">
+                    🏖️
+                </div>
+
+                <h5 class="fw-bold mb-2">
+                    No Holiday Requests
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Holiday requests will appear here when submitted.
+                </p>
+
+            </div>
+        }
 
     </div>
 
 </div>
 
-@if (!Model.Any())
-{
-    <div class="card mt-4">
 
-        <div class="card-body text-center py-5">
+<style>
 
-            <h5 class="text-muted mb-2">
-                No Holiday Requests
-            </h5>
+    .holiday-table th {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        color: #6c757d;
+        font-weight: 650;
+        white-space: nowrap;
+    }
 
-            <p class="text-muted mb-0">
-                Holiday requests will appear here when submitted.
-            </p>
+    .holiday-table td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 
-        </div>
+    .holiday-avatar {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 50%;
+        background: #eaf2ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+    }
 
-    </div>
-}
+</style>

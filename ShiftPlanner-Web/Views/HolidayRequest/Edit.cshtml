@@ -16,20 +16,28 @@
 
 </div>
 
+
 <div class="row justify-content-center">
 
-    <div class="col-lg-6">
+    <div class="col-xl-7 col-lg-8">
 
-        <div class="card">
+        <div class="card border-0 shadow-sm">
 
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
 
                 @if (!ViewData.ModelState.IsValid)
                 {
-                    <div asp-validation-summary="All"
-                         class="alert alert-danger mb-4">
+                    <div class="holiday-error mb-4">
+
+                        <div class="fw-semibold mb-1">
+                            Please check the details below
+                        </div>
+
+                        <div asp-validation-summary="All"></div>
+
                     </div>
                 }
+
 
                 <form asp-action="Edit"
                       method="post">
@@ -40,118 +48,189 @@
                     <input asp-for="EmployeeID"
                            type="hidden" />
 
-                    <div class="mb-4">
 
-                        <label asp-for="StartDate"
-                               class="form-label fw-semibold">
+                    <!-- HOLIDAY DATES -->
 
-                            Holiday Start Date
+                    <div class="form-section mb-4">
 
-                        </label>
+                        <div class="section-heading mb-3">
 
-                        <input asp-for="StartDate"
-                               type="date"
-                               class="form-control form-control-lg" />
+                            <h5 class="fw-bold mb-1">
+                                Holiday Dates
+                            </h5>
 
-                        <span asp-validation-for="StartDate"
-                              class="text-danger">
-                        </span>
+                            <p class="text-muted small mb-0">
+                                Update the requested holiday period.
+                            </p>
 
-                    </div>
+                        </div>
 
-                    <div class="mb-4">
 
-                        <label asp-for="EndDate"
-                               class="form-label fw-semibold">
+                        <div class="row g-3">
 
-                            Holiday End Date
+                            <div class="col-md-6">
 
-                        </label>
+                                <label asp-for="StartDate"
+                                       class="form-label fw-semibold">
 
-                        <input asp-for="EndDate"
-                               type="date"
-                               class="form-control form-control-lg" />
+                                    Start Date
 
-                        <span asp-validation-for="EndDate"
-                              class="text-danger">
-                        </span>
+                                </label>
 
-                    </div>
+                                <input asp-for="StartDate"
+                                       type="date"
+                                       class="form-control" />
 
-                    <div class="mb-4">
+                                <span asp-validation-for="StartDate"
+                                      class="text-danger small">
+                                </span>
 
-                        <label asp-for="Status"
-                               class="form-label fw-semibold">
+                            </div>
 
-                            Request Status
 
-                        </label>
+                            <div class="col-md-6">
 
-                        <select asp-for="Status"
-                                class="form-select form-select-lg">
+                                <label asp-for="EndDate"
+                                       class="form-label fw-semibold">
 
-                            <option value="0">
-                                Pending
-                            </option>
+                                    End Date
 
-                            <option value="1">
-                                Approved
-                            </option>
+                                </label>
 
-                            <option value="2">
-                                Rejected
-                            </option>
+                                <input asp-for="EndDate"
+                                       type="date"
+                                       class="form-control" />
 
-                        </select>
+                                <span asp-validation-for="EndDate"
+                                      class="text-danger small">
+                                </span>
 
-                        <span asp-validation-for="Status"
-                              class="text-danger">
-                        </span>
-
-                        <div class="mb-3">
-
-                            <label asp-for="ManagerNotes"
-                                   class="form-label">
-
-                                Manager Notes
-
-                            </label>        
-
-                            <textarea asp-for="ManagerNotes"
-                                      class="form-control"
-                                      rows="4"
-                                      placeholder="Optional notes for the employee...">
-                            </textarea>
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <div class="alert alert-info">
-
-                        <strong>Status Guide</strong>
-
-                        <ul class="mb-0 mt-2">
-
-                            <li>
-                                Pending - Awaiting review
-                            </li>
-
-                            <li>
-                                Approved - Employee may take leave
-                            </li>
-
-                            <li>
-                                Rejected - Leave request denied
-                            </li>
-
-                        </ul>
-
-                    </div>
 
                     <hr class="my-4" />
 
-                    <div class="d-flex justify-content-between">
+
+                    <!-- REQUEST STATUS -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Request Status
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Update the approval status of this request.
+                            </p>
+
+                        </div>
+
+
+                        <label asp-for="Status"
+                               class="form-label fw-semibold">
+
+                            Status
+
+                        </label>
+
+                        <select asp-for="Status"
+                                class="form-select"
+                                asp-items="Html.GetEnumSelectList<Shift_Planner_Web.Models.HolidayRequestStatus>()">
+                        </select>
+
+                        <span asp-validation-for="Status"
+                              class="text-danger small">
+                        </span>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- MANAGER NOTES -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Manager Notes
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Add any notes or information for the employee.
+                            </p>
+
+                        </div>
+
+
+                        <label asp-for="ManagerNotes"
+                               class="form-label fw-semibold">
+
+                            Notes
+
+                        </label>
+
+                        <textarea asp-for="ManagerNotes"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Optional notes for the employee..."></textarea>
+
+                        <span asp-validation-for="ManagerNotes"
+                              class="text-danger small">
+                        </span>
+
+                    </div>
+
+
+                    <!-- STATUS GUIDE -->
+
+                    <div class="status-guide mb-4">
+
+                        <div class="status-guide-icon">
+                            ℹ
+                        </div>
+
+                        <div>
+
+                            <div class="fw-semibold mb-2">
+                                Status Guide
+                            </div>
+
+                            <ul class="mb-0">
+
+                                <li>
+                                    <strong>Pending</strong> — Awaiting review
+                                </li>
+
+                                <li>
+                                    <strong>Approved</strong> — Employee may take leave
+                                </li>
+
+                                <li>
+                                    <strong>Rejected</strong> — Leave request denied
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="d-flex justify-content-between align-items-center">
 
                         <a asp-action="Index"
                            class="btn btn-outline-secondary">
@@ -161,7 +240,7 @@
                         </a>
 
                         <button type="submit"
-                                class="btn btn-primary">
+                                class="btn btn-primary px-4">
 
                             Save Changes
 
@@ -178,6 +257,87 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .form-section {
+        position: relative;
+    }
+
+    .section-heading h5 {
+        font-size: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 7px;
+    }
+
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        border-radius: 8px;
+    }
+
+    textarea.form-control {
+        min-height: 110px;
+    }
+
+    .holiday-error {
+        padding: 13px 15px;
+        border-left: 4px solid #dc3545;
+        border-radius: 8px;
+        background: #fff5f5;
+        color: #842029;
+        font-size: 14px;
+    }
+
+        .holiday-error ul {
+            margin-bottom: 0;
+            padding-left: 18px;
+        }
+
+    .status-guide {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 18px;
+        border: 1px solid #cfe2ff;
+        border-radius: 10px;
+        background: #f4f8ff;
+        color: #495057;
+        font-size: 14px;
+    }
+
+    .status-guide-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 10px;
+        background: #e2ecff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+    .status-guide ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+        color: #6c757d;
+    }
+
+    .status-guide li {
+        margin-bottom: 4px;
+    }
+
+        .status-guide li:last-child {
+            margin-bottom: 0;
+        }
+
+</style>
+
 
 @section Scripts
 {

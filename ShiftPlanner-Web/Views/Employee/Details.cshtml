@@ -9,69 +9,105 @@
     if (Model.ScheduledHours == 0)
     {
         status = "No Shifts";
-        badgeClass = "bg-secondary";
+        badgeClass = "bg-secondary-subtle text-secondary border";
     }
     else if (Model.ScheduledHours > Model.WeeklyHours)
     {
         status = "Over Contract";
-        badgeClass = "bg-danger";
+        badgeClass = "bg-danger-subtle text-danger border";
     }
     else if (Model.Utilisation >= 90)
     {
         status = "Fully Scheduled";
-        badgeClass = "bg-success";
+        badgeClass = "bg-success-subtle text-success border";
     }
     else
     {
         status = "Under Hours";
-        badgeClass = "bg-warning text-dark";
+        badgeClass = "bg-warning-subtle text-warning-emphasis border";
     }
+
+    var upcomingShifts = Model.Shifts
+        .Where(s => s.StartTime >= DateTime.Today)
+        .OrderBy(s => s.StartTime)
+        .ToList();
 }
 
-<div class="card shadow-sm border-0 mb-4">
-    <div class="card-body">
 
-        <div class="d-flex justify-content-between align-items-center">
+<!-- PROFILE HEADER -->
 
-            <div>
+<div class="card border-0 shadow-sm mb-4">
 
-                <h1 class="fw-bold mb-1">
-                    @Model.Name
-                </h1>
+    <div class="card-body p-4">
 
-                <div class="text-muted">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
 
-                    @Model.Role.ToString().Replace("_", " ")
-                    • Started
-                    @Model.StartDate.ToString("dd MMM yyyy")
+            <div class="d-flex align-items-center gap-3">
+
+                <div class="employee-profile-avatar">
+
+                    @(string.IsNullOrWhiteSpace(Model.Name)
+                        ? "?"
+                        : Model.Name.Substring(0, 1).ToUpper())
+
+                </div>
+
+                <div>
+
+                    <h1 class="fw-bold mb-1">
+                        @Model.Name
+                    </h1>
+
+                    <div class="text-muted">
+
+                        @Model.Role.ToString().Replace("_", " ")
+
+                        <span class="mx-1">•</span>
+
+                        Started
+                        @Model.StartDate.ToString("dd MMM yyyy")
+
+                    </div>
 
                 </div>
 
             </div>
 
-            <span class="badge @badgeClass fs-6">
+
+            <span class="badge @badgeClass px-3 py-2">
+
                 @status
+
             </span>
 
         </div>
 
     </div>
+
 </div>
 
-<div class="row mb-4">
-    <div class="col-md-3">
 
-        <div class="card shadow-sm border-0">
+<!-- SUMMARY CARDS -->
 
-            <div class="card-body text-center">
+<div class="row g-3 mb-4">
 
-                <div class="text-muted">
+    <div class="col-6 col-xl-3">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body p-4">
+
+                <div class="text-muted small fw-semibold text-uppercase mb-2">
                     Contract Hours
                 </div>
 
-                <h2>
+                <div class="fs-2 fw-bold">
                     @Model.WeeklyHours
-                </h2>
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Hours per week
+                </div>
 
             </div>
 
@@ -79,19 +115,24 @@
 
     </div>
 
-    <div class="col-md-3">
 
-        <div class="card shadow-sm border-0">
+    <div class="col-6 col-xl-3">
 
-            <div class="card-body text-center">
+        <div class="card border-0 shadow-sm h-100">
 
-                <div class="text-muted">
+            <div class="card-body p-4">
+
+                <div class="text-muted small fw-semibold text-uppercase mb-2">
                     Scheduled
                 </div>
 
-                <h2>
+                <div class="fs-2 fw-bold">
                     @Model.ScheduledHours
-                </h2>
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Hours scheduled
+                </div>
 
             </div>
 
@@ -99,19 +140,24 @@
 
     </div>
 
-    <div class="col-md-3">
 
-        <div class="card shadow-sm border-0">
+    <div class="col-6 col-xl-3">
 
-            <div class="card-body text-center">
+        <div class="card border-0 shadow-sm h-100">
 
-                <div class="text-muted">
+            <div class="card-body p-4">
+
+                <div class="text-muted small fw-semibold text-uppercase mb-2">
                     Remaining
                 </div>
 
-                <h2>
+                <div class="fs-2 fw-bold">
                     @Model.RemainingHours
-                </h2>
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Contract hours remaining
+                </div>
 
             </div>
 
@@ -119,130 +165,238 @@
 
     </div>
 
-    <div class="col-md-3">
 
-        <div class="card shadow-sm border-0">
+    <div class="col-6 col-xl-3">
 
-            <div class="card-body text-center">
+        <div class="card border-0 shadow-sm h-100">
 
-                <div class="text-muted">
+            <div class="card-body p-4">
+
+                <div class="text-muted small fw-semibold text-uppercase mb-2">
                     Utilisation
                 </div>
 
-                <h2>
+                <div class="fs-2 fw-bold">
                     @Model.Utilisation%
-                </h2>
+                </div>
+
+                <div class="text-muted small mt-1">
+                    Weekly schedule usage
+                </div>
 
             </div>
 
         </div>
 
     </div>
+
 </div>
 
-<div class="card shadow-sm border-0 mb-4">
-    <div class="card-header bg-white">
 
-        <h5 class="mb-0">
-            Workload
-        </h5>
+<!-- WORKLOAD -->
 
-    </div>
+<div class="card border-0 shadow-sm mb-4">
 
-    <div class="card-body">
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <div>
+
+                <h5 class="fw-bold mb-1">
+                    Workload
+                </h5>
+
+                <p class="text-muted small mb-0">
+                    Scheduled hours compared with contract hours.
+                </p>
+
+            </div>
+
+            <span class="fw-semibold">
+                @Model.Utilisation%
+            </span>
+
+        </div>
+
 
         <div class="progress"
-             style="height: 30px;">
+             style="height: 12px;">
 
             <div class="progress-bar
                 @(Model.Utilisation >= 100 ? "bg-danger" :
-                   Model.Utilisation >= 90 ? "bg-success" :
-                   "bg-warning")"
-                 style="width:@Model.Utilisation%">
-
-                @Model.Utilisation%
-
+                    Model.Utilisation >= 90 ? "bg-success" :
+                    "bg-warning")"
+                 role="progressbar"
+                 style="width:@Math.Min(Model.Utilisation, 100)%"
+                 aria-valuenow="@Model.Utilisation"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
             </div>
 
         </div>
 
+        @if (Model.Utilisation > 100)
+        {
+            <div class="text-danger small mt-2 fw-semibold">
+                Employee is scheduled above their contracted hours.
+            </div>
+        }
+
     </div>
+
 </div>
 
-<div class="card shadow-sm border-0 mb-4">
-    <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
-        <h5 class="mb-0">
-            Upcoming Shifts
-        </h5>
+<!-- UPCOMING SHIFTS -->
 
-        <span class="badge bg-primary">
-            @Model.Shifts.Count()
-        </span>
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-white border-0 p-4 pb-3">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="fw-bold mb-1">
+                    Upcoming Shifts
+                </h5>
+
+                <p class="text-muted small mb-0">
+                    Scheduled shifts from today onwards.
+                </p>
+
+            </div>
+
+            <span class="badge bg-primary-subtle text-primary border px-3 py-2">
+                @upcomingShifts.Count
+            </span>
+
+        </div>
 
     </div>
+
 
     <div class="card-body p-0">
 
-        <table class="table table-hover mb-0">
+        @if (upcomingShifts.Any())
+        {
+            <div class="table-responsive">
 
-            <thead>
+                <table class="table table-hover align-middle mb-0 employee-shift-table">
 
-                <tr>
+                    <thead class="table-light">
 
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Break</th>
-                    <th>Hours</th>
+                        <tr>
 
-                </tr>
+                            <th class="ps-4">
+                                Date
+                            </th>
 
-            </thead>
+                            <th>
+                                Time
+                            </th>
 
-            <tbody>
+                            <th>
+                                Break
+                            </th>
 
-                @foreach (var shift in Model.Shifts
-                    .Where(s => s.StartTime >= DateTime.Today)
-                    .OrderBy(s => s.StartTime))
-                {
-                    <tr>
+                            <th>
+                                Hours
+                            </th>
 
-                        <td>
-                            @shift.StartTime.ToString("ddd dd MMM")
-                        </td>
+                        </tr>
 
-                        <td>
+                    </thead>
 
-                            @shift.StartTime.ToString("HH:mm")
-                            -
-                            @shift.EndTime.ToString("HH:mm")
 
-                        </td>
+                    <tbody>
 
-                        <td>
-                            @shift.BreakDuration mins
-                        </td>
+                        @foreach (var shift in upcomingShifts)
+                        {
+                            <tr>
 
-                        <td>
-                            @shift.ShiftHours hrs
-                        </td>
+                                <td class="ps-4">
 
-                    </tr>
-                }
+                                    <div class="fw-semibold">
+                                        @shift.StartTime.ToString("ddd dd MMM")
+                                    </div>
 
-            </tbody>
+                                </td>
 
-        </table>
+
+                                <td>
+
+                                    <span class="fw-medium">
+
+                                        @shift.StartTime.ToString("HH:mm")
+                                        -
+                                        @shift.EndTime.ToString("HH:mm")
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="text-muted">
+                                        @shift.BreakDuration mins
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="badge bg-light text-dark border">
+
+                                        @shift.ShiftHours hrs
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5 px-3">
+
+                <div class="shift-empty-icon mb-3">
+                    ✓
+                </div>
+
+                <h6 class="fw-bold mb-1">
+                    No upcoming shifts
+                </h6>
+
+                <p class="text-muted small mb-0">
+                    This employee currently has no shifts scheduled.
+                </p>
+
+            </div>
+        }
 
     </div>
+
 </div>
 
-<div class="card shadow-sm border-0">
 
-    ```
-    <div class="card-body">
+<!-- ACTIONS -->
 
-        <div class="d-flex gap-2 flex-wrap">
+<div class="card border-0 shadow-sm">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex flex-wrap gap-2">
 
             <a asp-controller="Availability"
                asp-action="Index"
@@ -253,14 +407,16 @@
 
             </a>
 
+
             <a asp-controller="HolidayRequest"
                asp-action="Create"
                asp-route-employeeId="@Model.EmployeeID"
-               class="btn btn-warning">
+               class="btn btn-outline-warning">
 
                 Request Holiday
 
             </a>
+
 
             <a asp-action="Index"
                class="btn btn-outline-secondary">
@@ -272,4 +428,52 @@
         </div>
 
     </div>
+
 </div>
+
+
+<style>
+
+    .employee-profile-avatar {
+        width: 58px;
+        height: 58px;
+        min-width: 58px;
+        border-radius: 50%;
+        background: #eaf2ff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .employee-shift-table th {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        color: #6c757d;
+        font-weight: 650;
+        white-space: nowrap;
+    }
+
+    .employee-shift-table td {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .shift-empty-icon {
+        width: 46px;
+        height: 46px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: #e9f7ef;
+        color: #198754;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+</style>

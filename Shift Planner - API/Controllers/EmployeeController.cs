@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shift_Planner___API.Models;
 using Shift_Planner___API.Services;
+using Shift_Planner___API.DTOs;
 
 namespace Shift_Planner___API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class EmployeeController : ControllerBase
     {
         private readonly EmployeeService _employeeService;
@@ -33,6 +33,17 @@ namespace Shift_Planner___API.Controllers
             return Ok(employee);
         }
 
+        [HttpGet("{id}/holiday")]
+        public ActionResult<EmployeeHolidayDto> GetEmployeeHoliday(int id)
+        {
+            var holiday = _employeeService.GetEmployeeHoliday(id);
+
+            if (holiday == null)
+                return NotFound();
+
+            return Ok(holiday);
+        }
+
         [HttpGet("{id}/schedule")]
         public ActionResult<Employee> GetEmployeeSchedule(int id)
         {
@@ -56,7 +67,9 @@ namespace Shift_Planner___API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateEmployee(int id, Employee updatedEmployee)
+        public IActionResult UpdateEmployee(
+            int id,
+            Employee updatedEmployee)
         {
             if (!_employeeService.UpdateEmployee(id, updatedEmployee))
                 return NotFound();

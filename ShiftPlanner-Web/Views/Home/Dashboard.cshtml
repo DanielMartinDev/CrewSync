@@ -28,11 +28,13 @@
         Model.PendingHolidayRequests.Count;
 }
 
-<!-- Header -->
+
+<!-- HEADER -->
 
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4">
 
     <div>
+
         <h1 class="fw-bold mb-1">
             Dashboard
         </h1>
@@ -40,6 +42,7 @@
         <p class="text-muted mb-0">
             Here's what's happening with your team this week.
         </p>
+
     </div>
 
 </div>
@@ -49,24 +52,38 @@
 
 <div class="row g-3 mb-4">
 
-    <!-- Employees -->
+    <!-- TEAM -->
 
     <div class="col-xl-3 col-md-6">
 
         <div class="card border-0 shadow-sm h-100">
 
-            <div class="card-body">
+            <div class="card-body p-4">
 
-                <div class="text-primary small fw-semibold mb-2">
-                    TEAM
-                </div>
+                <div class="d-flex justify-content-between align-items-start">
 
-                <h2 class="fw-bold mb-1">
-                    @Model.EmployeeCount
-                </h2>
+                    <div>
 
-                <div class="text-muted small">
-                    Active employees
+                        <div class="text-primary small fw-semibold text-uppercase mb-2">
+                            Team
+                        </div>
+
+                        <div class="fs-2 fw-bold">
+                            @Model.EmployeeCount
+                        </div>
+
+                        <div class="text-muted small mt-1">
+                            Active employees
+                        </div>
+
+                    </div>
+
+                    <div class="bg-primary bg-opacity-10 rounded-3 p-2">
+                        <span class="text-primary fw-bold">
+                            👥
+                        </span>
+                    </div>
+
                 </div>
 
             </div>
@@ -76,24 +93,38 @@
     </div>
 
 
-    <!-- Scheduled hours -->
+    <!-- SCHEDULED HOURS -->
 
     <div class="col-xl-3 col-md-6">
 
         <div class="card border-0 shadow-sm h-100">
 
-            <div class="card-body">
+            <div class="card-body p-4">
 
-                <div class="text-success small fw-semibold mb-2">
-                    SCHEDULED HOURS
-                </div>
+                <div class="d-flex justify-content-between align-items-start">
 
-                <h2 class="fw-bold mb-1">
-                    @Model.TotalHours.ToString("0.0")
-                </h2>
+                    <div>
 
-                <div class="text-muted small">
-                    Hours scheduled this week
+                        <div class="text-success small fw-semibold text-uppercase mb-2">
+                            Scheduled Hours
+                        </div>
+
+                        <div class="fs-2 fw-bold">
+                            @Model.TotalHours.ToString("0.0")
+                        </div>
+
+                        <div class="text-muted small mt-1">
+                            Hours this week
+                        </div>
+
+                    </div>
+
+                    <div class="bg-success bg-opacity-10 rounded-3 p-2">
+                        <span class="text-success fw-bold">
+                            ⏱
+                        </span>
+                    </div>
+
                 </div>
 
             </div>
@@ -103,24 +134,38 @@
     </div>
 
 
-    <!-- Contracted hours -->
+    <!-- CONTRACTED HOURS -->
 
     <div class="col-xl-3 col-md-6">
 
         <div class="card border-0 shadow-sm h-100">
 
-            <div class="card-body">
+            <div class="card-body p-4">
 
-                <div class="text-info small fw-semibold mb-2">
-                    CONTRACTED HOURS
-                </div>
+                <div class="d-flex justify-content-between align-items-start">
 
-                <h2 class="fw-bold mb-1">
-                    @contractedHours.ToString("0.0")
-                </h2>
+                    <div>
 
-                <div class="text-muted small">
-                    Total weekly contracted hours
+                        <div class="text-info small fw-semibold text-uppercase mb-2">
+                            Contracted Hours
+                        </div>
+
+                        <div class="fs-2 fw-bold">
+                            @contractedHours.ToString("0.0")
+                        </div>
+
+                        <div class="text-muted small mt-1">
+                            Weekly contracted hours
+                        </div>
+
+                    </div>
+
+                    <div class="bg-info bg-opacity-10 rounded-3 p-2">
+                        <span class="text-info fw-bold">
+                            📋
+                        </span>
+                    </div>
+
                 </div>
 
             </div>
@@ -130,7 +175,7 @@
     </div>
 
 
-    <!-- Holidays -->
+    <!-- HOLIDAYS -->
 
     <div class="col-xl-3 col-md-6">
 
@@ -140,18 +185,32 @@
 
             <div class="card border-0 shadow-sm h-100">
 
-                <div class="card-body">
+                <div class="card-body p-4">
 
-                    <div class="text-warning-emphasis small fw-semibold mb-2">
-                        HOLIDAYS
-                    </div>
+                    <div class="d-flex justify-content-between align-items-start">
 
-                    <h2 class="fw-bold mb-1 text-dark">
-                        @Model.PendingHolidayRequests.Count
-                    </h2>
+                        <div>
 
-                    <div class="text-muted small">
-                        Pending requests
+                            <div class="text-warning-emphasis small fw-semibold text-uppercase mb-2">
+                                Holidays
+                            </div>
+
+                            <div class="fs-2 fw-bold text-dark">
+                                @Model.PendingHolidayRequests.Count
+                            </div>
+
+                            <div class="text-muted small mt-1">
+                                Pending requests
+                            </div>
+
+                        </div>
+
+                        <div class="bg-warning bg-opacity-10 rounded-3 p-2">
+                            <span class="text-warning-emphasis fw-bold">
+                                📅
+                            </span>
+                        </div>
+
                     </div>
 
                 </div>
@@ -169,59 +228,95 @@
 
 <div class="card border-0 shadow-sm mb-4">
 
-    <div class="card-body">
+    <div class="card-body p-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
 
             <div>
+
                 <h5 class="fw-bold mb-1">
                     This Week
                 </h5>
 
                 <small class="text-muted">
-                    Week @System.Globalization.ISOWeek.GetWeekOfYear(Model.WeekStart)
-                    · @Model.WeekStart.ToString("dd MMM yyyy")
+
+                    Week
+                    @System.Globalization.ISOWeek.GetWeekOfYear(Model.WeekStart)
+
+                    ·
+
+                    @Model.WeekStart.ToString("dd MMM yyyy")
+
                     -
+
                     @Model.WeekStart.AddDays(6).ToString("dd MMM yyyy")
+
                 </small>
+
             </div>
 
             <a asp-controller="Shift"
                asp-action="Index"
-               class="btn btn-primary btn-sm">
+               class="btn btn-primary btn-sm mt-3 mt-md-0">
+
                 Manage Schedule
+
             </a>
 
         </div>
+
 
         <div class="row g-3">
 
             <div class="col-md-6">
 
-                <div class="p-3 bg-light rounded">
+                <div class="border rounded-3 p-3">
 
-                    <div class="text-muted small mb-1">
-                        Scheduled
-                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
 
-                    <div class="fs-4 fw-bold">
-                        @Model.TotalHours.ToString("0.0") hrs
+                        <div>
+
+                            <div class="text-muted small mb-1">
+                                Scheduled
+                            </div>
+
+                            <div class="fs-4 fw-bold">
+                                @Model.TotalHours.ToString("0.0")
+                                <span class="fs-6 fw-normal text-muted">
+                                    hrs
+                                </span>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
+
             <div class="col-md-6">
 
-                <div class="p-3 bg-light rounded">
+                <div class="border rounded-3 p-3">
 
-                    <div class="text-muted small mb-1">
-                        Contracted
-                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
 
-                    <div class="fs-4 fw-bold">
-                        @contractedHours.ToString("0.0") hrs
+                        <div>
+
+                            <div class="text-muted small mb-1">
+                                Contracted
+                            </div>
+
+                            <div class="fs-4 fw-bold">
+                                @contractedHours.ToString("0.0")
+                                <span class="fs-6 fw-normal text-muted">
+                                    hrs
+                                </span>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -239,9 +334,9 @@
 
 <div class="card border-0 shadow-sm mb-4">
 
-    <div class="card-body">
+    <div class="card-body p-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-start mb-4">
 
             <div>
 
@@ -257,8 +352,14 @@
 
             @if (totalAttentionItems > 0)
             {
-                <span class="badge bg-danger">
+                <span class="badge bg-danger rounded-pill px-3 py-2">
                     @totalAttentionItems
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-success rounded-pill px-3 py-2">
+                    All clear
                 </span>
             }
 
@@ -270,11 +371,17 @@
              !noShiftEmployees.Any() &&
              !Model.PendingHolidayRequests.Any())
         {
-            <div class="alert alert-success mb-0">
+            <div class="border rounded-3 p-4 text-center">
 
-                <strong>Everything looks good.</strong>
+                <div class="text-success fs-3 mb-2">
+                    ✓
+                </div>
 
-                <div class="small mt-1">
+                <div class="fw-semibold">
+                    Everything looks good
+                </div>
+
+                <div class="small text-muted mt-1">
                     No staffing or holiday items require attention.
                 </div>
 
@@ -283,65 +390,109 @@
         else
         {
 
-            <!-- Over hours -->
+            <!-- OVER HOURS -->
             @foreach (var employee in Model.OverHoursEmployees)
             {
-                <div class="alert alert-danger py-2 mb-2">
+                <div class="alert alert-danger d-flex align-items-center py-3 mb-2">
 
-                    <strong>@employee.Name</strong>
+                    <div class="me-3">
+                        ⚠
+                    </div>
 
-                    is over their contracted hours.
+                    <div>
+
+                        <strong>
+                            @employee.Name
+                        </strong>
+
+                        is over their contracted hours.
+
+                    </div>
 
                 </div>
             }
 
 
-            <!-- Under hours -->
+            <!-- UNDER HOURS -->
             @foreach (var employee in underHoursEmployees)
             {
                 var employeeHours = Model.UpcomingShifts
                     .Where(s => s.EmployeeID == employee.EmployeeID)
                     .Sum(s => s.ShiftHours);
 
-                <div class="alert alert-warning py-2 mb-2">
+                <div class="alert alert-warning d-flex align-items-center py-3 mb-2">
 
-                    <strong>@employee.Name</strong>
+                    <div class="me-3">
+                        ⚠
+                    </div>
 
-                    is scheduled for
-                    <strong>@employeeHours.ToString("0.0")</strong>
-                    /
-                    @employee.WeeklyHours.ToString("0.0")
-                    hours.
+                    <div>
+
+                        <strong>
+                            @employee.Name
+                        </strong>
+
+                        is scheduled for
+
+                        <strong>
+                            @employeeHours.ToString("0.0")
+                        </strong>
+
+                        /
+
+                        @employee.WeeklyHours.ToString("0.0")
+
+                        hours.
+
+                    </div>
 
                 </div>
             }
 
 
-            <!-- No shifts -->
+            <!-- NO SHIFTS -->
             @foreach (var employee in noShiftEmployees)
             {
-                <div class="alert alert-warning py-2 mb-2">
+                <div class="alert alert-warning d-flex align-items-center py-3 mb-2">
 
-                    <strong>@employee.Name</strong>
+                    <div class="me-3">
+                        ⚠
+                    </div>
 
-                    has no shifts assigned this week.
+                    <div>
+
+                        <strong>
+                            @employee.Name
+                        </strong>
+
+                        has no shifts assigned this week.
+
+                    </div>
 
                 </div>
             }
 
 
-            <!-- Holidays -->
+            <!-- HOLIDAYS -->
             @if (Model.PendingHolidayRequests.Any())
             {
                 <a asp-controller="HolidayRequest"
                    asp-action="Index"
-                   class="alert alert-info py-2 mb-0 text-decoration-none d-block">
+                   class="alert alert-info d-flex align-items-center py-3 mb-0 text-decoration-none">
 
-                    <strong>
-                        @Model.PendingHolidayRequests.Count
-                    </strong>
+                    <div class="me-3">
+                        📅
+                    </div>
 
-                    holiday request(s) are waiting for approval.
+                    <div>
+
+                        <strong>
+                            @Model.PendingHolidayRequests.Count
+                        </strong>
+
+                        holiday request(s) are waiting for approval.
+
+                    </div>
 
                 </a>
             }

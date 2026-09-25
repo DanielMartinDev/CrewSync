@@ -33,7 +33,10 @@
             min-height: 100vh;
         }
 
-        /* Sidebar */
+
+        /* ========================================
+           SIDEBAR
+        ======================================== */
 
         .app-sidebar {
             width: 250px;
@@ -44,40 +47,53 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            overflow-y: auto;
         }
 
+
+        /* Brand */
+
         .brand {
-            padding: 24px 22px;
+            padding: 22px;
             border-bottom: 1px solid #eef0f3;
         }
 
+        .brand > div {
+            display: flex;
+            align-items: center;
+        }
+
         .brand-logo {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
             background: #0d6efd;
-            color: white;
+            color: #ffffff;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             font-size: 20px;
-            margin-right: 10px;
+            margin-right: 11px;
+            box-shadow: 0 4px 10px rgba(13, 110, 253, .18);
         }
 
         .brand-name {
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 750;
             color: #172033;
+            letter-spacing: -.02em;
         }
 
         .brand-subtitle {
             display: block;
-            margin-top: 4px;
-            margin-left: 49px;
-            font-size: 12px;
+            margin-top: 5px;
+            margin-left: 51px;
+            font-size: 11px;
             color: #8a93a2;
+            letter-spacing: .02em;
         }
+
 
         /* Navigation */
 
@@ -87,50 +103,76 @@
 
         .nav-section {
             padding: 0 12px;
-            margin: 10px 0 8px;
-            font-size: 11px;
-            font-weight: 700;
+            margin: 14px 0 8px;
+            font-size: 10px;
+            font-weight: 750;
             text-transform: uppercase;
-            letter-spacing: .06em;
+            letter-spacing: .08em;
             color: #9aa2af;
         }
 
+        .nav-section:first-child {
+            margin-top: 2px;
+        }
+
         .sidebar-link {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 11px;
             padding: 11px 13px;
             margin-bottom: 4px;
-            border-radius: 9px;
+            border-radius: 10px;
             color: #4b5563;
             text-decoration: none;
             font-weight: 500;
-            transition: all .15s ease;
+            transition:
+                background-color .15s ease,
+                color .15s ease,
+                transform .15s ease;
         }
 
         .sidebar-link:hover {
-            background: #f1f5f9;
+            background: #f4f7fb;
             color: #0d6efd;
+            transform: translateX(2px);
         }
 
         .sidebar-link.active {
             background: #eaf2ff;
             color: #0d6efd;
-            font-weight: 600;
+            font-weight: 650;
+        }
+
+        .sidebar-link.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: #0d6efd;
         }
 
         .nav-icon {
             width: 20px;
+            min-width: 20px;
             text-align: center;
             font-size: 16px;
+            line-height: 1;
         }
 
-        /* Main */
+
+        /* ========================================
+           MAIN
+        ======================================== */
 
         .app-main {
             min-width: 0;
             flex: 1;
         }
+
 
         /* Top bar */
 
@@ -142,6 +184,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .page-title {
@@ -156,6 +201,9 @@
             color: #8a93a2;
             margin-top: 2px;
         }
+
+
+        /* User */
 
         .user-area {
             display: flex;
@@ -173,6 +221,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            border: 1px solid #d9e7ff;
         }
 
         .user-details {
@@ -195,15 +244,31 @@
             margin-left: 8px;
         }
 
-        /* Content */
+        .logout-button .btn {
+            border-color: #d9dee7;
+            color: #5f6877;
+        }
+
+        .logout-button .btn:hover {
+            background: #f4f6f8;
+            color: #273142;
+        }
+
+
+        /* ========================================
+           CONTENT
+        ======================================== */
 
         .app-content {
             padding: 30px;
         }
 
-        /* Mobile */
 
-       @@media (max-width: 900px) {
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @@media (max-width: 900px) {
 
             .app-sidebar {
                 width: 210px;
@@ -224,6 +289,7 @@
 
         }
 
+
         @@media (max-width: 700px) {
 
             .app-sidebar {
@@ -234,6 +300,10 @@
             .brand {
                 padding: 18px 0;
                 text-align: center;
+            }
+
+            .brand > div {
+                justify-content: center;
             }
 
             .brand-logo {
@@ -255,6 +325,14 @@
                 padding: 12px;
             }
 
+            .sidebar-link:hover {
+                transform: none;
+            }
+
+            .sidebar-link.active::before {
+                left: 2px;
+            }
+
             .sidebar-link span:not(.nav-icon) {
                 display: none;
             }
@@ -268,15 +346,30 @@
                 padding: 0 16px;
             }
 
+            .page-subtitle {
+                display: none;
+            }
+
+            .logout-button {
+                margin-left: 2px;
+            }
+
+            .logout-button .btn {
+                padding: 6px 9px;
+                font-size: 12px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
     <div class="d-flex app-shell">
+
 
         <!-- Sidebar -->
 
@@ -285,8 +378,15 @@
             <div class="brand">
 
                 <div>
-                    <span class="brand-logo">C</span>
-                    <span class="brand-name">CrewSync</span>
+
+                    <span class="brand-logo">
+                        C
+                    </span>
+
+                    <span class="brand-name">
+                        CrewSync
+                    </span>
+
                 </div>
 
                 <span class="brand-subtitle">
@@ -295,83 +395,132 @@
 
             </div>
 
+
             <nav class="sidebar-nav">
 
                 @if (User.Identity?.IsAuthenticated == true)
                 {
+
                     <div class="nav-section">
                         Overview
                     </div>
 
+
                     @if (!User.IsInRole("Employee"))
                     {
+
                         <a asp-controller="Home"
                            asp-action="Dashboard"
                            class="sidebar-link">
 
-                            <span class="nav-icon">📊</span>
-                            <span>Dashboard</span>
+                            <span class="nav-icon">
+                                📊
+                            </span>
+
+                            <span>
+                                Dashboard
+                            </span>
 
                         </a>
+
                     }
+
 
                     @if (User.IsInRole("Employee"))
                     {
+
                         <a asp-controller="EmployeePortal"
                            asp-action="Index"
                            class="sidebar-link">
 
-                            <span class="nav-icon">👤</span>
-                            <span>My Portal</span>
+                            <span class="nav-icon">
+                                👤
+                            </span>
+
+                            <span>
+                                My Portal
+                            </span>
 
                         </a>
+
                     }
+
 
                     @if (User.IsInRole("Admin") ||
                          User.IsInRole("Manager"))
                     {
-                        <div class="nav-section mt-4">
+
+                        <div class="nav-section">
                             Management
                         </div>
+
 
                         <a asp-controller="Shift"
                            asp-action="Index"
                            class="sidebar-link">
 
-                            <span class="nav-icon">📅</span>
-                            <span>Schedule</span>
+                            <span class="nav-icon">
+                                📅
+                            </span>
+
+                            <span>
+                                Schedule
+                            </span>
 
                         </a>
+
 
                         <a asp-controller="HolidayRequest"
                            asp-action="Index"
                            class="sidebar-link">
 
-                            <span class="nav-icon">🏖️</span>
-                            <span>Holiday Requests</span>
+                            <span class="nav-icon">
+                                🏖️
+                            </span>
+
+                            <span>
+                                Holiday Requests
+                            </span>
 
                         </a>
+
 
                         <a asp-controller="Absence"
                            asp-action="Index"
                            class="sidebar-link">
 
-                            <span class="nav-icon">🔴</span>
-                            <span>Absences</span>
+                            <span class="nav-icon">
+                                🔴
+                            </span>
+
+                            <span>
+                                Absences
+                            </span>
+
                         </a>
+
                     }
+
 
                     @if (User.IsInRole("Admin"))
                     {
+
                         <a asp-controller="Employee"
                            asp-action="Index"
                            class="sidebar-link">
 
-                            <span class="nav-icon">👥</span>
-                            <span>Employees</span>
+                            <span class="nav-icon">
+                                👥
+                            </span>
+
+                            <span>
+                                Employees
+                            </span>
 
                         </a>
+
                     }
+
                 }
 
             </nav>
@@ -382,6 +531,7 @@
         <!-- Main -->
 
         <div class="app-main">
+
 
             <!-- Top Bar -->
 
@@ -404,6 +554,7 @@
 
                     @if (User.Identity?.IsAuthenticated == true)
                     {
+
                         var userName =
                             User.Identity.Name ?? "User";
 
@@ -412,9 +563,11 @@
                                 .Substring(0, 1)
                                 .ToUpper();
 
+
                         <div class="user-avatar">
                             @initial
                         </div>
+
 
                         <div class="user-details">
 
@@ -426,24 +579,33 @@
 
                                 @if (User.IsInRole("Admin"))
                                 {
-                                    <span>Store Manager</span>
+                                    <span>
+                                        Store Manager
+                                    </span>
                                 }
                                 else if (User.IsInRole("Manager"))
                                 {
-                                    <span>Deputy Store Manager</span>
+                                    <span>
+                                        Deputy Store Manager
+                                    </span>
                                 }
                                 else if (User.IsInRole("Employee"))
                                 {
-                                    <span>Employee</span>
+                                    <span>
+                                        Employee
+                                    </span>
                                 }
                                 else
                                 {
-                                    <span>User</span>
+                                    <span>
+                                        User
+                                    </span>
                                 }
 
                             </div>
 
                         </div>
+
 
                         <form asp-controller="Account"
                               asp-action="Logout"
@@ -458,9 +620,11 @@
                             </button>
 
                         </form>
+
                     }
                     else
                     {
+
                         <a asp-controller="Account"
                            asp-action="Login"
                            class="btn btn-primary btn-sm">
@@ -468,6 +632,7 @@
                             Login
 
                         </a>
+
                     }
 
                 </div>

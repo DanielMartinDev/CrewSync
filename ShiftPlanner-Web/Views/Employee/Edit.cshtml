@@ -5,6 +5,8 @@
     ViewData["Title"] = "Edit Employee";
 }
 
+<!-- HEADER -->
+
 <div class="mb-4">
 
     <h1 class="fw-bold mb-1">
@@ -17,13 +19,14 @@
 
 </div>
 
+
 <div class="row justify-content-center">
 
-    <div class="col-lg-8">
+    <div class="col-xl-9 col-lg-10">
 
-        <div class="card">
+        <div class="card border-0 shadow-sm">
 
-            <div class="card-body p-4">
+            <div class="card-body p-4 p-md-5">
 
                 <form asp-action="Edit"
                       method="post">
@@ -31,72 +34,184 @@
                     <input asp-for="EmployeeID"
                            type="hidden" />
 
+
                     @if (!ViewData.ModelState.IsValid)
                     {
                         <div asp-validation-summary="All"
-                             class="alert alert-danger">
+                             class="alert alert-danger mb-4">
                         </div>
                     }
 
-                    <div class="mb-4">
 
-                        <label asp-for="Name"
-                               class="form-label fw-semibold">
+                    <!-- PERSONAL DETAILS -->
 
-                            Employee Name
+                    <div class="form-section mb-4">
 
-                        </label>
+                        <div class="section-heading mb-3">
 
-                        <input asp-for="Name"
-                               class="form-control form-control-lg" />
+                            <h5 class="fw-bold mb-1">
+                                Personal Details
+                            </h5>
 
-                        <span asp-validation-for="Name"
-                              class="text-danger">
-                        </span>
+                            <p class="text-muted small mb-0">
+                                Update the employee's basic information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label asp-for="Name"
+                                       class="form-label fw-semibold">
+                                    Employee Name
+                                </label>
+
+                                <input asp-for="Name"
+                                       class="form-control"
+                                       placeholder="Enter employee name" />
+
+                                <span asp-validation-for="Name"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="Email"
+                                       class="form-label fw-semibold">
+                                    Email Address
+                                </label>
+
+                                <input asp-for="Email"
+                                       class="form-control"
+                                       placeholder="employee@crewsync.com" />
+
+                                <span asp-validation-for="Email"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="mb-4">
-
-                        <label asp-for="WeeklyHours"
-                               class="form-label fw-semibold">
-
-                            Weekly Contract Hours
-
-                        </label>
-
-                        <input asp-for="WeeklyHours"
-                               class="form-control form-control-lg" />
-
-                        <span asp-validation-for="WeeklyHours"
-                              class="text-danger">
-                        </span>
-
-                    </div>
-
-                    <div class="mb-4">
-
-                        <label asp-for="Role"
-                               class="form-label fw-semibold">
-
-                            Job Role
-
-                        </label>
-
-                        <select asp-for="Role"
-                                class="form-select form-select-lg"
-                                asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
-                        </select>
-
-                        <span asp-validation-for="Role"
-                              class="text-danger">
-                        </span>
-
-                    </div>
 
                     <hr class="my-4" />
 
-                    <div class="d-flex justify-content-between">
+
+                    <!-- EMPLOYMENT DETAILS -->
+
+                    <div class="form-section mb-4">
+
+                        <div class="section-heading mb-3">
+
+                            <h5 class="fw-bold mb-1">
+                                Employment Details
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Update contract and role information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label asp-for="WeeklyHours"
+                                       class="form-label fw-semibold">
+                                    Weekly Contract Hours
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input asp-for="WeeklyHours"
+                                           class="form-control"
+                                           type="number"
+                                           step="0.5"
+                                           min="0" />
+
+                                    <span class="input-group-text">
+                                        hrs
+                                    </span>
+
+                                </div>
+
+                                <span asp-validation-for="WeeklyHours"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="HolidayAllowance"
+                                       class="form-label fw-semibold">
+                                    Holiday Allowance
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input asp-for="HolidayAllowance"
+                                           type="number"
+                                           min="0"
+                                           class="form-control" />
+
+                                    <span class="input-group-text">
+                                        days
+                                    </span>
+
+                                </div>
+
+                                <span asp-validation-for="HolidayAllowance"
+                                      class="text-danger small">
+                                </span>
+
+                                <div class="form-text">
+                                    Annual holiday entitlement.
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label asp-for="Role"
+                                       class="form-label fw-semibold">
+                                    Job Role
+                                </label>
+
+                                <select asp-for="Role"
+                                        class="form-select"
+                                        asp-items="Html.GetEnumSelectList<EmployeeRole.Role>()">
+                                </select>
+
+                                <span asp-validation-for="Role"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="d-flex justify-content-between align-items-center">
 
                         <a asp-action="Index"
                            class="btn btn-outline-secondary">
@@ -106,7 +221,7 @@
                         </a>
 
                         <button type="submit"
-                                class="btn btn-primary">
+                                class="btn btn-primary px-4">
 
                             Save Changes
 
@@ -123,6 +238,30 @@
     </div>
 
 </div>
+
+
+<style>
+
+    .form-section {
+        position: relative;
+    }
+
+    .section-heading h5 {
+        font-size: 1rem;
+    }
+
+    .form-label {
+        margin-bottom: 7px;
+    }
+
+    .form-control,
+    .form-select,
+    .input-group-text {
+        min-height: 44px;
+    }
+
+</style>
+
 
 @section Scripts
 {
