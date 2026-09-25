@@ -2,122 +2,296 @@
 
 @{
     ViewData["Title"] = "Login";
+    Layout = null;
 }
 
-<div class="row justify-content-center align-items-center"
-     style="min-height: 80vh;">
+<!DOCTYPE html>
 
-    <div class="col-lg-5 col-md-7">
+<html lang="en">
 
-        <div class="text-center mb-4">
+<head>
 
-            <h1 class="fw-bold text-primary mb-2">
-                CrewSync
-            </h1>
+    <meta charset="utf-8" />
 
-            <p class="text-muted mb-0">
-                Workforce Management Platform
-            </p>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
 
-        </div>
+    <title>Sign In - CrewSync</title>
 
-        <div class="card">
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-            <div class="card-body p-5">
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
 
-                <div class="text-center mb-4">
+    <style>
 
-                    <h3 class="fw-bold mb-2">
-                        Welcome Back
-                    </h3>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                background: #f6f8fb;
+            }
 
-                    <p class="text-muted mb-0">
-                        Sign in to access your schedule, employees and workforce tools.
-                    </p>
+            .login-page {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 30px 20px;
+            }
+
+            .login-container {
+                width: 100%;
+                max-width: 440px;
+            }
+
+            .login-brand {
+                text-align: center;
+                margin-bottom: 28px;
+            }
+
+            .login-logo {
+                width: 52px;
+                height: 52px;
+                margin: 0 auto 14px;
+                border-radius: 14px;
+                background: #0d6efd;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 26px;
+                font-weight: 800;
+            }
+
+            .login-brand-name {
+                font-size: 30px;
+                font-weight: 800;
+                color: #172033;
+            }
+
+            .login-brand-subtitle {
+                margin-top: 4px;
+                color: #8a93a2;
+                font-size: 14px;
+            }
+
+            .login-card {
+                background: white;
+                border: 1px solid #e1e5eb;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            }
+
+            .login-card-body {
+                padding: 36px;
+            }
+
+            .login-heading {
+                font-size: 24px;
+                font-weight: 700;
+                color: #172033;
+                margin-bottom: 8px;
+            }
+
+            .login-description {
+                color: #7b8492;
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .login-input {
+                min-height: 48px;
+                border-color: #d6dbe3;
+            }
+
+                .login-input:focus {
+                    border-color: #0d6efd;
+                    box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .12);
+                }
+
+            .login-button {
+                min-height: 48px;
+                font-weight: 600;
+            }
+
+            .security-note {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 7px;
+                margin-top: 24px;
+                color: #8a93a2;
+                font-size: 12px;
+            }
+
+            .login-footer {
+                text-align: center;
+                margin-top: 18px;
+                color: #8a93a2;
+                font-size: 12px;
+            }
+
+            @@media (max-width: 480px) {
+
+                .login-page {
+                    padding: 20px 15px;
+                }
+
+                .login-card-body {
+                    padding: 28px 22px;
+                }
+
+                .login-brand-name {
+                    font-size: 26px;
+                }
+            }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-container">
+
+            <!-- Branding -->
+
+            <div class="login-brand">
+
+                <div class="login-logo">
+                    C
+                </div>
+
+                <div class="login-brand-name">
+                    CrewSync
+                </div>
+
+                <div class="login-brand-subtitle">
+                    Workforce Management Platform
+                </div>
+
+            </div>
+
+
+            <!-- Login Card -->
+
+            <div class="login-card">
+
+                <div class="login-card-body">
+
+                    <div class="text-center">
+
+                        <h1 class="login-heading">
+                            Welcome Back
+                        </h1>
+
+                        <p class="login-description">
+                            Sign in to access your schedule,
+                            employees and workforce tools.
+                        </p>
+
+                    </div>
+
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mb-4">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+
+                    <form asp-controller="Account"
+                          asp-action="Login"
+                          method="post">
+
+                        <!-- Email -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold">
+                                Email Address
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control login-input"
+                                   placeholder="name@company.com"
+                                   autocomplete="email" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Password -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Password"
+                                   class="form-label fw-semibold">
+                                Password
+                            </label>
+
+                            <input asp-for="Password"
+                                   type="password"
+                                   class="form-control login-input"
+                                   placeholder="Enter your password"
+                                   autocomplete="current-password" />
+
+                            <span asp-validation-for="Password"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Sign In -->
+
+                        <div class="d-grid">
+
+                            <button type="submit"
+                                    class="btn btn-primary login-button">
+
+                                Sign In
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+
+                    <div class="security-note">
+
+                        🔒 Secure access to your workforce
+
+                    </div>
 
                 </div>
 
-                @if (ViewBag.Error != null)
-                {
-                    <div class="alert alert-danger">
+            </div>
 
-                        @ViewBag.Error
 
-                    </div>
-                }
-
-                <form asp-action="Login"
-                      method="post">
-
-                    <div class="mb-4">
-
-                        <label asp-for="Email"
-                               class="form-label fw-semibold">
-
-                            Email Address
-
-                        </label>
-
-                        <input asp-for="Email"
-                               class="form-control form-control-lg"
-                               placeholder="name@company.com" />
-
-                        <span asp-validation-for="Email"
-                              class="text-danger">
-                        </span>
-
-                    </div>
-
-                    <div class="mb-4">
-
-                        <label asp-for="Password"
-                               class="form-label fw-semibold">
-
-                            Password
-
-                        </label>
-
-                        <input asp-for="Password"
-                               type="password"
-                               class="form-control form-control-lg"
-                               placeholder="Enter your password" />
-
-                        <span asp-validation-for="Password"
-                              class="text-danger">
-                        </span>
-
-                    </div>
-
-                    <div class="d-grid">
-
-                        <button type="submit"
-                                class="btn btn-primary btn-lg">
-
-                            Sign In
-
-                        </button>
-
-                    </div>
-
-                </form>
-
+            <div class="login-footer">
+                CrewSync © 2026
             </div>
 
         </div>
 
-        <div class="text-center mt-3">
-
-            <small class="text-muted">
-                CrewSync © 2026
-            </small>
-
-        </div>
-
     </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-</div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-@section Scripts
-{
     <partial name="_ValidationScriptsPartial" />
-}
+
+</body>
+
+</html>

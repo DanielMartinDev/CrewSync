@@ -154,6 +154,37 @@ namespace Shift_Planner___API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Shift_Planner_API.Models.Absence", b =>
+                {
+                    b.Property<int>("AbsenceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AbsenceID"));
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("AbsenceID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.ToTable("Absences");
+                });
+
             modelBuilder.Entity("Shift_Planner___API.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -396,6 +427,17 @@ namespace Shift_Planner___API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Shift_Planner_API.Models.Absence", b =>
+                {
+                    b.HasOne("Shift_Planner___API.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Shift_Planner___API.Models.Availability", b =>

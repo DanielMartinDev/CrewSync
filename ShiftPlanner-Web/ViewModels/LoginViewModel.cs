@@ -1,9 +1,14 @@
-﻿namespace ShiftPlanner_Web.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShiftPlanner_Web.ViewModels
 {
     public class LoginViewModel
     {
-        public string Email { get; set; } = "";
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = String.Empty;
 
-        public string Password { get; set; } = "";
+        [Required]
+        public string Password { get; set; } = String.Empty;
     }
 }

@@ -29,8 +29,8 @@ namespace Shift_Planner___API.Data
             }
 
             var adminUser =
-    await userManager.FindByEmailAsync(
-        "admin@shiftplanner.com");
+                await userManager.FindByEmailAsync(
+                    "admin@shiftplanner.com");
 
             if (adminUser == null)
             {
@@ -68,42 +68,6 @@ namespace Shift_Planner___API.Data
                 await userManager.AddToRoleAsync(
                     managerUser,
                     "Manager");
-            }
-
-            var employeeUser =
-                await userManager.FindByEmailAsync(
-                    "employee@shiftplanner.com");
-
-            if (employeeUser == null)
-            {
-                employeeUser = new ApplicationUser
-                {
-                    UserName = "employee@shiftplanner.com",
-                    Email = "employee@shiftplanner.com"
-                };
-
-                await userManager.CreateAsync(
-                    employeeUser,
-                    "Employee123!");
-
-                await userManager.AddToRoleAsync(
-                    employeeUser,
-                    "Employee");
-            }
-
-            var context =
-            services.GetRequiredService<ShiftPlannerContext>();
-
-            var employee =
-                context.Employees
-                    .FirstOrDefault(e => e.Name == "Daniel");
-
-            if (employee != null &&
-                string.IsNullOrEmpty(employee.UserId))
-            {
-                employee.UserId = employeeUser!.Id;
-
-                context.SaveChanges();
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -24,197 +23,461 @@
           href="~/ShiftPlanner_Web.styles.css"
           asp-append-version="true" />
 
+    <style>
+
+        body {
+            background: #f6f8fb;
+        }
+
+        .app-shell {
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+
+        .app-sidebar {
+            width: 250px;
+            min-width: 250px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            min-height: 100vh;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .brand {
+            padding: 24px 22px;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #0d6efd;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 4px;
+            margin-left: 49px;
+            font-size: 12px;
+            color: #8a93a2;
+        }
+
+        /* Navigation */
+
+        .sidebar-nav {
+            padding: 18px 12px;
+        }
+
+        .nav-section {
+            padding: 0 12px;
+            margin: 10px 0 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: #9aa2af;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px 13px;
+            margin-bottom: 4px;
+            border-radius: 9px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all .15s ease;
+        }
+
+        .sidebar-link:hover {
+            background: #f1f5f9;
+            color: #0d6efd;
+        }
+
+        .sidebar-link.active {
+            background: #eaf2ff;
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Main */
+
+        .app-main {
+            min-width: 0;
+            flex: 1;
+        }
+
+        /* Top bar */
+
+        .topbar {
+            height: 72px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 650;
+            color: #172033;
+            margin: 0;
+        }
+
+        .page-subtitle {
+            font-size: 12px;
+            color: #8a93a2;
+            margin-top: 2px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #eaf2ff;
+            color: #0d6efd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .user-details {
+            line-height: 1.2;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #273142;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: #8a93a2;
+            margin-top: 3px;
+        }
+
+        .logout-button {
+            margin-left: 8px;
+        }
+
+        /* Content */
+
+        .app-content {
+            padding: 30px;
+        }
+
+        /* Mobile */
+
+       @@media (max-width: 900px) {
+
+            .app-sidebar {
+                width: 210px;
+                min-width: 210px;
+            }
+
+            .app-content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .user-details {
+                display: none;
+            }
+
+        }
+
+        @@media (max-width: 700px) {
+
+            .app-sidebar {
+                width: 70px;
+                min-width: 70px;
+            }
+
+            .brand {
+                padding: 18px 0;
+                text-align: center;
+            }
+
+            .brand-logo {
+                margin: 0;
+            }
+
+            .brand-name,
+            .brand-subtitle,
+            .nav-section {
+                display: none;
+            }
+
+            .sidebar-nav {
+                padding: 15px 8px;
+            }
+
+            .sidebar-link {
+                justify-content: center;
+                padding: 12px;
+            }
+
+            .sidebar-link span:not(.nav-icon) {
+                display: none;
+            }
+
+            .app-content {
+                padding: 16px;
+            }
+
+            .topbar {
+                height: 64px;
+                padding: 0 16px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body class="bg-light">
+<body>
 
-    <div class="d-flex min-vh-100">
+    <div class="d-flex app-shell">
 
         <!-- Sidebar -->
 
-        <aside class="bg-white border-end shadow-sm"
-               style="width:260px;">
+        <aside class="app-sidebar no-print">
 
-            <div class="p-4 border-bottom">
+            <div class="brand">
 
-                <h3 class="fw-bold text-primary mb-0">
-                    CrewSync
-                </h3>
+                <div>
+                    <span class="brand-logo">C</span>
+                    <span class="brand-name">CrewSync</span>
+                </div>
 
-                <small class="text-muted">
+                <span class="brand-subtitle">
                     Workforce Management
-                </small>
+                </span>
 
             </div>
 
-            <nav class="p-3">
+            <nav class="sidebar-nav">
 
-                <ul class="nav flex-column">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="nav-section">
+                        Overview
+                    </div>
 
-                    @if (User.Identity?.IsAuthenticated == true &&
-                         !User.IsInRole("Employee"))
+                    @if (!User.IsInRole("Employee"))
                     {
-                        <li class="nav-item mb-2">
+                        <a asp-controller="Home"
+                           asp-action="Dashboard"
+                           class="sidebar-link">
 
-                            <a class="nav-link text-dark"
-                               asp-controller="Home"
-                               asp-action="Dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span>Dashboard</span>
 
-                                📊 Dashboard
-
-                            </a>
-
-                        </li>
+                        </a>
                     }
 
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Employee"))
                     {
-                        <li class="nav-item mb-2">
+                        <a asp-controller="EmployeePortal"
+                           asp-action="Index"
+                           class="sidebar-link">
 
-                            <a class="nav-link text-dark"
-                               asp-controller="Employee"
-                               asp-action="Index">
+                            <span class="nav-icon">👤</span>
+                            <span>My Portal</span>
 
-                                👥 Employees
-
-                            </a>
-
-                        </li>
+                        </a>
                     }
 
                     @if (User.IsInRole("Admin") ||
                          User.IsInRole("Manager"))
                     {
-                        <li class="nav-item mb-2">
+                        <div class="nav-section mt-4">
+                            Management
+                        </div>
 
-                            <a class="nav-link text-dark"
-                               asp-controller="Shift"
-                               asp-action="Index">
+                        <a asp-controller="Shift"
+                           asp-action="Index"
+                           class="sidebar-link">
 
-                                📅 Schedule
+                            <span class="nav-icon">📅</span>
+                            <span>Schedule</span>
 
-                            </a>
+                        </a>
 
-                        </li>
+                        <a asp-controller="HolidayRequest"
+                           asp-action="Index"
+                           class="sidebar-link">
 
-                        <li class="nav-item mb-2">
+                            <span class="nav-icon">🏖️</span>
+                            <span>Holiday Requests</span>
 
-                            <a class="nav-link text-dark"
-                               asp-controller="HolidayRequest"
-                               asp-action="Index">
+                        </a>
 
-                                🏖 Holiday Requests
+                        <a asp-controller="Absence"
+                           asp-action="Index"
+                           class="sidebar-link">
 
-                            </a>
-
-                        </li>
+                            <span class="nav-icon">🔴</span>
+                            <span>Absences</span>
+                        </a>
                     }
 
-                    @if (User.IsInRole("Employee"))
+                    @if (User.IsInRole("Admin"))
                     {
-                        <li class="nav-item mb-2">
+                        <a asp-controller="Employee"
+                           asp-action="Index"
+                           class="sidebar-link">
 
-                            <a class="nav-link text-dark"
-                               asp-controller="EmployeePortal"
-                               asp-action="Index">
+                            <span class="nav-icon">👥</span>
+                            <span>Employees</span>
 
-                                👤 My Portal
-
-                            </a>
-
-                        </li>
+                        </a>
                     }
-
-                </ul>
+                }
 
             </nav>
 
         </aside>
 
-        <!-- Main Content -->
 
-        <div class="flex-grow-1">
+        <!-- Main -->
+
+        <div class="app-main">
 
             <!-- Top Bar -->
 
-            <header class="bg-white border-bottom shadow-sm">
+            <header class="topbar no-print">
 
-                <div class="container-fluid">
+                <div>
 
-                    <div class="d-flex justify-content-between align-items-center py-3">
+                    <h1 class="page-title">
+                        @ViewData["Title"]
+                    </h1>
 
-                        <div>
+                    <div class="page-subtitle">
+                        Workforce Management
+                    </div>
 
-                            <h5 class="mb-0 fw-semibold">
-                                @ViewData["Title"]
-                            </h5>
+                </div>
 
+
+                <div class="user-area">
+
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        var userName =
+                            User.Identity.Name ?? "User";
+
+                        var initial =
+                            userName
+                                .Substring(0, 1)
+                                .ToUpper();
+
+                        <div class="user-avatar">
+                            @initial
                         </div>
 
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="user-details">
 
-                            @if (User.Identity?.IsAuthenticated == true)
-                            {
-                                <span class="text-muted">
+                            <div class="user-name">
+                                @userName
+                            </div>
 
-                                    @User.Identity.Name
-
-                                </span>
+                            <div class="user-role">
 
                                 @if (User.IsInRole("Admin"))
                                 {
-                                    <span class="badge bg-danger">
-                                        Store Manager
-                                    </span>
+                                    <span>Store Manager</span>
                                 }
                                 else if (User.IsInRole("Manager"))
                                 {
-                                    <span class="badge bg-warning text-dark">
-                                        Deputy Store Manager
-                                    </span>
+                                    <span>Deputy Store Manager</span>
                                 }
                                 else if (User.IsInRole("Employee"))
                                 {
-                                    <span class="badge bg-primary">
-                                        Employee
-                                    </span>
+                                    <span>Employee</span>
+                                }
+                                else
+                                {
+                                    <span>User</span>
                                 }
 
-                                <form asp-controller="Account"
-                                      asp-action="Logout"
-                                      method="post">
-
-                                    <button type="submit"
-                                            class="btn btn-outline-danger btn-sm">
-
-                                        Logout
-
-                                    </button>
-
-                                </form>
-                            }
-                            else
-                            {
-                                <a asp-controller="Account"
-                                   asp-action="Login"
-                                   class="btn btn-primary btn-sm">
-
-                                    Login
-
-                                </a>
-                            }
+                            </div>
 
                         </div>
 
-                    </div>
+                        <form asp-controller="Account"
+                              asp-action="Logout"
+                              method="post"
+                              class="logout-button">
+
+                            <button type="submit"
+                                    class="btn btn-outline-secondary btn-sm">
+
+                                Logout
+
+                            </button>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account"
+                           asp-action="Login"
+                           class="btn btn-primary btn-sm">
+
+                            Login
+
+                        </a>
+                    }
 
                 </div>
 
             </header>
 
+
             <!-- Page Content -->
 
-            <main class="p-4">
+            <main class="app-content">
 
                 @RenderBody()
 
@@ -224,6 +487,7 @@
 
     </div>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -231,7 +495,9 @@
     <script src="~/js/site.js"
             asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false)
 
 </body>
 

@@ -16,15 +16,15 @@ namespace Shift_Planner___API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Shift>> GetShifts()
+        public async Task<ActionResult<List<Shift>>> GetShifts()
         {
-            return Ok(_shiftService.GetShifts());
+            return Ok(await _shiftService.GetShifts());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Shift> GetShift(int id)
+        public async Task<ActionResult<Shift>> GetShift(int id)
         {
-            var shift = _shiftService.GetShift(id);
+            var shift = await _shiftService.GetShift(id);
 
             if (shift == null)
                 return NotFound();

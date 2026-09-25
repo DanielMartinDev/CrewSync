@@ -15,12 +15,63 @@ namespace ShiftPlanner_Web.Controllers
             _httpClient = factory.CreateClient();
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? weekStart)
         {
-            var shifts = await _httpClient.GetFromJsonAsync<List<Shift>>
-            (
-                "https://localhost:7255/api/Shift"
-            );
+            var selectedWeekStart = weekStart ?? DateTime.Today.AddDays(
+                -(((int)DateTime.Today.DayOfWeek + 6) % 7));
+
+            var selectedWeekEnd = selectedWeekStart.AddDays(6);
+
+            var shifts = await _httpClient.GetFromJsonAsync<List<Shift>>(
+                "https://localhost:7255/api/Shift");
+
+            var employees = await _httpClient.GetFromJsonAsync<List<Employee>>(
+                "https://localhost:7255/api/Employee");
+
+            shifts = shifts?
+                .Where(s =>
+                    s.StartTime.Date >= selectedWeekStart.Date &&
+                    s.StartTime.Date <= selectedWeekEnd.Date)
+                .ToList()
+                ?? new List<Shift>();
+
+            var absences =
+            await _httpClient.GetFromJsonAsync<List<Absence>>(
+                "https://localhost:7255/api/Absence")
+            ?? new List<Absence>();
+
+            var holidays =
+            await _httpClient.GetFromJsonAsync<List<HolidayRequest>>(
+                "https://localhost:7255/api/HolidayRequest")
+            ?? new List<HolidayRequest>();
+
+            holidays = holidays
+                .Where(h =>
+                    h.Status == HolidayRequestStatus.Approved &&
+                    h.StartDate.Date <= selectedWeekEnd.Date &&
+                    h.EndDate.Date >= selectedWeekStart.Date)
+                .ToList();
+
+            ViewBag.Holidays = holidays;
+
+            var weekStartDate =
+                DateOnly.FromDateTime(selectedWeekStart.Date);
+
+            var weekEndDate =
+                DateOnly.FromDateTime(selectedWeekEnd.Date);
+
+            absences = absences
+                .Where(a =>
+                    a.StartDate <= weekEndDate &&
+                    a.EndDate >= weekStartDate)
+                .ToList();
+
+            ViewBag.Absences = absences;
+
+            employees ??= new List<Employee>();
+
+            ViewBag.WeekStart = selectedWeekStart;
+            ViewBag.Employees = employees;
 
             return View(shifts);
         }

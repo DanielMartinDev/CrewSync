@@ -7,9 +7,9 @@
         public int EmployeeID { get; set; }
         public Employee? Employee { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; } = DateTime.Today.AddHours(9);
 
-        public DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; } = DateTime.Today.AddHours(17);
 
         public int BreakDuration { get; set; }
 

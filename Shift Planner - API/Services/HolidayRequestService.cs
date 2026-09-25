@@ -46,14 +46,9 @@ namespace Shift_Planner___API.Services
                 .ToList();
         }
 
-        public HolidayRequest
-            CreateHolidayRequest(
-                HolidayRequest holidayRequest)
+        public HolidayRequest CreateHolidayRequest(
+               HolidayRequest holidayRequest)
         {
-            shiftPlannerContext
-                .HolidayRequests
-                .Add(holidayRequest);
-
             var existingRequest =
             shiftPlannerContext.HolidayRequests
             .Any(h =>
@@ -75,14 +70,17 @@ namespace Shift_Planner___API.Services
             }
 
             shiftPlannerContext
+                .HolidayRequests
+                .Add(holidayRequest);
+
+            shiftPlannerContext
                 .SaveChanges();
 
             return holidayRequest;
         }
 
-        public bool UpdateHolidayRequest(
-            int id,
-            HolidayRequest updatedHolidayRequest)
+        public bool UpdateHolidayRequest( int id,
+        HolidayRequest updatedHolidayRequest)
         {
             var holidayRequest =
                 shiftPlannerContext
@@ -92,6 +90,29 @@ namespace Shift_Planner___API.Services
 
             if (holidayRequest == null)
                 return false;
+
+            if (updatedHolidayRequest.EndDate <
+                updatedHolidayRequest.StartDate)
+            {
+                throw new Exception(
+                    "Holiday end date cannot be before the start date.");
+            }
+
+            var overlappingRequest =
+                shiftPlannerContext
+                    .HolidayRequests
+                    .Any(h =>
+                        h.HolidayRequestID != id &&
+                        h.EmployeeID ==
+                            updatedHolidayRequest.EmployeeID &&
+                        updatedHolidayRequest.StartDate <= h.EndDate &&
+                        updatedHolidayRequest.EndDate >= h.StartDate);
+
+            if (overlappingRequest)
+            {
+                throw new Exception(
+                    "This employee already has a holiday request covering some or all of these dates.");
+            }
 
             holidayRequest.EmployeeID =
                 updatedHolidayRequest.EmployeeID;
@@ -105,11 +126,10 @@ namespace Shift_Planner___API.Services
             holidayRequest.Status =
                 updatedHolidayRequest.Status;
 
-            holidayRequest.ManagerNotes = 
+            holidayRequest.ManagerNotes =
                 updatedHolidayRequest.ManagerNotes;
 
-            shiftPlannerContext
-                .SaveChanges();
+            shiftPlannerContext.SaveChanges();
 
             return true;
         }

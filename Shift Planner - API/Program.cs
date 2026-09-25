@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shift_Planner___API.Data;
 using Shift_Planner___API.Services;
+using Shift_Planner_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddScoped<ShiftService>();
 builder.Services.AddScoped<AvailabilityService>();
 builder.Services.AddScoped<HolidayRequestService>();
+builder.Services.AddScoped<AbsenceService>();
 
 var app = builder.Build();
 

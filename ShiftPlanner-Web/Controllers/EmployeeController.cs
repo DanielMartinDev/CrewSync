@@ -181,20 +181,35 @@ namespace ShiftPlanner_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Employee employee)
         {
+            var employeeResponse =
+                await _httpClient.DeleteAsync(
+                    $"https://localhost:7255/api/Employee/{employee.EmployeeID}");
+
+            if (!employeeResponse.IsSuccessStatusCode)
+            {
+                return BadRequest("Unable to delete employee.");
+            }
+
             if (!string.IsNullOrEmpty(employee.UserId))
             {
                 var user =
-                    await _userManager.FindByIdAsync(
-                        employee.UserId);
+                    await _userManager.FindByIdAsync(employee.UserId);
 
                 if (user != null)
                 {
-                    await _userManager.DeleteAsync(user);
+                    var result =
+                        await _userManager.DeleteAsync(user);
+
+                    if (!result.Succeeded)
+                    {
+                        return BadRequest(
+                            string.Join(
+                                ", ",
+                                result.Errors.Select(
+                                    e => e.Description)));
+                    }
                 }
             }
-
-            await _httpClient.DeleteAsync(
-                $"https://localhost:7255/api/Employee/{employee.EmployeeID}");
 
             return RedirectToAction(nameof(Index));
         }

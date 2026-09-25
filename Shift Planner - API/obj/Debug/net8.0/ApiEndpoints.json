@@ -1,5 +1,114 @@
 [
   {
+    "ContainingType": "Shift_Planner_API.Controllers.AbsenceController",
+    "Method": "GetAbsences",
+    "RelativePath": "api/Absence",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Shift_Planner_API.Models.Absence, Shift Planner - API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner_API.Controllers.AbsenceController",
+    "Method": "CreateAbsence",
+    "RelativePath": "api/Absence",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "absence",
+        "Type": "Shift_Planner_API.Models.Absence",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner_API.Models.Absence",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner_API.Controllers.AbsenceController",
+    "Method": "GetAbsence",
+    "RelativePath": "api/Absence/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Shift_Planner_API.Models.Absence",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shift_Planner_API.Controllers.AbsenceController",
+    "Method": "UpdateAbsence",
+    "RelativePath": "api/Absence/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "absence",
+        "Type": "Shift_Planner_API.Models.Absence",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Shift_Planner_API.Controllers.AbsenceController",
+    "Method": "DeleteAbsence",
+    "RelativePath": "api/Absence/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Shift_Planner___API.Controllers.AvailabilityController",
     "Method": "GetAll",
     "RelativePath": "api/Availability",

@@ -3,213 +3,652 @@
 @{
     ViewData["Title"] = "Schedule";
 
-    var weekStart = DateTime.Today.AddDays(
-    -(int)DateTime.Today.DayOfWeek + 1);
+    var today = DateTime.Today;
+
+    var weekStart = ViewBag.WeekStart != null
+        ? (DateTime)ViewBag.WeekStart
+        : today.AddDays(-(((int)today.DayOfWeek + 6) % 7));
 
     var weekEnd = weekStart.AddDays(6);
 
     var totalShifts = Model.Count;
 
-    var totalHours =
-        Model.Sum(s => s.ShiftHours);
+    var totalHours = Model.Sum(s => s.ShiftHours);
 
-    var employeeCount =
-        Model.Select(s => s.EmployeeID)
-             .Distinct()
-             .Count();
+    var absences =
+        ViewBag.Absences as List<Shift_Planner_Web.Models.Absence>
+        ?? new List<Shift_Planner_Web.Models.Absence>();
 
-    var todayShifts =
-        Model.Where(s =>
-            s.StartTime.Date ==
-            DateTime.Today)
-        .OrderBy(s => s.StartTime)
+    var holidays =
+        ViewBag.Holidays as List<Shift_Planner_Web.Models.HolidayRequest>
+        ?? new List<Shift_Planner_Web.Models.HolidayRequest>();
+
+    var employeeCount = Model
+        .Select(s => s.EmployeeID)
+        .Distinct()
+        .Count();
+
+    var employees = Model
+        .Where(s => s.Employee != null)
+        .GroupBy(s => new
+        {
+            s.EmployeeID,
+            Name = s.Employee!.Name
+        })
+        .OrderBy(e => e.Key.Name)
         .ToList();
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
+<div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 no-print">
 
-        <h1 class="fw-bold">
+    <div>
+        <h1 class="fw-bold mb-1">
             Schedule
         </h1>
 
         <p class="text-muted mb-0">
-            Workforce scheduling overview.
+            Plan and manage your team's weekly rota.
         </p>
+    </div>
+
+    <div class="d-flex gap-2 mt-3 mt-lg-0">
+
+        <a asp-action="Index"
+           asp-route-weekStart="@weekStart.AddDays(-7).ToString("yyyy-MM-dd")"
+           class="btn btn-outline-secondary">
+            ← Previous Week
+        </a>
+
+        <a asp-action="Index"
+           asp-route-weekStart="@weekStart.AddDays(7).ToString("yyyy-MM-dd")"
+           class="btn btn-primary">
+            Next Week →
+        </a>
+
+        <button type="button"
+                class="btn btn-outline-primary no-print"
+                onclick="printRota()">
+            🖨 Print Rota
+        </button>
 
     </div>
 
-    <a asp-action="Create"
-       class="btn btn-primary">
-
-        Create Shift
-
-    </a>
 </div>
 
-<div class="row mb-4">
-    <div class="col-md-4">
+<!-- Summary Cards -->
 
-        <div class="card shadow-sm">
+<div class="row g-3 mb-4 no-print">
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted">
-                    Total Shifts
+                <div class="text-primary small fw-semibold mb-2">
+                    SHIFTS
                 </div>
 
-                <h2>
+                <h2 class="fw-bold mb-1">
                     @totalShifts
                 </h2>
 
+                <div class="text-muted small">
+                    Scheduled this week
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card shadow-sm">
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted">
-                    Total Hours
+                <div class="text-success small fw-semibold mb-2">
+                    HOURS
                 </div>
 
-                <h2>
+                <h2 class="fw-bold mb-1">
                     @totalHours.ToString("0.0")
                 </h2>
 
+                <div class="text-muted small">
+                    Total scheduled hours
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
 
-        <div class="card shadow-sm">
+        <div class="card border-0 shadow-sm h-100">
 
             <div class="card-body">
 
-                <div class="text-muted">
-                    Employees Scheduled
+                <div class="text-info small fw-semibold mb-2">
+                    TEAM
                 </div>
 
-                <h2>
+                <h2 class="fw-bold mb-1">
                     @employeeCount
                 </h2>
+
+                <div class="text-muted small">
+                    Employees scheduled
+                </div>
 
             </div>
 
         </div>
 
     </div>
+
 </div>
 
-<div class="card shadow-sm mb-4">
+<!-- Week Header -->
+
+<div class="card border-0 shadow-sm mb-4 no-print">
+
     <div class="card-body">
 
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
 
-            <h4 class="mb-0">
+            <div>
 
-                Current Week
+                <h4 class="fw-bold mb-1">
+                    Weekly Rota
+                </h4>
 
-            </h4>
+                <div class="text-muted">
+                    @weekStart.ToString("dd MMM yyyy")
+                    -
+                    @weekEnd.ToString("dd MMM yyyy")
+                </div>
 
-            <span class="text-muted">
+            </div>
 
-                @weekStart.ToString("dd MMM")
-                -
-                @weekEnd.ToString("dd MMM yyyy")
+            <div class="mt-3 mt-md-0">
 
-            </span>
+                <span class="badge bg-light text-dark border px-3 py-2">
+                    Week @System.Globalization.ISOWeek.GetWeekOfYear(weekStart)
+                </span>
+
+            </div>
 
         </div>
 
     </div>
+
 </div>
 
-<div class="card shadow-sm">
-    <div class="card-header bg-white">
+<!-- Weekly Rota -->
 
-        <h5 class="mb-0">
-            Today's Shifts
-        </h5>
+<div class="card border-0 shadow-sm">
 
-    </div>
+    <div class="table-responsive">
 
-    <div class="card-body p-0">
+        <table class="table align-middle mb-0 schedule-table">
 
-        @if (todayShifts.Any())
-        {
-            <table class="table table-hover mb-0">
+            <thead class="table-light">
 
-                <thead>
+                <tr>
 
+                    <th class="employee-column">
+                        Employee
+                    </th>
+
+                    @for (int i = 0; i < 7; i++)
+                    {
+                        var day = weekStart.AddDays(i);
+                        var isToday = day.Date == today.Date;
+
+                        <th class="text-center schedule-day @(isToday ? "today-column" : "")">
+
+                            <div class="fw-semibold">
+                                @day.ToString("ddd")
+                            </div>
+
+                            <small class="text-muted">
+                                @day.ToString("dd MMM")
+                            </small>
+
+                        </th>
+                    }
+
+                    <th class="text-center">
+                        Total
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @if (!employees.Any())
+                {
                     <tr>
 
-                        <th>Employee</th>
-                        <th>Time</th>
-                        <th>Hours</th>
-                        <th></th>
+                        <td colspan="9"
+                            class="text-center py-5">
+
+                            <div class="fw-semibold mb-1">
+                                No shifts scheduled
+                            </div>
+
+                            <div class="text-muted small">
+                                There are no shifts in this week's rota yet.
+                            </div>
+
+                        </td>
 
                     </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @foreach (var shift in todayShifts)
+                }
+                else
+                {
+                    @foreach (var employeeGroup in employees)
                     {
+                        var employeeId = employeeGroup.Key.EmployeeID;
+                        var employeeName = employeeGroup.Key.Name;
+
+                        var employeeShifts = Model
+                            .Where(s => s.EmployeeID == employeeId)
+                            .ToList();
+
+                        var employeeHours = employeeShifts
+                            .Sum(s => s.ShiftHours);
+
                         <tr>
 
-                            <td>
-                                @shift.Employee?.Name
-                            </td>
+                            <!-- Employee -->
 
-                            <td>
+                            <td class="employee-column">
 
-                                @shift.StartTime.ToString("HH:mm")
-                                -
-                                @shift.EndTime.ToString("HH:mm")
+                                <div class="fw-semibold">
+                                    @employeeName
+                                </div>
 
                             </td>
 
-                            <td>
-                                @shift.ShiftHours
-                            </td>
+                            <!-- Days -->
+                            @for (int i = 0; i < 7; i++)
+                            {
+                                var day = weekStart.AddDays(i);
+                                var isToday = day.Date == today.Date;
 
-                            <td>
+                                var shift = employeeShifts
+                                    .FirstOrDefault(s =>
+                                        s.StartTime.Date == day.Date);
 
-                                <a asp-action="Edit"
-                                   asp-route-id="@shift.ShiftID"
-                                   class="btn btn-sm btn-outline-primary">
+                                /*
+                                 * Check whether this employee is absent
+                                 * on the current day.
+                                 */
+                                var absence = absences.FirstOrDefault(a =>
+                                    a.EmployeeID == employeeId &&
+                                    DateOnly.FromDateTime(day.Date) >= a.StartDate &&
+                                    DateOnly.FromDateTime(day.Date) <= a.EndDate);
 
-                                    Edit
+                                /*
+                                 * Check whether this employee has an
+                                 * approved holiday on the current day.
+                                 */
+                                var holiday = holidays.FirstOrDefault(h =>
+                                    h.EmployeeID == employeeId &&
+                                    h.Status == Shift_Planner_Web.Models.HolidayRequestStatus.Approved &&
+                                    day.Date >= h.StartDate.Date &&
+                                    day.Date <= h.EndDate.Date);
 
-                                </a>
+                                <td class="text-center schedule-cell @(isToday ? "today-column" : "")">
+
+                                    @if (absence != null)
+                                    {
+                                        <!-- ABSENCE -->
+
+                                        <div class="empty-schedule-cell">
+
+                                            <span class="badge bg-danger text-white">
+                                                Absent
+                                            </span>
+
+                                            <small class="d-block text-muted mt-1">
+                                                @absence.Type
+                                            </small>
+
+                                        </div>
+                                    }
+                                    else if (holiday != null)
+                                    {
+                                        <!-- HOLIDAY -->
+
+                                        <div class="empty-schedule-cell">
+
+                                            <span class="badge bg-warning text-dark">
+                                                Holiday
+                                            </span>
+
+                                        </div>
+                                    }
+                                    else if (shift != null)
+                                    {
+                                        <!-- SHIFT -->
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@shift.ShiftID"
+                                           class="text-decoration-none">
+
+                                            <div class="shift-card">
+
+                                                <div class="fw-semibold text-dark">
+
+                                                    @shift.StartTime.ToString("HH:mm")
+                                                    -
+                                                    @shift.EndTime.ToString("HH:mm")
+
+                                                </div>
+
+                                                <div class="small text-muted">
+
+                                                    @shift.ShiftHours.ToString("0.0")
+                                                    hrs
+
+                                                </div>
+
+                                                @if (!string.IsNullOrWhiteSpace(shift.Notes))
+                                                {
+                                                    <div class="small fw-semibold text-dark mt-1">
+
+                                                        @shift.Notes
+
+                                                    </div>
+                                                }
+
+                                            </div>
+
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <!-- OFF -->
+
+                                        <a asp-action="Create"
+                                           asp-route-employeeId="@employeeId"
+                                           asp-route-date="@day.ToString("yyyy-MM-dd")"
+                                           class="empty-schedule-cell text-decoration-none">
+
+                                            <span class="text-muted">
+                                                Off
+                                            </span>
+
+                                            <span class="add-shift-text">
+                                                + Add shift
+                                            </span>
+
+                                        </a>
+                                    }
+
+                                </td>
+                            }
+
+                            <!-- Total -->
+
+                            <td class="text-center">
+
+                                <span class="badge bg-success fs-6">
+
+                                    @employeeHours.ToString("0.0")
+                                    hrs
+
+                                </span>
 
                             </td>
 
                         </tr>
                     }
+                }
 
-                </tbody>
+            </tbody>
 
-            </table>
-        }
-        else
-        {
-            <div class="p-4 text-center text-muted">
-
-                No shifts today.
-
-            </div>
-        }
+        </table>
 
     </div>
+
+    <script>
+            function printRota() {
+                setTimeout(function () {
+                    window.print();
+                }, 100);
+            }
+    </script>
+
 </div>
+
+<style>
+
+    /* ================================
+           Schedule Table
+           ================================ */
+
+    .schedule-table {
+        min-width: 1100px;
+    }
+
+    .employee-column {
+        min-width: 180px;
+        position: sticky;
+        left: 0;
+        background: white;
+        z-index: 2;
+    }
+
+    .schedule-day {
+        min-width: 125px;
+    }
+
+    .schedule-cell {
+        height: 105px;
+        min-width: 125px;
+    }
+
+    /* ================================
+           Today
+           ================================ */
+
+    .today-column {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    thead .today-column {
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    /* ================================
+           Shift Cards
+           ================================ */
+
+    .shift-card {
+        background-color: rgba(13, 110, 253, 0.1);
+        border-radius: 8px;
+        padding: 10px 8px;
+        transition: 0.15s ease-in-out;
+    }
+
+        .shift-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+    /* ================================
+           Empty Schedule Cells
+           ================================ */
+
+    .empty-schedule-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 80px;
+        border-radius: 8px;
+        transition: 0.15s ease-in-out;
+    }
+
+        .empty-schedule-cell:hover {
+            background-color: rgba(13, 110, 253, 0.06);
+        }
+
+    .add-shift-text {
+        display: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #0d6efd;
+        margin-top: 4px;
+    }
+
+    .empty-schedule-cell:hover .add-shift-text {
+        display: block;
+    }
+
+    /* ================================
+           Print Layout
+           ================================ */
+
+    @@media print {
+
+        @@page {
+            size: landscape;
+            margin: 10mm;
+        }
+
+        body {
+            background: white !important;
+            font-size: 12px;
+        }
+        /*
+                Hide anything marked as no-print.
+            */
+
+        .no-print {
+            display: none !important;
+        }
+        /*
+                Remove Bootstrap card styling
+                from the printed rota.
+            */
+
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+        /*
+                Make the rota use the entire
+                printable page width.
+            */
+
+        .schedule-table {
+            width: 100% !important;
+            min-width: 0 !important;
+            table-layout: fixed;
+        }
+        /*
+                Employee column.
+            */
+
+        .employee-column {
+            position: static !important;
+            min-width: 140px !important;
+            width: 140px;
+        }
+        /*
+                Day columns.
+            */
+
+        .schedule-day {
+            min-width: 0 !important;
+            width: auto;
+        }
+
+        .schedule-cell {
+            height: 75px !important;
+            min-width: 0 !important;
+            padding: 6px !important;
+        }
+        /*
+                Shift cards become printer-friendly.
+            */
+
+        .shift-card {
+            background: white !important;
+            border: 1px solid #333 !important;
+            border-radius: 4px !important;
+            padding: 6px !important;
+            box-shadow: none !important;
+        }
+
+            .shift-card:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+        /*
+                Remove today's blue highlighting
+                from the printed rota.
+            */
+
+        .today-column {
+            background: white !important;
+        }
+        /*
+                Empty cells.
+            */
+
+        .empty-schedule-cell {
+            min-height: 50px !important;
+            color: #555 !important;
+        }
+        /*
+                Hide the "+ Add shift" text.
+            */
+
+        .add-shift-text {
+            display: none !important;
+        }
+        /*
+                Remove link styling.
+            */
+
+        a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        /*
+                Make badges printer-friendly.
+            */
+
+        .badge {
+            border: 1px solid #333 !important;
+            background: white !important;
+            color: black !important;
+        }
+        /*
+                Clean table borders.
+            */
+
+        .table {
+            border-collapse: collapse !important;
+        }
+
+            .table th,
+            .table td {
+                border: 1px solid #999 !important;
+            }
+    }
+
+</style>

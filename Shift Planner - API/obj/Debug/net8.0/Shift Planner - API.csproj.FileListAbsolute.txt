@@ -145,3 +145,4 @@ C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner 
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.pdb
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\Shift Planner - API.genruntimeconfig.cache
 C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\ref\Shift Planner - API.dll
+C:\Users\danie\Documents\Development\C# Projects\ShiftPlanner-Web\Shift Planner - API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

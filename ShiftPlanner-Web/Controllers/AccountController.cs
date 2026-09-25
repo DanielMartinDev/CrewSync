@@ -24,7 +24,8 @@ namespace ShiftPlanner_Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (User.Identity?.IsAuthenticated == true && User.IsInRole("Manager") || User.IsInRole("Admin"))
+            if (User.Identity?.IsAuthenticated == true &&
+            (User.IsInRole("Manager") || User.IsInRole("Admin")))
             {
                 return RedirectToAction(
                     "Dashboard",
@@ -36,8 +37,20 @@ namespace ShiftPlanner_Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Login(
-            LoginViewModel model)
+    LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Email) ||
+                string.IsNullOrWhiteSpace(model.Password))
+            {
+                ViewBag.Error = "Please enter your email address and password.";
+                return View(model);
+            }
+
             var result =
                 await _signInManager.PasswordSignInAsync(
                     model.Email,

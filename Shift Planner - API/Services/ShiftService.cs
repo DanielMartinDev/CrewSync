@@ -13,16 +13,20 @@ namespace Shift_Planner___API.Services
             shiftPlannerContext = context;
         }
 
-        public List<Shift> GetShifts()
-        {
-            return shiftPlannerContext.Shifts.Include(s => s.Employee).ToList();
-        }
-
-        public Shift? GetShift(int id)
+        public async Task<List<Shift>> GetShifts()
         {
             return shiftPlannerContext.Shifts
+                .AsNoTracking()
                 .Include(s => s.Employee)
-                .FirstOrDefault(s => s.ShiftID == id);
+                .ToList();
+        }
+
+        public async Task<Shift?> GetShift(int id)
+        {
+            return await shiftPlannerContext.Shifts
+                .AsNoTracking()
+                .Include(s => s.Employee)
+                .FirstOrDefaultAsync(s => s.ShiftID == id);
         }
 
         public Shift? GetShiftWithEmployee(int id)
@@ -55,6 +59,11 @@ namespace Shift_Planner___API.Services
                         $"{availability.AvailableTo:hh\\:mm} on " +
                         $"{availability.DayOfWeek}.");
                 }
+
+                if (shift.EndTime <= shift.StartTime)
+                {
+                    throw new Exception("Shift end time must be after start time.");
+                }
             }
 
             var holiday =
@@ -81,6 +90,13 @@ namespace Shift_Planner___API.Services
             {
                 throw new Exception(
                     "Employee already has a shift during this time.");
+            }
+
+            if (shift.BreakDuration >=
+               (shift.EndTime - shift.StartTime).TotalMinutes)
+            {
+                throw new Exception(
+                    "Break duration cannot be equal to or longer than the shift.");
             }
 
             shiftPlannerContext.Shifts.Add(shift);
@@ -130,8 +146,8 @@ namespace Shift_Planner___API.Services
                 .FirstOrDefault(h =>
                     h.EmployeeID == shift.EmployeeID &&
                     h.Status == HolidayRequestStatus.Approved &&
-                    shift.StartTime.Date >= h.StartDate.Date &&
-                    shift.StartTime.Date <= h.EndDate.Date);
+                    updatedShift.StartTime.Date >= h.StartDate.Date &&
+                    updatedShift.StartTime.Date <= h.EndDate.Date);
 
             if (holiday != null)
             {
@@ -140,10 +156,10 @@ namespace Shift_Planner___API.Services
             }
 
             var overlappingShift = shiftPlannerContext.Shifts.Any(s =>
-            s.EmployeeID == shift.EmployeeID &&
-            s.ShiftID != shift.ShiftID &&
-            shift.StartTime < s.EndTime &&
-            shift.EndTime > s.StartTime);
+            s.EmployeeID == updatedShift.EmployeeID &&
+            s.ShiftID != id &&
+            updatedShift.StartTime < s.EndTime &&
+            updatedShift.EndTime > s.StartTime);
 
             if (overlappingShift)
             {
@@ -151,6 +167,10 @@ namespace Shift_Planner___API.Services
                     "Employee already has a shift during this time.");
             }
 
+            if (shift.EndTime <= shift.StartTime)
+            {
+                throw new Exception("Shift end time must be after start time.");
+            }
 
             shift.EmployeeID = updatedShift.EmployeeID;
             shift.StartTime = updatedShift.StartTime;

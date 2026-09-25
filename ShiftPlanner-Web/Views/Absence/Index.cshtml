@@ -1,0 +1,134 @@
+﻿@model List<Shift_Planner_Web.Models.Absence>
+
+@{
+    ViewData["Title"] = "Absences";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="fw-bold mb-1">
+            Absences
+        </h1>
+
+        <p class="text-muted mb-0">
+            Record and manage employee absences.
+        </p>
+    </div>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        Record Absence
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="card border-0 shadow-sm">
+        <div class="card-body text-center py-5">
+
+            <h5 class="fw-bold mb-2">
+                No absences recorded
+            </h5>
+
+            <p class="text-muted mb-3">
+                Recorded employee absences will appear here.
+            </p>
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+                Record Absence
+            </a>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="card border-0 shadow-sm">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Employee</th>
+                        <th>Dates</th>
+                        <th>Type</th>
+                        <th>Notes</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var absence in Model.OrderByDescending(a => a.StartDate))
+                    {
+                        <tr>
+
+                            <td class="fw-semibold">
+                                @absence.Employee?.Name
+                            </td>
+
+                            <td>
+                                @absence.StartDate.ToString("dd MMM yyyy")
+
+                                @if (absence.EndDate != absence.StartDate)
+                                {
+                                    <span>
+                                        -
+                                        @absence.EndDate.ToString("dd MMM yyyy")
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                <span class="badge bg-danger">
+                                    @absence.Type
+                                </span>
+                            </td>
+
+                            <td>
+                                @if (string.IsNullOrWhiteSpace(absence.Notes))
+                                {
+                                    <span class="text-muted">
+                                        —
+                                    </span>
+                                }
+                                else
+                                {
+                                    @absence.Notes
+                                }
+                            </td>
+
+                            <td class="text-end">
+
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@absence.AbsenceID"
+                                       class="btn btn-outline-secondary btn-sm">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@absence.AbsenceID"
+                                       class="btn btn-outline-danger btn-sm">
+                                        Delete
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+}

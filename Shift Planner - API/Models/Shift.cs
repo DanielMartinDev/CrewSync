@@ -8,8 +8,8 @@ namespace Shift_Planner___API.Models
         [Required]
         public int EmployeeID { get; set; }
         public Employee? Employee { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime StartTime { get; set; } = DateTime.Now.AddHours(9);
+        public DateTime EndTime { get; set; } = DateTime.Now.AddHours(17);
 
         [Required]
         [Range(0, 180)]

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shift_Planner___API.Models;
+using Shift_Planner_API.Models;
 
 namespace Shift_Planner___API.Data
 {
@@ -42,5 +43,6 @@ namespace Shift_Planner___API.Data
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<HolidayRequest> HolidayRequests { get; set; }
+        public DbSet<Absence> Absences { get; set; }
     }
 }

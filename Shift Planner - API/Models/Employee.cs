@@ -14,7 +14,7 @@ namespace Shift_Planner___API.Models
         [StringLength(100,
             ErrorMessage = "Name cannot exceed 100 characters")]
         public string Name { get; set; } = string.Empty;
-        public DateTime StartDate {  get; set; }
+        public DateTime StartDate {  get; set; } = DateTime.Now.Date;
 
         [Display(Name = "Contracted Hours")]
         [Range(1, 60)]
