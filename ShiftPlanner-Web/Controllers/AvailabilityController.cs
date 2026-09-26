@@ -35,18 +35,30 @@ public class AvailabilityController : Controller
     {
         foreach (var day in availability)
         {
-            await _httpClient.PutAsJsonAsync(
-                $"https://localhost:7255/api/Availability/{day.AvailabilityID}",
-                day);
+            var response =
+                await _httpClient.PutAsJsonAsync(
+                    $"https://localhost:7255/api/Availability/{day.AvailabilityID}",
+                    day);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ViewBag.Error =
+                    await response.Content.ReadAsStringAsync();
+
+                ViewBag.EmployeeId =
+                    availability.FirstOrDefault()?.EmployeeID;
+
+                return View(availability);
+            }
         }
 
         return RedirectToAction(
-        "Details",
-        "Employee",
-        new
-        {
-            id = availability.First().EmployeeID
-        });
+            "Details",
+            "Employee",
+            new
+            {
+                id = availability.First().EmployeeID
+            });
     }
 
     [HttpGet]

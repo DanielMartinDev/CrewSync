@@ -110,8 +110,9 @@ namespace Shift_Planner___API.Services
             return holidayRequest;
         }
 
-        public bool UpdateHolidayRequest( int id,
-        HolidayRequest updatedHolidayRequest)
+        public bool UpdateHolidayRequest(
+         int id,
+         HolidayRequest updatedHolidayRequest)
         {
             var holidayRequest =
                 shiftPlannerContext
@@ -143,6 +144,45 @@ namespace Shift_Planner___API.Services
             {
                 throw new Exception(
                     "This employee already has a holiday request covering some or all of these dates.");
+            }
+
+            var employee =
+                shiftPlannerContext
+                    .Employees
+                    .Include(e => e.HolidayRequests)
+                    .FirstOrDefault(
+                        e => e.EmployeeID ==
+                            updatedHolidayRequest.EmployeeID);
+
+            if (employee == null)
+            {
+                throw new Exception(
+                    "Employee could not be found.");
+            }
+
+            var usedDays =
+                employee.HolidayRequests
+                    .Where(h =>
+                        h.HolidayRequestID != id &&
+                        h.Status == HolidayRequestStatus.Approved)
+                    .Sum(h =>
+                        (h.EndDate.Date -
+                         h.StartDate.Date).Days + 1);
+
+            var updatedRequestDays =
+                (updatedHolidayRequest.EndDate.Date -
+                 updatedHolidayRequest.StartDate.Date).Days + 1;
+
+            var remainingDays =
+                employee.HolidayAllowance - usedDays;
+
+            if (updatedHolidayRequest.Status ==
+                    HolidayRequestStatus.Approved &&
+                updatedRequestDays > remainingDays)
+            {
+                throw new Exception(
+                    $"This holiday request uses {updatedRequestDays} days, " +
+                    $"but the employee only has {remainingDays} days remaining.");
             }
 
             holidayRequest.EmployeeID =

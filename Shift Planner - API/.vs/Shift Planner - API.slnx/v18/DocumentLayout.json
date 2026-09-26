@@ -3,13 +3,50 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\controllers\\availabilitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shift planner - api\\services\\availabilityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|solutionrelative:services\\availabilityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shift planner - api\\services\\absenceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|solutionrelative:services\\absenceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shift planner - api\\services\\shiftservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|solutionrelative:services\\shiftservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shift planner - api\\services\\holidayrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF166BC7-8E6D-B963-DCDC-C027D229C3D0}|Shift Planner - API.csproj|solutionrelative:services\\holidayrequestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\controllers\\employeeportalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\controllers\\holidayrequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\controllers\\shiftcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66604C90-262B-4520-88EA-4421F200BED7}|..\\ShiftPlanner-Web\\ShiftPlanner-Web.csproj|c:\\users\\danie\\documents\\development\\c# projects\\shiftplanner-web\\shiftplanner-web\\views\\shift\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
@@ -79,24 +116,158 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AvailabilityController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\AvailabilityController.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Controllers\\AvailabilityController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\AvailabilityController.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Controllers\\AvailabilityController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAQwDgAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T09:22:10.823Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
-              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
-              "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
-              "ViewState": "AgIAAJcBAAAAAAAAAAAAALUBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:44:48.08Z",
+              "Title": "AvailabilityService.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\AvailabilityService.cs",
+              "RelativeDocumentMoniker": "Services\\AvailabilityService.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\AvailabilityService.cs",
+              "RelativeToolTip": "Services\\AvailabilityService.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAuwEcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T09:20:19.167Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "AbsenceService.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\AbsenceService.cs",
+              "RelativeDocumentMoniker": "Services\\AbsenceService.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\AbsenceService.cs",
+              "RelativeToolTip": "Services\\AbsenceService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAmwEYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T09:08:44.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HolidayRequestService.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\HolidayRequestService.cs",
+              "RelativeDocumentMoniker": "Services\\HolidayRequestService.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\HolidayRequestService.cs",
+              "RelativeToolTip": "Services\\HolidayRequestService.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAAAHIAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T09:07:41.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml*",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml*",
+              "ViewState": "AgIAACgDAAAAAAAAAAAAwEYDAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-09-26T08:43:48.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeePortalController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\EmployeePortalController.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Controllers\\EmployeePortalController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\EmployeePortalController.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Controllers\\EmployeePortalController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:55:49.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Controllers\\EmployeeController.cs",
+              "ViewState": "AgIAANQAAAAAAAAAAAAAAPIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:55:30.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShiftService.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\ShiftService.cs",
+              "RelativeDocumentMoniker": "Services\\ShiftService.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\Shift Planner - API\\Services\\ShiftService.cs",
+              "RelativeToolTip": "Services\\ShiftService.cs",
+              "ViewState": "AgIAALwAAAAAAAAAAAAswNEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:48:50.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Program.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Program.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Program.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T09:03:38.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HolidayRequestController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\HolidayRequestController.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Controllers\\HolidayRequestController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\HolidayRequestController.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Controllers\\HolidayRequestController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:54:58.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ShiftController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\ShiftController.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Controllers\\ShiftController.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Controllers\\ShiftController.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Controllers\\ShiftController.cs",
+              "ViewState": "AgIAAIkAAAAAAAAAAAA9wJoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:40:39.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Details.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Details.cshtml",
@@ -104,12 +275,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Details.cshtml",
               "ViewState": "AgIAAC8BAAAAAAAAAAAAAE0BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:44:30.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:44:30.613Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 13,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Delete.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Delete.cshtml",
@@ -122,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Create.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Create.cshtml",
@@ -130,12 +300,37 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Create.cshtml",
               "ViewState": "AgIAAI0BAAAAAAAAAAAAAKsBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:43:53.301Z",
+              "WhenOpened": "2026-09-25T23:43:53.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Edit.cshtml",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAAALUBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-09-25T23:44:48.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml.cs",
+              "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-26T08:43:49.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\HolidayRequest\\Edit.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Edit.cshtml",
@@ -143,25 +338,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Edit.cshtml",
               "ViewState": "AgIAADoBAAAAAAAAAAAAAFgBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:43:29.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:43:29.209Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
-              "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
-              "ToolTip": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
-              "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shift\\Index.cshtml",
-              "ViewState": "AgIAACkDAAAAAAAAAAAAAD4DAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:31:11.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\HolidayRequest\\Delete.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Delete.cshtml",
@@ -169,12 +350,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Delete.cshtml",
               "ViewState": "AgIAAAsBAAAAAAAAAAAAACgBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:43:07.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:43:07.679Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 20,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\HolidayRequest\\Create.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Create.cshtml",
@@ -182,12 +362,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Create.cshtml",
               "ViewState": "AgIAANQAAAAAAAAAAAAAAPIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:42:45.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:42:45.04Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 21,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Employee\\Delete.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Employee\\Delete.cshtml",
@@ -195,16 +374,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Employee\\Delete.cshtml",
               "ViewState": "AgIAACABAAAAAAAAAAAAAD0BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:37:43.352Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+              "WhenOpened": "2026-09-25T23:37:43.352Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\HolidayRequest\\Index.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Index.cshtml",
@@ -212,12 +386,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\HolidayRequest\\Index.cshtml",
               "ViewState": "AgIAAIUBAAAAAAAAAADwv5ABAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:33:11.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:33:11.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 16,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Home\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Home\\Dashboard.cshtml",
@@ -225,12 +398,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Home\\Dashboard.cshtml",
               "ViewState": "AgIAAOYBAAAAAAAAAADwv/cBAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:26:57.916Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:26:57.916Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 22,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Availability\\Index.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Availability\\Index.cshtml",
@@ -238,12 +410,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Availability\\Index.cshtml",
               "ViewState": "AgIAAAABAAAAAAAAAAAAAB0BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:41:58.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:41:58.585Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 24,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Absence\\Edit.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Absence\\Edit.cshtml",
@@ -251,12 +422,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Absence\\Edit.cshtml",
               "ViewState": "AgIAABEBAAAAAAAAAAAAAC8BAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:41:36.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:41:36.612Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 25,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Absence\\Delete.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Absence\\Delete.cshtml",
@@ -264,12 +434,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Absence\\Delete.cshtml",
               "ViewState": "AgIAAN4AAAAAAAAAAAAAAPsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:41:17.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:41:17.524Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 26,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Absence\\Create.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Absence\\Create.cshtml",
@@ -277,12 +446,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Absence\\Create.cshtml",
               "ViewState": "AgIAAA0BAAAAAAAAAAAAACsBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:40:57.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:40:57.365Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 27,
               "Title": "ChangePassword.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Account\\ChangePassword.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Account\\ChangePassword.cshtml",
@@ -290,12 +458,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Account\\ChangePassword.cshtml",
               "ViewState": "AgIAAPMAAAAAAAAAAADwvwQBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:39:12.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:39:12.944Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 29,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Employee\\Details.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Employee\\Details.cshtml",
@@ -303,12 +470,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Employee\\Details.cshtml",
               "ViewState": "AgIAAM0BAAAAAAAAAADwv94BAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:37:43.911Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:37:43.911Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 23,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Absence\\Index.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Absence\\Index.cshtml",
@@ -316,12 +482,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Absence\\Index.cshtml",
               "ViewState": "AgIAAJQBAAAAAAAAAADwv6UBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:34:29.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:34:29.484Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 28,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Account\\Login.cshtml",
@@ -329,12 +494,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAAFoBAAAAAAAAAADwv2sBAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:39:19.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:39:19.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 30,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Employee\\Edit.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Employee\\Edit.cshtml",
@@ -342,12 +506,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Employee\\Edit.cshtml",
               "ViewState": "AgIAAPsAAAAAAAAAAADwvwwBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:35:59.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:35:59.053Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 31,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Employee\\Create.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Employee\\Create.cshtml",
@@ -355,12 +518,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Employee\\Create.cshtml",
               "ViewState": "AgIAACwBAAAAAAAAAAAAAEoBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:35:46.261Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:35:46.261Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 32,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Employee\\Index.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Employee\\Index.cshtml",
@@ -368,12 +530,11 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Employee\\Index.cshtml",
               "ViewState": "AgIAALYAAAAAAAAAAADwv8cAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:29:59.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:29:59.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 33,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\danie\\Documents\\Development\\C# Projects\\ShiftPlanner-Web\\ShiftPlanner-Web\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "..\\ShiftPlanner-Web\\Views\\Shared\\_Layout.cshtml",
@@ -381,8 +542,7 @@
               "RelativeToolTip": "..\\ShiftPlanner-Web\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAIsCAAAAAAAAAADwv5wCAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-09-25T23:28:16.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-25T23:28:16.208Z"
             }
           ]
         }

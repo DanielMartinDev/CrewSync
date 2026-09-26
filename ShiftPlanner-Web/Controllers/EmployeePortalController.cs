@@ -38,15 +38,7 @@ namespace ShiftPlanner_Web.Controllers
 
             if (employee == null)
             {
-                var employeeIds = employees?
-                    .Select(e => $"{e.Name}: {e.UserId}")
-                    .ToList();
-
-                throw new Exception(
-                    $"Logged in UserId: {user?.Id}. " +
-                    $"Employees: {string.Join(
-                        " | ",
-                        employeeIds ?? new List<string>())}");
+                return null;
             }
 
             return employee;
@@ -83,20 +75,22 @@ namespace ShiftPlanner_Web.Controllers
             ViewBag.HolidaySummary = holidaySummary;
 
             ViewBag.Holidays =
-                holidays.Where(
-                    h => h.EmployeeID ==
-                         employee.EmployeeID)
-                .OrderByDescending(
-                    h => h.StartDate)
-                .ToList();
+                holidays
+                    .Where(
+                        h => h.EmployeeID ==
+                             employee.EmployeeID)
+                    .OrderByDescending(
+                        h => h.StartDate)
+                    .ToList();
 
             return View(
-                shifts.Where(
-                    s => s.EmployeeID ==
-                         employee.EmployeeID)
-                .OrderBy(
-                    s => s.StartTime)
-                .ToList());
+                shifts
+                    .Where(
+                        s => s.EmployeeID ==
+                             employee.EmployeeID)
+                    .OrderBy(
+                        s => s.StartTime)
+                    .ToList());
         }
     }
 }

@@ -28,15 +28,9 @@
         .Distinct()
         .Count();
 
-    var employees = Model
-        .Where(s => s.Employee != null)
-        .GroupBy(s => new
-        {
-            s.EmployeeID,
-            Name = s.Employee!.Name
-        })
-        .OrderBy(e => e.Key.Name)
-        .ToList();
+    var employees =
+    ViewBag.Employees as List<Shift_Planner_Web.Models.Employee>
+    ?? new List<Shift_Planner_Web.Models.Employee>();
 }
 
 
@@ -330,13 +324,13 @@
                 else
                 {
 
-                    @foreach (var employeeGroup in employees)
+                    @foreach (var employee in employees)
                     {
                         var employeeId =
-                            employeeGroup.Key.EmployeeID;
+                            employee.EmployeeID;
 
                         var employeeName =
-                            employeeGroup.Key.Name;
+                            employee.Name;
 
                         var employeeShifts = Model
                             .Where(s => s.EmployeeID == employeeId)
@@ -735,17 +729,16 @@
     /* ========================================
            PRINT
         ======================================== */
-
     @@media print {
 
         @@page {
-            size: landscape;
-            margin: 10mm;
+            size: A4 landscape;
+            margin: 6mm;
         }
 
         body {
             background: white !important;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .no-print {
@@ -765,19 +758,23 @@
 
         .employee-column {
             position: static !important;
-            min-width: 140px !important;
-            width: 140px;
+            min-width: 145px !important;
+            width: 145px;
         }
 
         .schedule-day {
             min-width: 0 !important;
             width: auto;
         }
-
+        /* Make the rota fill more of the page */
         .schedule-cell {
-            height: 75px !important;
+            height: 90px !important;
             min-width: 0 !important;
-            padding: 6px !important;
+            padding: 8px !important;
+        }
+        /* Give the day headers a little more presence */
+        .schedule-table th {
+            padding: 8px !important;
         }
 
         .employee-avatar {
@@ -788,7 +785,7 @@
             background: white !important;
             border: 1px solid #333 !important;
             border-radius: 4px !important;
-            padding: 6px !important;
+            padding: 8px !important;
             box-shadow: none !important;
         }
 
@@ -802,7 +799,7 @@
         }
 
         .empty-schedule-cell {
-            min-height: 50px !important;
+            min-height: 60px !important;
             color: #555 !important;
         }
 
@@ -835,6 +832,10 @@
             .table td {
                 border: 1px solid #999 !important;
             }
+
+        tr {
+            page-break-inside: avoid;
+        }
     }
 
 </style>
